@@ -9,7 +9,15 @@ public class GroceryItem {
 	private boolean taxable;
 	
 	public boolean equals(Object obj) {
-		return false;
+		boolean isEqual = true;
+		if (obj instanceof GroceryItem) {
+			GroceryItem item = (GroceryItem) obj;
+			
+			
+		} else {
+			isEqual = false;
+		}
+		return isEqual;
 	}
 	
 	public String toString() {

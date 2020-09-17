@@ -1,9 +1,12 @@
-package project1;
+/**
+ * This is a driver class to run project 1
+ * @author Liman Chang, Kenneth Christian
+ */
 
 public class RunProject1 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		new Shopping().run();
 
 	}
 

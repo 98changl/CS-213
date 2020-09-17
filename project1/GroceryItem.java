@@ -16,11 +16,11 @@ public class GroceryItem {
 	 * @return true if equal, false if not equal
 	 */
 	private boolean stringEquals(String a, String b) {
-		if (a.length() != b.length()) {
+		if (a.length() != b.length()) { // names are not the same length
 			return false;
 		}
 		
-		for (int i = 0; i < a.length(); i++) {
+		for (int i = 0; i < a.length(); i++) { // compares each character of both strings
 			if (a.charAt(i) != b.charAt(i)) {
 				return false;
 			}
@@ -32,23 +32,24 @@ public class GroceryItem {
 	public boolean equals(Object obj) {
 		boolean isEqual = true;
 		
-		if (obj instanceof GroceryItem) {
+		if (obj instanceof GroceryItem) { // check type of obj
 			GroceryItem item = (GroceryItem) obj;
 			
-			if (stringEquals(name, item.name) == false) {
+			if (stringEquals(name, item.name) == false) { // compares item names
 				isEqual = false;
 			}
 			
-			if (price != item.price) {
+			if (price != item.price) { // compares item price
 				isEqual = false;
 			}
 			
-			if (taxable != item.taxable) {
+			if (taxable != item.taxable) { // compares item taxable
 				isEqual = false;
 			}
 		} else {
 			isEqual = false;
 		}
+		
 		return isEqual;
 	}
 	
@@ -56,13 +57,13 @@ public class GroceryItem {
 		String str = "";
 		String cat = ": $";
 		
-		str = str.concat(name);
+		str = str.concat(name); // concat item name
 		str = str.concat(cat);
 		
-		cat = String.valueOf(price);
+		cat = String.valueOf(price); // concat item price
 		str = str.concat(cat.substring(0, 5));
 		
-		if (taxable == false) {
+		if (taxable == false) { // concat item taxable
 			cat = " : tax free";
 		} else {
 			cat = " : 6.625%";

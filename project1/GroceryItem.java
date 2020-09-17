@@ -53,7 +53,22 @@ public class GroceryItem {
 	}
 	
 	public String toString() {
+		String str = "";
+		String cat = ": $";
 		
-		return name;
+		str = str.concat(name);
+		str = str.concat(cat);
+		
+		cat = String.valueOf(price);
+		str = str.concat(cat.substring(0, 5));
+		
+		if (taxable == false) {
+			cat = " : tax free";
+		} else {
+			cat = " : 6.625%";
+		}
+		str = str.concat(cat);
+		
+		return str;
 	}
 }

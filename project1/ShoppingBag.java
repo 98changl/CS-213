@@ -3,7 +3,6 @@
  * @author Liman Chang, Kenneth Christian
  */
 
-
 public class ShoppingBag {
     
     	private GroceryItem[] bag ;	// array-based implementation of the bag
@@ -127,15 +126,12 @@ public class ShoppingBag {
             boolean return_value = false; 
             
             if(find != -1){
-                
-                for(int x = 0 ; x<bag.length ;++x){
-                   
-                    if(bag[x].equals(item)){
-                        bag[x] = null;
+                        bag[find] = null;
                         return_value = true;
-                        break;
-                    }
+                        
+                    
                 }
+            
         //if the item is found and removed then 
         //shift everything in array to "left" to ensure empty indexes at the right/end of array
         for (int j=0; j<bag.length; j++){
@@ -147,10 +143,10 @@ public class ShoppingBag {
                 break;
             }
         }
-            }
+            
             
            	return return_value; //
-	}
+        }
 	
         
 	public double salesPrice() {
@@ -180,4 +176,3 @@ public class ShoppingBag {
     
     
 }
-

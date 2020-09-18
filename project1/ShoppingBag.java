@@ -160,6 +160,13 @@ public class ShoppingBag {
 	}
 	
 	public void print() {
+		System.out.println(size + " items in bag");
+		
+		for (int i = 0; i < size; i++) {
+			String prt;
+			prt = bag[i].toString();
+			System.out.println(prt);
+		}
 		
 	}
 	

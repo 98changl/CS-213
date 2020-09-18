@@ -66,7 +66,7 @@ public class GroceryItem {
 		if (taxable == false) { // concat item taxable
 			cat = " : tax free";
 		} else {
-			cat = " : 6.625%";
+			cat = " : is taxable";
 		}
 		str = str.concat(cat);
 		

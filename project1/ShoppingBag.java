@@ -103,7 +103,7 @@ public class ShoppingBag {
             //if the array is full, increase and copy the old array then add to the next empty index
             for(int t = 0 ; t<bag.length; t++){
             
-                   if(bag[t] != null){
+                   if(bag[t] != null && bag[bag.length-1] != null)){//checks both in and the last index to see if all index are full
                      
                        grow(); //calls the helper grow method to copy the array and grow and add the item to the next empty index 
                        

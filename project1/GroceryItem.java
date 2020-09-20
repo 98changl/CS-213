@@ -74,7 +74,7 @@ public class GroceryItem {
 		str = str.concat(cat);
 		
 		cat = String.valueOf(price); // concat item price
-		str = str.concat(cat.substring(0, 5));
+		str = str.concat(cat.substring(0, 5));  //----->  i had to get rid of .substring(0, 5) in order for code to run str = str.concat(cat/*.substring(0, 5)*/);
 		
 		if (taxable == false) { // concat item taxable
 			cat = " : tax free";
@@ -85,4 +85,20 @@ public class GroceryItem {
 		
 		return str;
 	}
+	
+	        
+        public String getname(){
+            return name;
+        }
+        
+        public double getPrice(){
+            return price;
+        }
+    
+        public boolean getTax(){
+         
+            return taxable;
+        }
+    
+    
 }

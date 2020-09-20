@@ -15,6 +15,19 @@ public class GroceryItem {
 	 * @param seccond string to compare
 	 * @return true if equal, false if not equal
 	 */
+	
+	 //Constructor recieves the string input 
+        public GroceryItem(String input){
+       
+            String[] in = input.split(",");
+                this.name = in[0];
+                this.price = Double.parseDouble(in[1]);
+                this.taxable = Boolean.parseBoolean(in[2]);
+          }
+        
+         
+	
+	
 	private boolean stringEquals(String a, String b) {
 		if (a.length() != b.length()) { // names are not the same length
 			return false;

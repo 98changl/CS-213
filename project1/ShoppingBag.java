@@ -5,17 +5,23 @@
 
 public class ShoppingBag {
     
-    	private GroceryItem[] bag ;	// array-based implementation of the bag
+    	private GroceryItem[] bag  ;	// array-based implementation of the bag
 	private int size;			// number of items currently in the bag
 	
-	
-        public  ShoppingBag() {
+     
+	//private static ShoppingBag instance = new ShoppingBag();
+        
+        
+        
+        public ShoppingBag() {
 	
         bag = new GroceryItem[5];//initial size of array = 5
-        size = bag.length;
-            
+        size = 0;
+          
         }
 	
+     
+        
 	/**
 	 * helper method to find an item
 	 * 
@@ -86,24 +92,33 @@ public class ShoppingBag {
         and then add the item to the next empty index.
         Assume if the array is partially empty then it will be the last index that is empty.
         */
-	
+       /* 
+        public void passRefrence(GroceryItem item){
+            GroceryItem refrence = item;
+            System.out.println(refrence + " hi from refrence ");
+        }
+*/	
 	public void add(GroceryItem item) {
            
+             GroceryItem refrence = item;
+            //System.out.println(refrence + " hi from add ");
+            
             for(int x = 0 ; x<bag.length; x++){
                
                 if(bag[x] == null){
                     
                     bag[x] = item;
+                    
                
                     break; //break out of for loop once the next empty index has been filled
                     
                 }
             }
-            
+        
             //if the array is full, increase and copy the old array then add to the next empty index
             for(int t = 0 ; t<bag.length; t++){
             
-                   if(bag[t] != null && bag[bag.length-1] != null)){//checks both in and the last index to see if all index are full
+                   if(bag[t] != null && bag[bag.length-1] != null){
                      
                        grow(); //calls the helper grow method to copy the array and grow and add the item to the next empty index 
                        
@@ -160,25 +175,26 @@ public class ShoppingBag {
 	}
 	
 	public void print() {
-		System.out.println(size + " items in bag");
-		
-		for (int i = 0; i < size; i++) {
-			String prt;
-			prt = bag[i].toString();
-			System.out.println(prt);
-		}
-		
-	}
+             size = 0;
+            for(int e = 0 ; e<bag.length; e++){
+                if(bag[e] != null){
+                    size++;
+                    System.out.println(bag[e].toString());
+                   
+                }
+            } 
+		//debugging
+            System.out.println("you have " + size + " items in bag");
+            
+          
+        }
 	
 	
-        
+        //testbed main as a driver to excersice this class
         public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-              
+           
+        }
     
-                
-	}
     
     
     

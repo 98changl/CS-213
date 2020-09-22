@@ -1,22 +1,22 @@
-/*
+/**
  * This class deals with I/O
+ * @author Kenneth Christian, Liman Chang
  */
 
-import java.util.*;;
+import java.util.*;
+
 public class Shopping {
-
-	public class Shopping {//////////////////////////////// for now use "," to seperate. itemname,price,true/false////////////////////
-
-    //create only one instance of the shoppingBag
-    private static ShoppingBag instance = new ShoppingBag();
-
+	private static ShoppingBag instance = new ShoppingBag();	// create only one instance of the shopping bag
 	
-	//main method from driver class will call this for I/O. 
+	public Shopping() {//////////////////////////////// for now use "," to seperate. itemname,price,true/false////////////////////
+
+	}
+	
+	// main method from driver class will call this for I/O. 
 	public void run() {
 		
 		Scanner sc = new Scanner(System.in); //to get input
 		String input = ""; //will get input C, A, R, or D
-	   
 	    
 	    //this while loop will continue asking the user for new commands after each
 	    //new item is added to the array until they decide to checkout
@@ -43,12 +43,12 @@ public class Shopping {
 		}
 		
 		//remove from bag
-		else if(input.equals("R")) {
+		else if (input.equals("R")) {
 			 
 		}
 		
 		//display bag
-		else if(input.equals("D")) {
+		else if (input.equals("D")) {
 		
                
                instance.print();
@@ -57,7 +57,7 @@ public class Shopping {
 		}
 		
 		//checkout
-		else if(input.equals("C")) {
+		else if (input.equals("C")) {
 			System.out.println("thank You, have a nice day");
 		}
 		
@@ -70,4 +70,3 @@ public class Shopping {
 	
 	}
 }
-

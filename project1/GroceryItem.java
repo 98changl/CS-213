@@ -8,17 +8,13 @@ public class GroceryItem {
 	private double price;
 	private boolean taxable;
 	
-	 // constructor recieves the string input 
-     public GroceryItem(String input){
-       
-    	 String[] in = input.split(",");
-    	 this.name = in[0];
-    	 this.price = Double.parseDouble(in[1]);
-    	 this.taxable = Boolean.parseBoolean(in[2]);
-     }
-        
-         
-	
+	// constructor recieves the input 
+    public GroceryItem(String name, double price, boolean taxable){
+    	this.name = name;
+    	this.price = price;
+    	this.taxable = taxable;
+    }
+    
     /**
      * Check to see if two strings are equal
      * 
@@ -96,5 +92,6 @@ public class GroceryItem {
         public boolean getTax(){
             return taxable;
         }
+    
     
 }

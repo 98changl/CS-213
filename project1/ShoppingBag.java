@@ -1,72 +1,56 @@
-/**
- * The container class that defines the abstract data type
- * @author Liman Chang, Kenneth Christian
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+package RunProject1;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import java.lang.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.*;
 
-public class ShoppingBag {
+ public class ShoppingBag {
     
-	private GroceryItem[] bag;	// array-based implementation of the bag
+    	private GroceryItem[] bag  ;	// array-based implementation of the bag
 	private int size;			// number of items currently in the bag
-	private double taxRate;		// tax rate for items in the bag
 	
-	public ShoppingBag() {
-        bag = new GroceryItem[5];	// initial size of array = 5
+     
+	//private static ShoppingBag instance = new ShoppingBag();
+        
+        
+        
+        public ShoppingBag() {
+	
+        bag = new GroceryItem[5];//initial size of array = 5
         size = 0;
-        taxRate = 6.625;
-	}
+          
+        }
 	
-	/**
-	 * helper method to find an item
-	 * 
-	 * @param grocery item to be removed
-	 * @return index of grocery item, -1 if item doesn't exist
-	 */
-	private int find(GroceryItem item) {
-		int return_value = -1;
-              
-		for (int x = 0 ; x == bag.length ; x++) {
-			if (item.equals(bag[x])) { // calls grocery item method to compare objects  
-				return_value = x ;
-			}    
-		}
-            
-        return return_value;
-	}
-            
+     
+     
+	       
 	/**
 	 * helper method to grow the capacity
 	 */
-	private void grow(){
-		boolean empty = false; // assume array is full
-            
-            /*
-            This while loop checks to see if all the index of array are full
-            */
-            while(empty == false){
-               
-                for(int x = 0 ; x < bag.length; x++){
-                
-                    if(bag[x] == null){
-                    
-                        empty = true; //array is partiallty empty
-                 }
-                    else{
-                        /*
+	 
+        private void grow(){
+         /*
                         All the index are filled.
                         This creates a new array (newBag) that has size 5 greater than bag (initial array), 
                         copies the content of bag into it and assigns that array to bag (the original array)
                         */
                         
                       GroceryItem[] newBag = new GroceryItem[bag.length + 5];                       
-                      System.arraycopy(bag, 0, newBag, 0, bag.length);                              
+                      System.arraycopy(bag, 0, newBag, 0,bag.length);                              
 
                            bag = newBag;
                            size = bag.length;
                     }
-                }
-            }
+                
             
-        }
+
+        
 		
 	
         /* 
@@ -93,20 +77,23 @@ public class ShoppingBag {
                     
                     bag[x] = item;
                     
+                   //  System.out.println(item.getname() + " added to the bag ");
                
                     break; //break out of for loop once the next empty index has been filled
                     
                 }
             }
-        
+       
             //if the array is full, increase and copy the old array then add to the next empty index
             for(int t = 0 ; t<bag.length; t++){
             
                    if(bag[t] != null && bag[bag.length-1] != null){
                      
                        grow(); //calls the helper grow method to copy the array and grow and add the item to the next empty index 
+                       System.out.println(bag.length);
+                       bag[t] = item;
                        
-                       bag[t+1] = item;
+                      // System.out.println(item.getname() + " added to the bag ");
                        
                        break; //break out of for loop
                          }
@@ -120,17 +107,27 @@ public class ShoppingBag {
         */
 	public boolean remove(GroceryItem item) {
           
-            int find = find(item);//is the item in the bag?
-          
+            
+             
+           
+             int find = find(item);//is the item in the bag? if so return the index
+           
+            
+             
             boolean return_value = false; 
             
-            if(find != -1){
+            if(find != -1 ){
+                       
                         bag[find] = null;
-                        return_value = true;
-                        
+                       
+                        return_value = true; //item found and removed
+                        System.out.println(item.getname() + item.getPrice() + " removed from the bag ");
                     
                 }
-            
+            else if( find == -1){
+                System.out.println("Unable to remove, this item is not in the bag");
+            }
+      
         //if the item is found and removed then 
         //shift everything in array to "left" to ensure empty indexes at the right/end of array
         for (int j=0; j<bag.length; j++){
@@ -146,32 +143,55 @@ public class ShoppingBag {
             
            	return return_value; //
         }
+    
 	
         
 	public double salesPrice() {
-		double price = 0.0;
-		
-		for (int i = 0; i < size; i++) {
-			price += bag[i].getPrice();
-		}
-		
-		return price;
-	}
+	
+            double price = 0;
+            
+            for(int x = 0 ; x < bag.length ; x++){
+                if(bag[x] != null  ){
+                price += bag[x].getPrice();
+                }
+            }      
+            return price;
+	
+        }
 	
 	public double salesTax() {
-		double salesTax = 0.0;
-		
-		for (int i = 0; i < size; i++) {
-			if (bag[i].getTax()) {
-				salesTax += bag[i].getPrice() * taxRate;
-			}
-		}
-		
-        return salesTax;
+		  double taxprice = 0;
+         
+                  for(int t = 0 ; t < bag.length ; t++){
+                      if(bag[t] != null && bag[t].getTax() == true){
+                          taxprice += bag[t].getPrice() * 0.06625;
+ 
+                      }
+                          
+                  }
+                      
+                      
+            return taxprice;
+
 	}
 	
 	public void print() {
              size = 0;
+             int numI = 0;
+             
+             //to print "title statment"
+             for(int e = 0 ; e<bag.length; e++){
+                if(bag[e] != null){
+                    numI++;
+                  }
+            } 
+            System.out.println("**you have " + numI + " items in bag:"); ///title statment
+            
+             
+             
+             
+             
+             //to print all the items
             for(int e = 0 ; e<bag.length; e++){
                 if(bag[e] != null){
                     size++;
@@ -179,18 +199,102 @@ public class ShoppingBag {
                    
                 }
             } 
-		//debugging
-            System.out.println("you have " + size + " items in bag");
+            System.out.println("**End of list");
             
           
+           
         }
-	
-	
-	//  testbed main as a driver to exersize this class
-	public static void main(String[] args) {
-		ShoppingBag testBag = new ShoppingBag(); // create an object of shopping bag
-		
-		// create groceryitems to test shopping bag
-	}
+
+        public void checkOut(){
+            
+            //format to print tax
+            NumberFormat formatter = new DecimalFormat("#0.00"); 
+            
+            //to get how may item are in bag
+             size = 0;
+             int numI = 0;
+             
+            
+             for(int e = 0 ; e<bag.length; e++){
+                if(bag[e] != null){
+                    numI++;
+                  }
+            }
+             
+             System.out.println("Checking out " + numI + " items. ");
+            
+             //print each item in the bag
+              for(int e = 0 ; e<bag.length; e++){
+                if(bag[e] != null){
+                    size++;
+                    System.out.println(bag[e].toString());
+                   
+                }
+             
+             
+             
+        }
+              //print the total price w/out tax
+              System.out.println("*Sales Total: " + salesPrice() );
+              
+              //print out price of total taxes
+              System.out.println("*Sales Tax: " + formatter.format(salesTax()));
+        }
+           
+	/**
+	 * helper method to find an item
+	 * 
+	 * @param grocery item to be removed
+	 * @return index of grocery item, -1 if item doesn't exist
+	 */
+        
+        private int find(GroceryItem item){
+           
+            int re = -1;
+        
+            for(int x = 0 ; x<bag.length ; x++){
+               
+                if(item.equals(bag[x]) && bag[x] != null ){
+                   
+                    re = x; //x means item found at a particular index
+                  
+                    break;
+        }
+                else if(bag[x] == null || !item.equals(bag[x])){
+                    
+                    re = -1; //0 means item not found
+                    
+                
+                }
+                
+                   
+            }
+            
+            
+        
+             return re;
+            
+        }
+        //testbed main as a driver to excersice this class
+  
+        
+        public static void main(String[] args) {
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+    
+    
+    
     
 }

@@ -5,55 +5,39 @@
 
 public class ShoppingBag {
     
-    	private GroceryItem[] bag  ;	// array-based implementation of the bag
+	private GroceryItem[] bag;	// array-based implementation of the bag
 	private int size;			// number of items currently in the bag
+	private double taxRate;		// tax rate for items in the bag
 	
-     
-	//private static ShoppingBag instance = new ShoppingBag();
-        
-        
-        
-        public ShoppingBag() {
-	
-        bag = new GroceryItem[5];//initial size of array = 5
+	public ShoppingBag() {
+        bag = new GroceryItem[5];	// initial size of array = 5
         size = 0;
-          
-        }
+        taxRate = 6.625;
+	}
 	
-     
-        
 	/**
 	 * helper method to find an item
 	 * 
 	 * @param grocery item to be removed
 	 * @return index of grocery item, -1 if item doesn't exist
 	 */
-	
-          private int find(GroceryItem item) {
-        
-            int return_value = 0;
+	private int find(GroceryItem item) {
+		int return_value = -1;
               
-            for(int x = 0 ; x == bag.length ; x++){
-                
-                if(bag[x] == item){
-                  
-                    return_value = x ;
-                }
-                else
-                    return_value = -1;
-                
-               }
+		for (int x = 0 ; x == bag.length ; x++) {
+			if (item.equals(bag[x])) { // calls grocery item method to compare objects  
+				return_value = x ;
+			}    
+		}
             
-         return return_value;
-        }
+        return return_value;
+	}
             
 	/**
 	 * helper method to grow the capacity
 	 */
-	 
-        private void grow(){
-           
-            boolean empty = false; //assume array is full
+	private void grow(){
+		boolean empty = false; // assume array is full
             
             /*
             This while loop checks to see if all the index of array are full
@@ -165,13 +149,25 @@ public class ShoppingBag {
 	
         
 	public double salesPrice() {
+		double price = 0.0;
 		
-            return 0.0;
+		for (int i = 0; i < size; i++) {
+			price += bag[i].getPrice();
+		}
+		
+		return price;
 	}
 	
 	public double salesTax() {
+		double salesTax = 0.0;
 		
-            return 0.0;
+		for (int i = 0; i < size; i++) {
+			if (bag[i].getTax()) {
+				salesTax += bag[i].getPrice() * taxRate;
+			}
+		}
+		
+        return salesTax;
 	}
 	
 	public void print() {
@@ -190,12 +186,11 @@ public class ShoppingBag {
         }
 	
 	
-        //testbed main as a driver to excersice this class
-        public static void main(String[] args) {
-           
-        }
-    
-    
-    
+	//  testbed main as a driver to exersize this class
+	public static void main(String[] args) {
+		ShoppingBag testBag = new ShoppingBag(); // create an object of shopping bag
+		
+		// create groceryitems to test shopping bag
+	}
     
 }

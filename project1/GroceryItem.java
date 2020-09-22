@@ -8,26 +8,24 @@ public class GroceryItem {
 	private double price;
 	private boolean taxable;
 	
-	/**
-	 * Check to see if two strings are equal
-	 * 
-	 * @param first string to compare
-	 * @param seccond string to compare
-	 * @return true if equal, false if not equal
-	 */
-	
-	 //Constructor recieves the string input 
-        public GroceryItem(String input){
+	 // constructor recieves the string input 
+     public GroceryItem(String input){
        
-            String[] in = input.split(",");
-                this.name = in[0];
-                this.price = Double.parseDouble(in[1]);
-                this.taxable = Boolean.parseBoolean(in[2]);
-          }
+    	 String[] in = input.split(",");
+    	 this.name = in[0];
+    	 this.price = Double.parseDouble(in[1]);
+    	 this.taxable = Boolean.parseBoolean(in[2]);
+     }
         
          
 	
-	
+    /**
+     * Check to see if two strings are equal
+     * 
+     * @param first string to compare
+     * @param seccond string to compare
+     * @return true if equal, false if not equal
+     */
 	private boolean stringEquals(String a, String b) {
 		if (a.length() != b.length()) { // names are not the same length
 			return false;
@@ -96,7 +94,6 @@ public class GroceryItem {
         }
     
         public boolean getTax(){
-         
             return taxable;
         }
     

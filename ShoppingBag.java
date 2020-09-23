@@ -9,7 +9,7 @@ public class ShoppingBag {
     private int size;			// number of items currently in the bag
 
     public ShoppingBag() {
-        bag = new GroceryItem[5];	//initial size of array = 5
+        bag = new GroceryItem[5];	// initial size of array = 5
     }
 
     // how many items in array
@@ -17,32 +17,33 @@ public class ShoppingBag {
         return this.size;
     }
 
-    //helper method to grow array by 5
+    /**
+     * method that doubles current bag size
+     */
     private void grow() {
-        /*
-                        All the index are filled.
-                        This creates a new array (newBag) that has size 5 greater than bag (initial array),
-                        copies the content of bag into it and assigns that array to bag (the original array)
-         */
-
-        GroceryItem[] newBag = new GroceryItem[bag.length + 5];
-        System.arraycopy(bag, 0, newBag, 0, bag.length);
-
+        GroceryItem[] newBag = new GroceryItem[bag.length * 2];
+        
+        for (int i = 0; i < size; i++) {
+        	newBag[i] = bag[i];
+        }
         bag = newBag;
-        size = bag.length;
     }
 
     // empty the bag IF checkout
-    public void setEmpty() {
-        bag = new GroceryItem[5];
+    public void emptyBag() {
+        for (int i = 0; i < size; i++) {
+        	bag[i] = null;
+        }
+        size = 0;
     }
 
     /**
-     * @param item 
      * this method adds item to the array bag. if the array is full
      * then will call helper grow method to crease the size by 5 and then add
      * the item to the next empty index. Assume if the array is partially empty
      * then it will be the last index that is empty.
+     * 
+     * @param item
      */
     public void add(GroceryItem item) {
     	if (this.size == bag.length) {
@@ -85,19 +86,17 @@ public class ShoppingBag {
     }
 
     /**
+     * 
      * @returns price
      */
     public double salesPrice() {
+        double salesPrice = 0;
 
-        double price = 0;
-
-        for (int x = 0; x < bag.length; x++) {
-            if (bag[x] != null) {
-                price += bag[x].getPrice();
-            }
+        for (int x = 0; x < size; x++) {
+        	salesPrice += bag[x].getPrice();
         }
-        return price;
-
+        
+        return salesPrice;
     }
 
     /**
@@ -105,18 +104,16 @@ public class ShoppingBag {
      * @return taxprice
      */
     public double salesTax() {
-        double taxprice = 0;
+    	double taxRate = 0.06625;
+        double salesTax = 0;
 
-        for (int t = 0; t < bag.length; t++) {
-            if (bag[t] != null && bag[t].getTax() == true) {
-                taxprice += bag[t].getPrice() * 0.06625;
-
-            }
-
+        for (int i = 0; i < this.size; i++) {
+        	if (bag[i].getTax()) {
+        		salesTax += bag[i].getPrice() * taxRate;
+        	}
         }
-
-        return taxprice;
-
+        
+        return Math.floor(salesTax * 100) / 100;
     }
 
     /**
@@ -127,21 +124,15 @@ public class ShoppingBag {
         return salesPrice() + salesTax();
     }
 
-    //print all items in bag
+    // print all items in bag
     public void print() {
-
         //TITLE 
-        System.out.println("**you have " + getSize() + " items in bag:"); ///title statment
+        //System.out.println("**you have " + getSize() + " items in bag:"); ///title statment
 
         //to print all the items
-        for (int e = 0; e < bag.length; e++) {
-            if (bag[e] != null) {
-
-                System.out.println(bag[e].toString());
-
-            }
+        for (int e = 0; e < size; e++) {
+            System.out.println(bag[e].toString());
         }
-
     }
 
     public GroceryItem[] getBag() {
@@ -155,30 +146,34 @@ public class ShoppingBag {
      * @return index
      */
     private int find(GroceryItem item) {
-
-        int index = -1;
-
-        for (int x = 0; x < bag.length; x++) {
-
-            if (item.equals(bag[x]) && bag[x] != null) {
-
-                index = x; //x means item found at a particular index
-
-                break;
-            } else if (bag[x] == null || !item.equals(bag[x])) {
-
-                index = -1; //0 means item not found
-
-            }
-
+        for (int i = 0; i < size; i++) {
+        	if (bag[i].equals(item)) {
+        		return i;
+        	}
         }
-
-        return index;
-
+        
+        return -1;
     }
 
     public static void main(String[] args) {
-
+    	GroceryItem test1 = new GroceryItem("stuff", 5.99, false);
+    	GroceryItem test2 = new GroceryItem("item", 4.50, false);
+    	GroceryItem test3 = new GroceryItem("hey", 1.5, false);
+    	GroceryItem test4 = new GroceryItem("there", 5.99, false);
+    	GroceryItem test5 = new GroceryItem("hello", 5.99, false);
+    	GroceryItem test6 = new GroceryItem("world", 5.99, false);
+    	
+    	// 
+    	ShoppingBag testBag = new ShoppingBag();
+    	System.out.println("Invalid remove: " + testBag.remove(test1));
+    	
+    	testBag.add(test1);
+    	System.out.println("Valid remove: " + testBag.remove(test1));
+    	testBag.print();
+    	
+    	testBag.add(test1);
+    	
+    	
     }
 
 }

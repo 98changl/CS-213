@@ -4,11 +4,17 @@
  */
 
 public class GroceryItem {
-	private String name;
-	private double price;
-	private boolean taxable;
+	private String name;		// the name of the item
+	private double price;		// the cost of the item
+	private boolean taxable;	// determines whether item can be taxed
 	
-	// constructor recieves the input 
+	/**
+	 * Constructor for the GroceryItem class
+	 * 
+	 * @param name of the item
+	 * @param price of the item
+	 * @param true if item is taxable, false if not
+	 */
     public GroceryItem(String name, double price, boolean taxable){
     	this.name = name;
     	this.price = price;
@@ -16,26 +22,10 @@ public class GroceryItem {
     }
     
     /**
-     * Check to see if two strings are equal
+     * Method to determine whether the item and object are the same
      * 
-     * @param first string to compare
-     * @param seccond string to compare
-     * @return true if equal, false if not equal
+     * @return true if objects are the same
      */
-	private boolean stringEquals(String a, String b) {
-		if (a.length() != b.length()) { // names are not the same length
-			return false;
-		}
-		
-		for (int i = 0; i < a.length(); i++) { // compares each character of both strings
-			if (a.charAt(i) != b.charAt(i)) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
 	public boolean equals(Object obj) {
 		boolean isEqual = true;
 		
@@ -60,6 +50,11 @@ public class GroceryItem {
 		return isEqual;
 	}
 	
+	/**
+	 * Creates a string representation of all data fields in a GroceryItem
+	 * 
+	 * @return String representation of data in item
+	 */
 	public String toString() {
 		String str = "";
 		String cat = ": $";
@@ -80,18 +75,48 @@ public class GroceryItem {
 		return str;
 	}
 	
-	        
-        public String getname(){
-            return name;
-        }
-        
-        public double getPrice(){
-            return price;
-        }
+	/**
+	 * 
+	 * @return name data field
+	 */
+	public String getName(){
+		return name;
+	}
     
-        public boolean getTax(){
-            return taxable;
-        }
+	/**
+	 * 
+	 * @return price data field
+	 */
+	public double getPrice(){
+		return price;
+	}
     
+	/**
+	 * 
+	 * @return taxable data field
+	 */
+    public boolean getTax(){
+        return taxable;
+    }
     
+    /**
+     * Check to see if two strings are equal
+     * 
+     * @param first string to compare
+     * @param seccond string to compare
+     * @return true if equal, false if not equal
+     */
+	private boolean stringEquals(String a, String b) {
+		if (a.length() != b.length()) { // names are not the same length
+			return false;
+		}
+		
+		for (int i = 0; i < a.length(); i++) { // compares each character of both strings
+			if (a.charAt(i) != b.charAt(i)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }

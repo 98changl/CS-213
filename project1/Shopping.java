@@ -39,17 +39,14 @@ public class Shopping {
 			} 
 			else if (command.equals("R")) { // remove item from shopping bag
 				item = makeItem(input);
-				boolean removed = bag.remove(item);
-				if (removed == false) {
-					
-				} else {
-					System.out.println(item.getName() + " " + item.getPrice() + " removed");
-				}
+				bag.remove(item);
+				System.out.println(item.getName() + " " + item.getPrice() + " removed");
 			} 
 			else if (command.equals("P")) { // display all items in the bag
 				if (bag.isEmpty()) {
 					System.out.println("The bag is empty!");
 				} else {
+					System.out.println("You have " + bag.getSize() + " item(s).");
 					bag.print();
 				}
 			}
@@ -92,6 +89,12 @@ public class Shopping {
 		double price = bag.salesPrice();
 		double tax = bag.salesTax();
 		double total = price + tax;;
+		
+		if (bag.getSize() == 1) {
+			System.out.println("Checking out 1 item.");
+		} else {
+			System.out.println("Checking out " + bag.getSize() + " items.");
+		}
 		
 		bag.print();
 		

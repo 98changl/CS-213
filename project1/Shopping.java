@@ -39,8 +39,12 @@ public class Shopping {
 			} 
 			else if (command.equals("R")) { // remove item from shopping bag
 				item = makeItem(input);
-				bag.remove(item);
-				System.out.println(item.getName() + " " + item.getPrice() + " removed");
+				boolean removed = bag.remove(item);
+				if (removed == false) {
+					
+				} else {
+					System.out.println(item.getName() + " " + item.getPrice() + " removed");
+				}
 			} 
 			else if (command.equals("P")) { // display all items in the bag
 				if (bag.isEmpty()) {

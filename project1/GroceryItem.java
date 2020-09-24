@@ -26,6 +26,27 @@ public class GroceryItem {
     }
     
     /**
+     * Helper method that checks to see if two strings are equal.
+     * 
+     * @param first string to compare
+     * @param seccond string to compare
+     * @return true if equal, false if not equal
+     */
+	private boolean stringEquals(String a, String b) {
+		if (a.length() != b.length()) { // names are not the same length
+			return false;
+		}
+		
+		for (int i = 0; i < a.length(); i++) { // compares each character of both strings
+			if (a.charAt(i) != b.charAt(i)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+    /**
      * Method to determine whether the GroceryItem and object are the same.
      * Checks the instance of the object to determine if it is of type GroceryItem
      * 
@@ -112,25 +133,4 @@ public class GroceryItem {
     public boolean getTax(){
         return taxable;
     }
-    
-    /**
-     * Helper method that checks to see if two strings are equal.
-     * 
-     * @param first string to compare
-     * @param seccond string to compare
-     * @return true if equal, false if not equal
-     */
-	private boolean stringEquals(String a, String b) {
-		if (a.length() != b.length()) { // names are not the same length
-			return false;
-		}
-		
-		for (int i = 0; i < a.length(); i++) { // compares each character of both strings
-			if (a.charAt(i) != b.charAt(i)) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
 }

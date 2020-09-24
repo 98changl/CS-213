@@ -1,24 +1,22 @@
 /**
- * The container class that defines the abstract data type
+ * The container class that defines the abstract data type.
+ * 
  * @author Liman Chang, Kenneth Christian
  */
-
 public class ShoppingBag {
     private GroceryItem[] bag;	// array-based implementation of the bag
     private int size;			// number of items currently in the bag
 
     /**
-     * Initializes the shopping bag with an initial array size of 2
+     * Initializes the shopping bag with an initial array size of 2.
      */
     public ShoppingBag() {
         bag = new GroceryItem[2];
     }
 
     /**
-     * this method adds item to the array bag. if the array is full
-     * then will call helper grow method to increase the size by 5 and then add
-     * the item to the next empty index. Assume if the array is partially empty
-     * then it will be the last index that is empty.
+     * This method adds item to the array bag. 
+     * If the array is full, then it will call grow() to double array's size.
      * 
      * @param GroceryItem to be added to Shopping Bag
      */
@@ -32,11 +30,11 @@ public class ShoppingBag {
     }
 
     /**
-     * Method removes item from bag if found. return_value = true if item found
-     * and removed. return_value = false it item not found in bag.
+     * Method to remove a grocery item from bag if found.
+     * The bag array will not be affected if the item is not found in the bag.
      *
-     * @param item
-     * @return return_value
+     * @param GroceryItem to be removed from Shopping Bag
+     * @return true if item was found and removed, false if the item is not in the bag
      */
     public boolean remove(GroceryItem item) {
         int index = find(item);
@@ -55,7 +53,7 @@ public class ShoppingBag {
     }
 
     /**
-     * Calculates the sales price of items in the shopping bag
+     * Calculates the sales price of items in the shopping bag.
      * 
      * @returns total sales price
      */
@@ -66,11 +64,12 @@ public class ShoppingBag {
         	salesPrice += bag[x].getPrice();
         }
         
-        return Math.floor(salesPrice * 100) / 100;
+        return salesPrice;
     }
 
     /**
-     * Calulates the sales tax of items in the shopping bag
+     * Calculates the sales tax of items in the shopping bag.
+     * The method does not format the sales tax to "$0.00".
      * 
      * @return total sales tax
      */
@@ -84,20 +83,20 @@ public class ShoppingBag {
         	}
         }
         
-        return Math.floor(salesTax * 100) / 100;
+        return salesTax;
     }
 
     /**
-     * print all items in bag
+     * Prints to IO all items in the shopping bag.
      */
     public void print() {
-        for (int e = 0; e < size; e++) { // print all the items
+        for (int e = 0; e < size; e++) {
             System.out.println("·" + bag[e].toString());
         }
     }
     
     /**
-     * Shows the number of items in the shopping bag
+     * Shows the number of items in the shopping bag.
      * 
      * @return integer size of shopping bag
      */
@@ -106,7 +105,7 @@ public class ShoppingBag {
     }
     
     /**
-     * Checks the size of the shopping bag for items
+     * Checks the size of the shopping bag for items and determines whether it's empty.
      * 
      * @return true if the shopping bag is empty
      */
@@ -118,7 +117,7 @@ public class ShoppingBag {
     }
     
     /**
-     * Nulls all items in the shopping bag array and resets size to 0
+     * Nulls all items in the shopping bag array and resets the size to 0.
      */
     public void emptyBag() {
         for (int i = 0; i < size; i++) {
@@ -128,7 +127,7 @@ public class ShoppingBag {
     }
 
     /**
-     * Doubles the max size of the shopping bag
+     * Doubles the maximum size of the shopping bag.
      */
     private void grow() {
         GroceryItem[] newBag = new GroceryItem[bag.length * 2];
@@ -140,10 +139,10 @@ public class ShoppingBag {
     }
     
     /**
-     * helper method to find an item
+     * Helper method to find a grocery item in the shopping bag array
      *
-     * @param item
-     * @return index
+     * @param Grocery item to be found
+     * @return index of the grocery item, -1 if the item is not in the shopping bag
      */
     private int find(GroceryItem item) {
         for (int i = 0; i < size; i++) {
@@ -151,15 +150,20 @@ public class ShoppingBag {
         		return i;
         	}
         }
-        
         return -1;
     }
 
+    /**
+     * Test bed main that implements test cases.
+     * The results of the tests are printed to console.
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
     	ShoppingBag testBag = new ShoppingBag();
-    	GroceryItem test1 = new GroceryItem("I", 5.99, false);
-    	GroceryItem test2 = new GroceryItem("like", 4.50, false);
-    	GroceryItem test3 = new GroceryItem("sushi_and_burger", 1.5, false);
+    	GroceryItem test1 = new GroceryItem("I", 5.987, false);
+    	GroceryItem test2 = new GroceryItem("like", 4.321, false);
+    	GroceryItem test3 = new GroceryItem("sushi_and_burger", 1000, false);
     	GroceryItem test4 = new GroceryItem("hello", 40, true);
     	GroceryItem test5 = new GroceryItem("world", 60, true);
     	

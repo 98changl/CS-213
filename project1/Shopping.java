@@ -3,31 +3,30 @@
  * @author Kenneth Christian, Liman Chang
  */
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Shopping {
-	//private static ShoppingBag bag = new ShoppingBag();	// create only one instance of the shopping bag
 	
-	public Shopping() {//////////////////////////////// for now use "," to seperate. itemname,price,true/false////////////////////
+	/**
+	 * main method from driver class will call this for I/O
+	 */
+    public void run() {
+        Scanner sc = new Scanner(System.in).useDelimiter("\\s+"); //to get input for command and data
 
-	}
-	
-	// main method from driver class will call this for I/O. 
-	public void run() {
-		Scanner sc = new Scanner(System.in); //to get input
-		ShoppingBag bag = new ShoppingBag();
-		String input = ""; // will get input C, A, R, or D
-		
-		boolean running = true;
-		System.out.println("Let's start shopping!");
-	    
-	    // this while loop will continue asking the user for new commands after each
-	    // new item is added to the array until they decide to checkout
-		while(running) {
-			String command;
-			GroceryItem item;
-			
-			input = sc.next();
+        ShoppingBag bag = new ShoppingBag();
+        String input = "";
+
+        boolean running = true;
+        System.out.println("Let's start shopping!");
+
+        // this while loop will continue asking the user for new commands after each
+        // new item is added to the array until they decide to checkout
+        while (running) {
+            String command;
+            GroceryItem item;
+
+            input = sc.nextLine();
 			
 			command = input.substring(0, 1);
 			input = input.trim();
@@ -35,19 +34,29 @@ public class Shopping {
 			if (command.equals("A")) { // add item to shopping bag
 				item = makeItem(input);
 				bag.add(item);
-				System.out.println(item.getName() + " added to the bag");
+				System.out.println(item.getName() + " added to the bag.");
 			} 
 			else if (command.equals("R")) { // remove item from shopping bag
 				item = makeItem(input);
-				bag.remove(item);
-				System.out.println(item.getName() + " " + item.getPrice() + " removed");
+				boolean result = bag.remove(item);
+				if (result == true) {
+					System.out.println(item.getName() + " " + item.getPrice() + " removed.");
+				} else {
+					System.out.println("Unable to remove, this item is not in the bag.");
+				}
 			} 
 			else if (command.equals("P")) { // display all items in the bag
 				if (bag.isEmpty()) {
 					System.out.println("The bag is empty!");
 				} else {
-					System.out.println("You have " + bag.getSize() + " item(s).");
+					int size = bag.getSize();
+					if (size == 1) {
+						System.out.println("**You have 1 item in the bag.");
+					} else {
+						System.out.println("**You have " + size + " items in the bag.");
+					}
 					bag.print();
+					System.out.println("**End of list");
 				}
 			}
 			else if (command.equals("C")) { // checking out the grocery items in bag
@@ -63,7 +72,7 @@ public class Shopping {
 				}
 				running = false;
 			} 
-			else { //
+			else {
 				System.out.println("Invalid command!");
 			}
 		}
@@ -71,6 +80,12 @@ public class Shopping {
 		System.out.println("Thanks for shopping with us!");
 	}
 	
+	/**
+	 * Creates a new GroceryItem
+	 * 
+	 * @param string of a valid user input
+	 * @return GroceryItem object
+	 */
 	private GroceryItem makeItem(String input) {
 		String[] elements = input.split(" ");
 		double price = 0.0;
@@ -85,22 +100,30 @@ public class Shopping {
 		return new GroceryItem(elements[1], price, taxable);
 	}
 	
+	/**
+	 * Prints all objects in the shopping bag and empties the shopping bag
+	 * 
+	 * @param Shopping bag to check out
+	 */
 	private void checkout(ShoppingBag bag) {
 		double price = bag.salesPrice();
 		double tax = bag.salesTax();
 		double total = price + tax;;
+		int size = bag.getSize();
+		DecimalFormat currency = new DecimalFormat("0.00");
 		
-		if (bag.getSize() == 1) {
-			System.out.println("Checking out 1 item.");
+		if (size == 1) {
+			System.out.println("**Checking out 1 item.");
 		} else {
-			System.out.println("Checking out " + bag.getSize() + " items.");
+			System.out.println("**Checking out " + size + " items.");
 		}
 		
 		bag.print();
+		bag.emptyBag();
 		
-		System.out.println("Sales total: $" + bag.salesPrice());
-		System.out.println("Sales tax: $" + bag.salesTax());
-		System.out.println("Total amount paid: $" + total);
+		System.out.println("*Sales total: $" + currency.format(price));
+		System.out.println("*Sales tax: $" + currency.format(tax));
+		System.out.println("*Total amount paid: $" + currency.format(total));
 	}
 	
 }

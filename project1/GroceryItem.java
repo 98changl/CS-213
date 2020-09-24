@@ -61,9 +61,11 @@ public class GroceryItem {
 		
 		str = str.concat(name); // concat item name
 		str = str.concat(cat);
+		//System.out.println(str);
 		
 		cat = String.valueOf(price); // concat item price
-		str = str.concat(cat.substring(0, 5));  //----->  i had to get rid of .substring(0, 5) in order for code to run str = str.concat(cat/*.substring(0, 5)*/);
+		str = str.concat(cat);  //----->  i had to get rid of .substring(0, 5) in order for code to run str = str.concat(cat/*.substring(0, 5)*/);
+		//System.out.println(str);
 		
 		if (taxable == false) { // concat item taxable
 			cat = " : tax free";
@@ -71,7 +73,7 @@ public class GroceryItem {
 			cat = " : is taxable";
 		}
 		str = str.concat(cat);
-		
+		//System.out.println(str);
 		return str;
 	}
 	

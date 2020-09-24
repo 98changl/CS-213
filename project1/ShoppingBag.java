@@ -161,76 +161,100 @@ public class ShoppingBag {
      */
     public static void main(String[] args) {
     	ShoppingBag testBag = new ShoppingBag();
-    	GroceryItem test1 = new GroceryItem("I", 5.987, false);
-    	GroceryItem test2 = new GroceryItem("like", 4.321, false);
-    	GroceryItem test3 = new GroceryItem("sushi_and_burger", 1000, false);
-    	GroceryItem test4 = new GroceryItem("hello", 40, true);
-    	GroceryItem test5 = new GroceryItem("world", 60, true);
+    	GroceryItem item1 = new GroceryItem("I", 5.987, false);
+    	GroceryItem item2 = new GroceryItem("like", 4.321, false);
+    	GroceryItem item3 = new GroceryItem("sushi_and_burger", 1000, false);
+    	GroceryItem item4 = new GroceryItem("hello", 40, true);
+    	GroceryItem item5 = new GroceryItem("world", 60, true);
     	
-    	// test getSize() 1
-    	System.out.println("Size zero: " + testBag.getSize() + "\n");
-    	
-    	// test remove() 1
-    	System.out.println("Invalid remove: " + testBag.remove(test1) + "\n");
-    	
-    	// test add() and print()
-    	System.out.println("Testing add:");
-    	testBag.add(test1);
+    	// test 1
+    	System.out.println("Test Case #1");
+    	testBag.add(item1);
     	testBag.print();
     	System.out.println();
     	
-    	// test remove() 2
-    	System.out.println("Valid remove: " + testBag.remove(test1));
-    	testBag.print();
-    	System.out.println();
-    	
-    	// test grow() 1
-    	testBag.add(test1);
-    	testBag.add(test2);
-    	testBag.add(test3);
-    	testBag.print();
-    	System.out.println();
-    	
-    	// test getSize() 2
-    	System.out.println("Size three: " + testBag.getSize() + "\n");
-    	
-    	// test grow() 2
-    	testBag.add(test1);
-    	testBag.add(test2);
-    	testBag.add(test3);
-    	testBag.print();
-    	System.out.println();
-    	
-    	// test isEmpty() 1
-    	System.out.println("Bag is empty: " + testBag.isEmpty() + "\n");
-    	
-    	// test emptyBag()
-    	System.out.println("Emptying bag: ");
+    	// test 2
+    	System.out.println("Test Case #2");
     	testBag.emptyBag();
     	testBag.print();
     	System.out.println();
     	
-    	// test isEmpty() 2
-    	System.out.println("Bag is empty: " + testBag.isEmpty() + "\n");
-    	
-    	// test print() 2
-    	testBag.add(test4);
-    	testBag.add(test5);
+    	// test 3
+    	System.out.println("Test Case #3");
+    	System.out.println("Case 1 returns");
+    	testBag.add(item1);
+    	testBag.add(item1);
+    	testBag.add(item1);
+    	testBag.print();
+    	System.out.println("Case 2 returns");
+    	testBag.add(item1);
+    	testBag.add(item1);
+    	testBag.add(item1);
     	testBag.print();
     	System.out.println();
+    	testBag.emptyBag();
     	
-    	// test salesPrice() 1
-    	System.out.println("Sales Price 100: $" + testBag.salesPrice() + "\n");
+    	// test 4
+    	System.out.println("Test Case #4");
+    	System.out.println("Case 1 returns");
+    	testBag.add(item1);
+    	System.out.println(testBag.remove(item2));
+    	System.out.println("Case 2 returns");
+    	System.out.println(testBag.remove(item1));
+    	System.out.println("Case 3 returns");
+    	testBag.add(item1);
+    	testBag.add(item1);
+    	testBag.add(item1);
+    	System.out.println(testBag.remove(item1));
+    	System.out.println();
+    	testBag.emptyBag();
     	
-    	// test salesTax() 1
-    	System.out.println("Sales Tax 6.62: $" + testBag.salesTax() + "\n");
-    	
-    	// test remove() 3
-    	testBag.add(test1);
-    	testBag.add(test1);
-    	testBag.add(test1);
-    	System.out.println("Duplicate remove: " + testBag.remove(test1));
+    	// test 5
+    	System.out.println("Test Case #5");
+    	testBag.add(item1);
+    	testBag.add(item2);
+    	testBag.add(item3);
+    	testBag.add(item4);
     	testBag.print();
+    	System.out.println();
+    	testBag.emptyBag();
+    	
+    	// test 6
+    	System.out.println("Test Case #6");
+    	testBag.add(item1);
+    	testBag.add(item2);
+    	System.out.println(testBag.salesPrice());
+    	System.out.println();
+    	testBag.emptyBag();
+    	
+    	// test 7
+    	System.out.println("Test Case #7");
+    	testBag.add(item4);
+    	testBag.add(item5);
+    	System.out.println(testBag.salesTax());
+    	System.out.println();
+    	testBag.emptyBag();
+    	
+    	// test 8
+    	System.out.println("Test Case #8");
+    	System.out.println("Case 1 returns");
+    	testBag.add(item1);
+    	System.out.println(testBag.getSize());
+    	System.out.println("Case 2 returns");
+    	testBag.add(item1);
+    	testBag.add(item1);
+    	System.out.println(testBag.getSize());
+    	System.out.println();
+    	testBag.emptyBag();
+    	
+    	// test 9
+    	System.out.println("Test Case #9");
+    	System.out.println("Case 1 returns");
+    	testBag.add(item1);
+    	System.out.println(testBag.isEmpty());
+    	System.out.println("Case 2 returns");
+    	testBag.emptyBag();
+    	System.out.println(testBag.isEmpty());
     	System.out.println();
     }
 }

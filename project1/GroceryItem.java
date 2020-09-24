@@ -1,5 +1,5 @@
 /**
- * This class defines the abstract data type GroceryItem
+ * This class defines the abstract data type GroceryItem.
  * 
  * @author Liman Chang, Kenneth Christian
  */
@@ -23,7 +23,7 @@ public class GroceryItem {
     }
     
     /**
-     * Method to determine whether the item and object are the same
+     * Method to determine whether the item and object are the same.
      * 
      * @return true if objects are the same
      */
@@ -52,18 +52,18 @@ public class GroceryItem {
 	}
 	
 	/**
-	 * Creates a string representation of all data fields in a GroceryItem
+	 * Creates a string representation of all data fields in a GroceryItem.
 	 * 
 	 * @return String representation of data in item
 	 */
 	public String toString() {
 		String str = "";
-		String cat = ": $";
+		String cat = ": ";
 		
 		str = str.concat(name); // concatenate item name
 		str = str.concat(cat);
 		
-		cat = String.valueOf(price); // concatenate item price
+		cat = String.format("$%,.02f", price); // concatenate item price
 		str = str.concat(cat);
 		
 		if (taxable == false) { // concatenate item taxable
@@ -76,7 +76,7 @@ public class GroceryItem {
 	}
 	
 	/**
-	 * Gives the string value of the name
+	 * Gives the string value of the name.
 	 * 
 	 * @return name data field
 	 */
@@ -85,7 +85,7 @@ public class GroceryItem {
 	}
     
 	/**
-	 * Gets the price of the grocery item
+	 * Gets the price of the grocery item.
 	 * 
 	 * @return price data field
 	 */
@@ -94,7 +94,7 @@ public class GroceryItem {
 	}
     
 	/**
-	 * Gets whether the grocery item should be taxed or not
+	 * Gets whether the grocery item should be taxed or not.
 	 * 
 	 * @return taxable data field
 	 */
@@ -103,7 +103,7 @@ public class GroceryItem {
     }
     
     /**
-     * Helper method that checks to see if two strings are equal
+     * Helper method that checks to see if two strings are equal.
      * 
      * @param first string to compare
      * @param seccond string to compare

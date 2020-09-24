@@ -26,7 +26,8 @@ public class GroceryItem {
     }
     
     /**
-     * Method to determine whether the item and object are the same.
+     * Method to determine whether the GroceryItem and object are the same.
+     * Checks the instance of the object to determine if it is of type GroceryItem
      * 
      * @return true if objects are the same
      */
@@ -56,13 +57,14 @@ public class GroceryItem {
 	
 	/**
 	 * Creates a string representation of all data fields in a GroceryItem.
+	 * The price of the item is displayed with two decimal places.
 	 * 
 	 * @return String representation of data in item
 	 */
 	public String toString() {
 		DecimalFormat currency;
 		String str = "";
-		String cat = ": ";
+		String cat = ": $";
 		
 		str = str.concat(name); // concatenate item name
 		str = str.concat(cat);

@@ -1,5 +1,8 @@
+import java.text.DecimalFormat;
+
 /**
  * This class defines the abstract data type GroceryItem.
+ * It encapsulates the data field and methods of a grocery item.
  * 
  * @author Liman Chang, Kenneth Christian
  */
@@ -57,13 +60,19 @@ public class GroceryItem {
 	 * @return String representation of data in item
 	 */
 	public String toString() {
+		DecimalFormat currency;
 		String str = "";
 		String cat = ": ";
 		
 		str = str.concat(name); // concatenate item name
 		str = str.concat(cat);
 		
-		cat = String.format("$%,.02f", price); // concatenate item price
+		if (price >= 1000) { // formatting expensive items
+			currency = new DecimalFormat("0,000.00");
+		} else {
+			currency = new DecimalFormat("0.00");
+		}
+		cat = currency.format(price); // concatenate item price
 		str = str.concat(cat);
 		
 		if (taxable == false) { // concatenate item taxable

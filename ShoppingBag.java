@@ -76,9 +76,9 @@ public class ShoppingBag {
         }
         
         if (index != size) {
-        	bag[index] = bag[size];	// swap index and last item
+        	bag[index] = bag[size-1];	// swap index and last item
         }
-        bag[size] = null;
+        bag[size-1] = null;
         this.size--;
         
         return true;
@@ -234,6 +234,14 @@ public class ShoppingBag {
     	
     	// test salesTax() 1
     	System.out.println("Sales Tax 6.62: $" + testBag.salesTax() + "\n");
+    	
+    	// test remove() 3
+    	testBag.add(test1);
+    	testBag.add(test1);
+    	testBag.add(test1);
+    	System.out.println("Duplicate remove: " + testBag.remove(test1));
+    	testBag.print();
+    	System.out.println();
     }
 
 }

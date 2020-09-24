@@ -1,18 +1,19 @@
+import java.util.Scanner;
+
 /**
- * This class deals with I/O
+ * User interface class that handles the input commands,
+ * output data, and messages.
+ * 
  * @author Kenneth Christian, Liman Chang
  */
-
-import java.text.DecimalFormat;
-import java.util.*;
-
 public class Shopping {
 	
 	/**
-	 * main method from driver class will call this for I/O
+	 * Main method from driver class will call this for I/O.
+	 * The run() method handles all user interactions.
 	 */
     public void run() {
-        Scanner sc = new Scanner(System.in).useDelimiter("\\s+"); //to get input for command and data
+        Scanner sc = new Scanner(System.in).useDelimiter("\\s+"); // to get input for command and data
 
         ShoppingBag bag = new ShoppingBag();
         String input = "";
@@ -66,22 +67,23 @@ public class Shopping {
 					checkout(bag);
 				}
 			} 
-			else if (command.equals("Q")) { // stop program execution
+			else if (command.equals("Q")) { // ends loop to stop program execution
 				if (!bag.isEmpty()) { // automatically check out items in the bag
 					checkout(bag);
 				}
 				running = false;
 			} 
-			else {
+			else { // user input was invalid
 				System.out.println("Invalid command!");
 			}
 		}
 		
 		System.out.println("Thanks for shopping with us!");
+		sc.close();
 	}
 	
 	/**
-	 * Creates a new GroceryItem
+	 * Creates a new GroceryItem.
 	 * 
 	 * @param string of a valid user input
 	 * @return GroceryItem object
@@ -101,7 +103,10 @@ public class Shopping {
 	}
 	
 	/**
-	 * Prints all objects in the shopping bag and empties the shopping bag
+	 * Runs the output messages for the checkout command
+	 * if there are grocery items in the shopping bag.
+	 * Prints all items in the shopping bag and then empties the shopping bag.
+	 * This method handles formating with total price and tax.
 	 * 
 	 * @param Shopping bag to check out
 	 */
@@ -110,7 +115,6 @@ public class Shopping {
 		double tax = bag.salesTax();
 		double total = price + tax;;
 		int size = bag.getSize();
-		DecimalFormat currency = new DecimalFormat("0.00");
 		
 		if (size == 1) {
 			System.out.println("**Checking out 1 item.");
@@ -121,9 +125,8 @@ public class Shopping {
 		bag.print();
 		bag.emptyBag();
 		
-		System.out.println("*Sales total: $" + currency.format(price));
-		System.out.println("*Sales tax: $" + currency.format(tax));
-		System.out.println("*Total amount paid: $" + currency.format(total));
+		System.out.println("*Sales total: " + String.format("$%,.02f", price));
+		System.out.println("*Sales tax: " + String.format("$%,.02f", tax));
+		System.out.println("*Total amount paid: " + String.format("$%,.02f", total));
 	}
-	
 }

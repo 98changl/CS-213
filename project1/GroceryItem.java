@@ -1,8 +1,8 @@
 /**
  * This class defines the abstract data type GroceryItem
+ * 
  * @author Liman Chang, Kenneth Christian
  */
-
 public class GroceryItem {
 	private String name;		// the name of the item
 	private double price;		// the cost of the item
@@ -10,6 +10,7 @@ public class GroceryItem {
 	
 	/**
 	 * Constructor for the GroceryItem class
+	 * The grocery item object must be initialized with variables
 	 * 
 	 * @param name of the item
 	 * @param price of the item
@@ -43,7 +44,7 @@ public class GroceryItem {
 			if (taxable != item.taxable) { // compares item taxable
 				isEqual = false;
 			}
-		} else {
+		} else { // object is not of type grocery item
 			isEqual = false;
 		}
 		
@@ -59,25 +60,23 @@ public class GroceryItem {
 		String str = "";
 		String cat = ": $";
 		
-		str = str.concat(name); // concat item name
+		str = str.concat(name); // concatenate item name
 		str = str.concat(cat);
-		//System.out.println(str);
 		
-		cat = String.valueOf(price); // concat item price
-		str = str.concat(cat);  //----->  i had to get rid of .substring(0, 5) in order for code to run str = str.concat(cat/*.substring(0, 5)*/);
-		//System.out.println(str);
+		cat = String.valueOf(price); // concatenate item price
+		str = str.concat(cat);
 		
-		if (taxable == false) { // concat item taxable
+		if (taxable == false) { // concatenate item taxable
 			cat = " : tax free";
 		} else {
 			cat = " : is taxable";
 		}
 		str = str.concat(cat);
-		//System.out.println(str);
 		return str;
 	}
 	
 	/**
+	 * Gives the string value of the name
 	 * 
 	 * @return name data field
 	 */
@@ -86,6 +85,7 @@ public class GroceryItem {
 	}
     
 	/**
+	 * Gets the price of the grocery item
 	 * 
 	 * @return price data field
 	 */
@@ -94,6 +94,7 @@ public class GroceryItem {
 	}
     
 	/**
+	 * Gets whether the grocery item should be taxed or not
 	 * 
 	 * @return taxable data field
 	 */
@@ -102,7 +103,7 @@ public class GroceryItem {
     }
     
     /**
-     * Check to see if two strings are equal
+     * Helper method that checks to see if two strings are equal
      * 
      * @param first string to compare
      * @param seccond string to compare

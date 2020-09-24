@@ -10,6 +10,71 @@ import java.util.Scanner;
 public class Shopping {
 	
 	/**
+	 * Creates a new GroceryItem.
+	 * The method assumes the string input is formatted.
+	 * 
+	 * @param string of a valid user input
+	 * @return GroceryItem object
+	 */
+	private GroceryItem makeItem(String input) {
+		String[] elements = input.split(" ");
+		double price = 0.0;
+		boolean taxable = false;
+		
+		price = Double.parseDouble(elements[2]);
+		
+		if (elements[3].equals("true")) {
+			taxable = true;
+		}
+
+		return new GroceryItem(elements[1], price, taxable);
+	}
+	
+	/**
+	 * Runs the output messages for the checkout command
+	 * if there are grocery items in the shopping bag.
+	 * Prints all items in the shopping bag and then empties the shopping bag.
+	 * This method handles formating with total price and tax.
+	 * 
+	 * @param Shopping bag to check out
+	 */
+	private void checkout(ShoppingBag bag) {
+		DecimalFormat currency = new DecimalFormat("0.00");
+		DecimalFormat expensive = new DecimalFormat("0,000.00");
+		double price = bag.salesPrice();
+		double tax = bag.salesTax();
+		double total = price + tax;;
+		int size = bag.getSize();
+		
+		if (size == 1) {
+			System.out.println("**Checking out 1 item.");
+		} else {
+			System.out.println("**Checking out " + size + " items.");
+		}
+		
+		bag.print();
+		bag.emptyBag();
+		
+		if (price >= 1000) {
+			System.out.println("*Sales total: $" + expensive.format(price));
+		} else {
+			System.out.println("*Sales total: $" + currency.format(price));
+		}
+		
+		if (tax >= 1000) {
+			System.out.println("*Sales tax: $" + expensive.format(tax));
+		} else {
+			System.out.println("*Sales tax: $" + currency.format(tax));
+		}
+		
+		if (total >= 1000) {
+			System.out.println("*Total amount paid: $" + expensive.format(total));
+		} else {
+			System.out.println("*Total amount paid: $" + currency.format(total));
+		}
+	}
+	
+	/**
 	 * Main method from driver class will call this for I/O.
 	 * The run() method handles all user interactions.
 	 */
@@ -81,70 +146,5 @@ public class Shopping {
 		
 		System.out.println("Thanks for shopping with us!");
 		sc.close();
-	}
-	
-	/**
-	 * Creates a new GroceryItem.
-	 * The method assumes the string input is formatted.
-	 * 
-	 * @param string of a valid user input
-	 * @return GroceryItem object
-	 */
-	private GroceryItem makeItem(String input) {
-		String[] elements = input.split(" ");
-		double price = 0.0;
-		boolean taxable = false;
-		
-		price = Double.parseDouble(elements[2]);
-		
-		if (elements[3].equals("true")) {
-			taxable = true;
-		}
-
-		return new GroceryItem(elements[1], price, taxable);
-	}
-	
-	/**
-	 * Runs the output messages for the checkout command
-	 * if there are grocery items in the shopping bag.
-	 * Prints all items in the shopping bag and then empties the shopping bag.
-	 * This method handles formating with total price and tax.
-	 * 
-	 * @param Shopping bag to check out
-	 */
-	private void checkout(ShoppingBag bag) {
-		DecimalFormat currency = new DecimalFormat("0.00");
-		DecimalFormat expensive = new DecimalFormat("0,000.00");
-		double price = bag.salesPrice();
-		double tax = bag.salesTax();
-		double total = price + tax;;
-		int size = bag.getSize();
-		
-		if (size == 1) {
-			System.out.println("**Checking out 1 item.");
-		} else {
-			System.out.println("**Checking out " + size + " items.");
-		}
-		
-		bag.print();
-		bag.emptyBag();
-		
-		if (price >= 1000) {
-			System.out.println("*Sales total: $" + expensive.format(price));
-		} else {
-			System.out.println("*Sales total: $" + currency.format(price));
-		}
-		
-		if (tax >= 1000) {
-			System.out.println("*Sales tax: $" + expensive.format(tax));
-		} else {
-			System.out.println("*Sales tax: $" + currency.format(tax));
-		}
-		
-		if (total >= 1000) {
-			System.out.println("*Total amount paid: $" + expensive.format(total));
-		} else {
-			System.out.println("*Total amount paid: $" + currency.format(total));
-		}
 	}
 }

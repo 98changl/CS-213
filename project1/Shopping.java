@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -14,10 +15,10 @@ public class Shopping {
 	 */
     public void run() {
         Scanner sc = new Scanner(System.in).useDelimiter("\\s+"); // to get input for command and data
-
+        
         ShoppingBag bag = new ShoppingBag();
         String input = "";
-
+        
         boolean running = true;
         System.out.println("Let's start shopping!");
 
@@ -84,6 +85,7 @@ public class Shopping {
 	
 	/**
 	 * Creates a new GroceryItem.
+	 * The method assumes the string input is formatted.
 	 * 
 	 * @param string of a valid user input
 	 * @return GroceryItem object
@@ -111,6 +113,8 @@ public class Shopping {
 	 * @param Shopping bag to check out
 	 */
 	private void checkout(ShoppingBag bag) {
+		DecimalFormat currency = new DecimalFormat("0.00");
+		DecimalFormat expensive = new DecimalFormat("0,000.00");
 		double price = bag.salesPrice();
 		double tax = bag.salesTax();
 		double total = price + tax;;
@@ -125,8 +129,22 @@ public class Shopping {
 		bag.print();
 		bag.emptyBag();
 		
-		System.out.println("*Sales total: " + String.format("$%,.02f", price));
-		System.out.println("*Sales tax: " + String.format("$%,.02f", tax));
-		System.out.println("*Total amount paid: " + String.format("$%,.02f", total));
+		if (price >= 1000) {
+			System.out.println("*Sales total: $" + expensive.format(price));
+		} else {
+			System.out.println("*Sales total: $" + currency.format(price));
+		}
+		
+		if (tax >= 1000) {
+			System.out.println("*Sales tax: $" + expensive.format(tax));
+		} else {
+			System.out.println("*Sales tax: $" + currency.format(tax));
+		}
+		
+		if (total >= 1000) {
+			System.out.println("*Total amount paid: $" + expensive.format(total));
+		} else {
+			System.out.println("*Total amount paid: $" + currency.format(total));
+		}
 	}
 }

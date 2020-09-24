@@ -15,6 +15,34 @@ public class ShoppingBag {
     public ShoppingBag() {
         bag = new GroceryItem[2];
     }
+    
+    /**
+     * Helper method to find a grocery item in the shopping bag array.
+     *
+     * @param Grocery item to be found
+     * @return index of the grocery item, -1 if the item is not in the shopping bag
+     */
+    private int find(GroceryItem item) {
+        for (int i = 0; i < size; i++) {
+        	if (bag[i].equals(item)) {
+        		return i;
+        	}
+        }
+        return -1;
+    }
+    
+    /**
+     * Helper method to grow the capacity.
+     * The method doubles the maximum length of the shopping bag.
+     */
+    private void grow() {
+        GroceryItem[] newBag = new GroceryItem[size * 2];
+        
+        for (int i = 0; i < size; i++) {
+        	newBag[i] = bag[i];
+        }
+        bag = newBag;
+    }
 
     /**
      * This method adds item to the array bag.
@@ -34,6 +62,8 @@ public class ShoppingBag {
 
     /**
      * Method to remove a grocery item from bag if found.
+     * If the removed item is not the last item in the array,
+     * the last item will replace the removed item.
      * The bag array will not be affected if the item is not found in the bag.
      *
      * @param GroceryItem to be removed from Shopping Bag
@@ -130,33 +160,6 @@ public class ShoppingBag {
         	bag[i] = null;
         }
         size = 0;
-    }
-
-    /**
-     * Doubles the maximum length of the shopping bag.
-     */
-    private void grow() {
-        GroceryItem[] newBag = new GroceryItem[size * 2];
-        
-        for (int i = 0; i < size; i++) {
-        	newBag[i] = bag[i];
-        }
-        bag = newBag;
-    }
-    
-    /**
-     * Helper method to find a grocery item in the shopping bag array.
-     *
-     * @param Grocery item to be found
-     * @return index of the grocery item, -1 if the item is not in the shopping bag
-     */
-    private int find(GroceryItem item) {
-        for (int i = 0; i < size; i++) {
-        	if (bag[i].equals(item)) {
-        		return i;
-        	}
-        }
-        return -1;
     }
 
     /**

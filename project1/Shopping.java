@@ -1,20 +1,19 @@
+package project1;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
- * User interface class that handles the input commands,
- * output data, and messages.
- * 
- * @author Kenneth Christian, Liman Chang
+User interface class that handles the input commands,
+output data, and messages.
+@author Kenneth Christian, Liman Chang
  */
 public class Shopping {
 	
 	/**
-	 * Creates a new GroceryItem.
-	 * The method assumes the string input is formatted.
-	 * 
-	 * @param string of a valid user input
-	 * @return GroceryItem object
+	Creates a new GroceryItem.
+	The method assumes the string input is formatted.
+	@param input string from user
+ 	@return GroceryItem object
 	 */
 	private GroceryItem makeItem(String input) {
 		String[] elements = input.split(" ");
@@ -31,12 +30,11 @@ public class Shopping {
 	}
 	
 	/**
-	 * Runs the output messages for the checkout command
-	 * if there are grocery items in the shopping bag.
-	 * Prints all items in the shopping bag and then empties the shopping bag.
-	 * This method handles formating with total price and tax.
-	 * 
-	 * @param Shopping bag to check out
+	Runs the output messages for the checkout command,
+	if there are grocery items in the shopping bag.
+	Prints all items in the shopping bag and then empties the shopping bag.
+	This method handles formating with total price and tax.
+	@param bag to check out
 	 */
 	private void checkout(ShoppingBag bag) {
 		DecimalFormat currency = new DecimalFormat("0.00");
@@ -75,8 +73,8 @@ public class Shopping {
 	}
 	
 	/**
-	 * Main method from driver class will call this for I/O.
-	 * The run() method handles all user interactions.
+	Main method from driver class will call this for I/O.
+	The run() method handles all user interactions.
 	 */
     public void run() {
         Scanner sc = new Scanner(System.in).useDelimiter("\\s+"); // to get input for command and data

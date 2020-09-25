@@ -1,26 +1,25 @@
+package project1;
 /**
- * The container class that defines the abstract data type.
- * It contains the data field and operations of a shopping bag.
- * 
- * @author Liman Chang, Kenneth Christian
+The container class that defines the abstract data type.
+It contains the data field and operations of a shopping bag.
+@author Liman Chang, Kenneth Christian
  */
 public class ShoppingBag {
     private GroceryItem[] bag;	// array-based implementation of the bag
     private int size;			// number of items currently in the bag
 
     /**
-     * Constructor for the ShoppingBag class
-     * Initializes the shopping bag with an initial array size of 2.
+    Constructor for the ShoppingBag class.
+    Initializes the shopping bag with an initial array size of 2.
      */
     public ShoppingBag() {
         bag = new GroceryItem[2];
     }
     
     /**
-     * Helper method to find a grocery item in the shopping bag array.
-     *
-     * @param Grocery item to be found
-     * @return index of the grocery item, -1 if the item is not in the shopping bag
+    Helper method to find a grocery item in the shopping bag array.
+    @param item to be found
+    @return index of the grocery item, -1 if the item is not in the shopping bag
      */
     private int find(GroceryItem item) {
         for (int i = 0; i < size; i++) {
@@ -32,8 +31,8 @@ public class ShoppingBag {
     }
     
     /**
-     * Helper method to grow the capacity.
-     * The method doubles the maximum length of the shopping bag.
+    Helper method to grow the capacity.
+    The method doubles the maximum length of the shopping bag.
      */
     private void grow() {
         GroceryItem[] newBag = new GroceryItem[size * 2];
@@ -45,11 +44,10 @@ public class ShoppingBag {
     }
 
     /**
-     * This method adds item to the array bag.
-     * The GroceryItem is assumed to be properly formatted.
-     * If the array is full, then it will call grow() to double array's size.
-     * 
-     * @param GroceryItem to be added to Shopping Bag
+    This method adds item to the array bag.
+    The GroceryItem is assumed to be properly formatted.
+    If the array is full, then it will call grow() to double array's size.
+    @param item to be added to Shopping Bag
      */
     public void add(GroceryItem item) {
     	if (this.size == bag.length) { // the shopping bag is at maximum capacity
@@ -61,13 +59,12 @@ public class ShoppingBag {
     }
 
     /**
-     * Method to remove a grocery item from bag if found.
-     * If the removed item is not the last item in the array,
-     * the last item will replace the removed item.
-     * The bag array will not be affected if the item is not found in the bag.
-     *
-     * @param GroceryItem to be removed from Shopping Bag
-     * @return true if item was found and removed, false if the item is not in the bag
+    Method to remove a grocery item from bag if found.
+    If the removed item is not the last item in the array,
+    the last item will replace the removed item.
+    The bag array will not be affected if the item is not found in the bag.
+    @param item to be removed from Shopping Bag
+    @return true if item was found and removed, false if the item is not in the bag
      */
     public boolean remove(GroceryItem item) {
         int index = find(item);
@@ -86,10 +83,9 @@ public class ShoppingBag {
     }
 
     /**
-     * Calculates the sales price of items in the shopping bag.
-     * The method does not format the sales price to "$0.00".
-     * 
-     * @returns total sales price
+    Calculates the sales price of items in the shopping bag.
+    The method does not format the sales price to "$0.00".
+    @return total sales price
      */
     public double salesPrice() {
         double salesPrice = 0;
@@ -102,10 +98,9 @@ public class ShoppingBag {
     }
 
     /**
-     * Calculates the sales tax of items in the shopping bag.
-     * The method does not format the sales tax to "$0.00".
-     * 
-     * @return total sales tax
+    Calculates the sales tax of items in the shopping bag.
+    The method does not format the sales tax to "$0.00".
+    @return total sales tax
      */
     public double salesTax() {
     	double taxRate = 0.06625;
@@ -121,28 +116,26 @@ public class ShoppingBag {
     }
 
     /**
-     * Prints to IO all items in the shopping bag.
-     * The method will print nothing if the bag is empty.
+    Prints to IO all items in the shopping bag.
+    The method will print nothing if the bag is empty.
      */
     public void print() {
         for (int e = 0; e < size; e++) {
-            System.out.println("Â·" + bag[e].toString());
+            System.out.println("·" + bag[e].toString());
         }
     }
     
     /**
-     * Shows the number of items in the shopping bag.
-     * 
-     * @return integer size of shopping bag
+    Shows the number of items in the shopping bag.
+    @return integer size of shopping bag
      */
     public int getSize() {
         return this.size;
     }
     
     /**
-     * Checks the size of the shopping bag for items and determines whether it's empty.
-     * 
-     * @return true if the shopping bag is empty
+    Checks the size of the shopping bag for items and determines whether it's empty.
+    @return true if the shopping bag is empty
      */
     public boolean isEmpty() {
     	if (size > 0) {
@@ -152,8 +145,8 @@ public class ShoppingBag {
     }
     
     /**
-     * Nulls all items in the shopping bag array and resets the size to 0.
-     * This method does not change the total length of the array.
+    Nulls all items in the shopping bag array and resets the size to 0.
+    This method does not change the total length of the array.
      */
     public void emptyBag() {
         for (int i = 0; i < size; i++) {
@@ -163,11 +156,10 @@ public class ShoppingBag {
     }
 
     /**
-     * Test bed main that implements test cases.
-     * Only the results of the tests are printed to console.
-     * Input data and test cases will not be displayed.
-     * 
-     * @param args
+    Test bed main that implements test cases.
+    Only the results of the tests are printed to console.
+    Input data and test cases will not be displayed.
+    @param args is not used
      */
     public static void main(String[] args) {
     	ShoppingBag testBag = new ShoppingBag();

@@ -1,7 +1,7 @@
 package project2;
 
 /**
- * 
+ * Date class
  * @author Liman Chang, Kenneth Christian
  */
 public class Date {
@@ -9,6 +9,12 @@ public class Date {
 	private int month;
 	private int day;
 	
+	/**
+	 * Constructor for the date class.
+	 * @param month of the date
+	 * @param day of the date
+	 * @param year of the date
+	 */
 	public Date (int month, int day, int year) {
 		this.month = month;
 		this.day = day;
@@ -17,12 +23,38 @@ public class Date {
 	
 	/**
 	 * Compares the date given by the parameter to this date.
+	 * Returns a positive integer if this date is later then the input date.
+	 * Returns a negative integer if this date is earlier than the input date.
 	 * @param date to compare to this date 
-	 * @return 0, 1, or -1
+	 * @return 0 if the dates are equal, 1 if the date is later, or -1 if the date is earlier
 	 */
 	public int compareTo(Date date) {
+		// compares years
+		if (this.year > date.getYear()) {
+			return 1;
+		}
+		if (this.year < date.getYear()) {
+			return -1;
+		}
 		
-		return -1;
+		// compares months
+		if (this.month > date.getMonth()) {
+			return 1;
+		}
+		if (this.month < date.getMonth()) {
+			return -1;
+		}
+		
+		// compares days
+		if (this.day > date.getDay()) {
+			return 1;
+		}
+		if (this.day < date.getDay()) {
+			return -1;
+		}
+		
+		// the dates are equivalent
+		return 0;
 	}
 	
 	/**
@@ -38,12 +70,16 @@ public class Date {
 		return str;
 	}
 	
+	/**
+	 * Checks whether the date is in the correct format.
+	 * Any date after the year of 2020 will be considered invalid.
+	 * @return true if date is valid
+	 */
 	public boolean isValid() {
-		
 		if (month < 1 && month > 12) {
 			return false;
 		}
-		if (month == 2 && day > 28) {
+		if (month == 2 && day > 28) { // February check
 			return false;
 		}
 		if (day < 1 && day > 31) {
@@ -53,5 +89,29 @@ public class Date {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Gets the year for the date.
+	 * @return integer representation of the year
+	 */
+	public int getYear() {
+		return year;
+	}
+	
+	/**
+	 * Gets the month for the date.
+	 * @return integer representation of the month
+	 */
+	public int getMonth() {
+		return month;
+	}
+	
+	/**
+	 * Gets the day for the date.
+	 * @return integer representation of the day
+	 */
+	public int getDay() {
+		return day;
 	}
 }

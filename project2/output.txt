@@ -1,0 +1,224 @@
+Transaction processing starts.....
+Command 'o' not supported!
+Command 'p' not supported!
+Command 'c' not supported!
+Command 'OA' not supported!
+Command 'cc' not supported!
+Command 'cs' not supported!
+Command 'cm' not supported!
+Command 'oc' not supported!
+Command 'os' not supported!
+Command 'om' not supported!
+Command 'CA' not supported!
+Command 'cc' not supported!
+Command 'cs' not supported!
+Command 'cm' not supported!
+Command 'pn' not supported!
+Command 'pd' not supported!
+Command 'pa' not supported!
+Database is empty.
+Database is empty.
+Database is empty.
+Account does not exist.
+Account does not exist.
+Account does not exist.
+Account opened and added to the database.
+Account opened and added to the database.
+Account opened and added to the database.
+Account is already in the database.
+Account is already in the database.
+Account is already in the database.
+--Listing accounts in the database--
+*Checking*John Doe* $500.00*1/1/2010*direct deposit account*
+*Savings*John Doe* $500.00*1/1/2010*special Savings account*
+*Money Market*John Doe* $500.00*1/1/2010*0 withdrawals*
+--end of listing--
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+--Listing accounts in the database--
+*Checking*John Doe* $400.00*1/1/2010*direct deposit account*
+*Savings*John Doe* $400.00*1/1/2010*special Savings account*
+*Money Market*John Doe* $400.00*1/1/2010*1 withdrawal*
+--end of listing--
+100.0 deposited to account.
+100.0 deposited to account.
+100.0 deposited to account.
+--Listing accounts in the database--
+*Checking*John Doe* $500.00*1/1/2010*direct deposit account*
+*Savings*John Doe* $500.00*1/1/2010*special Savings account*
+*Money Market*John Doe* $500.00*1/1/2010*1 withdrawal*
+--end of listing--
+Account does not exist
+Account does not exist.
+13/1/2010 is not a valid date!
+12/32/2010 is not a valid date!
+2/29/2010 is not a valid date!
+Account opened and added to the database.
+11/31/2019 is not a valid date!
+Account opened and added to the database.
+--Listing accounts in the database--
+*Checking*John Doe* $500.00*1/1/2010*direct deposit account*
+*Savings*John Doe* $500.00*1/1/2010*special Savings account*
+*Money Market*John Doe* $500.00*1/1/2010*1 withdrawal*
+*Checking*Jane Doe* $500.00*2/29/2008
+*Savings*Jane Doe* $500.00*11/1/2019
+--end of listing--
+Account closed and removed from the database.
+Account closed and removed from the database.
+--Listing accounts in the database--
+*Savings*Jane Doe* $500.00*11/1/2019
+*Savings*John Doe* $500.00*1/1/2010*special Savings account*
+*Checking*Jane Doe* $500.00*2/29/2008
+--end of listing--
+Account opened and added to the database.
+Account opened and added to the database.
+Account opened and added to the database.
+Account opened and added to the database.
+Account opened and added to the database.
+Account opened and added to the database.
+Account opened and added to the database.
+Account opened and added to the database.
+Input data type mismatch.
+Account opened and added to the database.
+Input data type mismatch.
+--Listing accounts in the database--
+*Savings*Jane Doe* $500.00*11/1/2019
+*Savings*John Doe* $500.00*1/1/2010*special Savings account*
+*Checking*Jane Doe* $500.00*2/29/2008
+*Checking*Richard Scanlan* $1,500.00*7/31/2014*direct deposit account*
+*Checking*Jason Brown* $300.12*6/28/2015
+*Savings*Mary Johnson* $2,000.88*7/31/2014*special Savings account*
+*Savings*Charlie Brown* $800.00*6/28/2015
+*Money Market*Mary Johnson* $456.78*7/10/2014*0 withdrawals*
+*Money Market*Charlie Brown* $600.33*6/2/2015*0 withdrawals*
+*Money Market*Forever Young* $3,634.45*2/21/2020*0 withdrawals*
+*Checking*Jerry Anderson* $1,001.40*9/23/2020
+*Savings*Tom Moore* $1,001.40*9/23/2020
+--end of listing--
+Input data type mismatch.
+Input data type mismatch.
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+100.00 withdrawn from account.
+Insufficient funds.
+--Listing accounts in the database--
+*Savings*Jane Doe* $500.00*11/1/2019
+*Savings*John Doe* $500.00*1/1/2010*special Savings account*
+*Checking*Jane Doe* $500.00*2/29/2008
+*Checking*Richard Scanlan* $1,500.00*7/31/2014*direct deposit account*
+*Checking*Jason Brown* $300.12*6/28/2015
+*Savings*Mary Johnson* $2,000.88*7/31/2014*special Savings account*
+*Savings*Charlie Brown* $800.00*6/28/2015
+*Money Market*Mary Johnson* $456.78*7/10/2014*0 withdrawals*
+*Money Market*Charlie Brown* $600.33*6/2/2015*0 withdrawals*
+*Money Market*Forever Young* $2,934.45*2/21/2020*7 withdrawals*
+*Checking*Jerry Anderson* $1,001.40*9/23/2020
+*Savings*Tom Moore* $1,001.40*9/23/2020
+--end of listing--
+--Printing statements by last name--
+*Checking*Jerry Anderson* $1,001.40*9/23/2020
+-interest: $ 0.04
+-fee: $ 25.00
+-new balance: $ 976.44
+*Checking*Jason Brown* $300.12*6/28/2015
+-interest: $ 0.01
+-fee: $ 25.00
+-new balance: $ 275.14
+*Savings*Charlie Brown* $800.00*6/28/2015
+-interest: $ 0.17
+-fee: $ 0.00
+-new balance: $ 800.17
+*Money Market*Charlie Brown* $600.33*6/2/2015*0 withdrawals*
+-interest: $ 0.33
+-fee: $ 12.00
+-new balance: $ 588.66
+*Savings*John Doe* $500.00*1/1/2010*special Savings account*
+-interest: $ 0.15
+-fee: $ 0.00
+-new balance: $ 500.15
+*Checking*Jane Doe* $500.00*2/29/2008
+-interest: $ 0.02
+-fee: $ 25.00
+-new balance: $ 475.02
+*Savings*Jane Doe* $500.00*11/1/2019
+-interest: $ 0.10
+-fee: $ 0.00
+-new balance: $ 500.10
+*Money Market*Mary Johnson* $456.78*7/10/2014*0 withdrawals*
+-interest: $ 0.25
+-fee: $ 12.00
+-new balance: $ 445.03
+*Savings*Mary Johnson* $2,000.88*7/31/2014*special Savings account*
+-interest: $ 0.58
+-fee: $ 0.00
+-new balance: $ 2,001.46
+*Savings*Tom Moore* $1,001.40*9/23/2020
+-interest: $ 0.21
+-fee: $ 0.00
+-new balance: $ 1,001.61
+*Checking*Richard Scanlan* $1,500.00*7/31/2014*direct deposit account*
+-interest: $ 0.06
+-fee: $ 0.00
+-new balance: $ 1,500.06
+*Money Market*Forever Young* $2,934.45*2/21/2020*7 withdrawals*
+-interest: $ 1.59
+-fee: $ 12.00
+-new balance: $ 2,924.04
+--end of printing--
+600.00 withdrawn from account.
+--Printing statements by date opened--
+*Checking*Jane Doe* $475.02*2/29/2008
+-interest: $ 0.02
+-fee: $ 25.00
+-new balance: $ 450.04
+*Savings*John Doe* $500.15*1/1/2010*special Savings account*
+-interest: $ 0.15
+-fee: $ 0.00
+-new balance: $ 500.29
+*Money Market*Mary Johnson* $445.03*7/10/2014*0 withdrawals*
+-interest: $ 0.24
+-fee: $ 12.00
+-new balance: $ 433.27
+*Savings*Mary Johnson* $2,001.46*7/31/2014*special Savings account*
+-interest: $ 0.58
+-fee: $ 0.00
+-new balance: $ 2,002.04
+*Checking*Richard Scanlan* $1,500.06*7/31/2014*direct deposit account*
+-interest: $ 0.06
+-fee: $ 0.00
+-new balance: $ 1,500.13
+*Money Market*Charlie Brown* $588.66*6/2/2015*0 withdrawals*
+-interest: $ 0.32
+-fee: $ 12.00
+-new balance: $ 576.97
+*Savings*Charlie Brown* $200.17*6/28/2015
+-interest: $ 0.04
+-fee: $ 5.00
+-new balance: $ 195.21
+*Checking*Jason Brown* $275.14*6/28/2015
+-interest: $ 0.01
+-fee: $ 25.00
+-new balance: $ 250.15
+*Savings*Jane Doe* $500.10*11/1/2019
+-interest: $ 0.10
+-fee: $ 0.00
+-new balance: $ 500.21
+*Money Market*Forever Young* $2,924.04*2/21/2020*7 withdrawals*
+-interest: $ 1.58
+-fee: $ 12.00
+-new balance: $ 2,913.62
+*Checking*Jerry Anderson* $976.44*9/23/2020
+-interest: $ 0.04
+-fee: $ 25.00
+-new balance: $ 951.48
+*Savings*Tom Moore* $1,001.61*9/23/2020
+-interest: $ 0.21
+-fee: $ 0.00
+-new balance: $ 1,001.82
+--end of printing--
+Transaction processing completed.

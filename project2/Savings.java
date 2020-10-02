@@ -7,6 +7,11 @@ package project2;
 public class Savings extends Account {
 	private boolean isLoyal;
 
+	public Savings(String first_name, String last_name, double balance, Date date, boolean isLoyal) {
+		super(first_name, last_name, balance, date);
+		this.isLoyal = isLoyal;
+	}
+	
 	@Override
 	public double monthlyInterest() {
 		// TODO Auto-generated method stub

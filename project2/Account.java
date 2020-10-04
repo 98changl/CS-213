@@ -28,7 +28,7 @@ public abstract class Account {
 	 * @param amount money to decrease
 	 */
 	public void debit(double amount) {
-		balance -= amount;
+		this.balance -= amount;
 	}
 	
 	/**
@@ -36,23 +36,51 @@ public abstract class Account {
 	 * @param amount money to increase
 	 */
 	public void credit(double amount) {
-		balance += amount;
+		this.balance += amount;
 	}
 	
 	public String toString() {
+            //*Savings*Jane Doe* $500.00*11/1/2019
 		DecimalFormat currency = new DecimalFormat("0,000.00");
-		String str = "*";
-		String cat = "* $";
+		String str = "";
+		
+
 		
 		str = str.concat(holder.getName());
 		str = str.concat("* $");
+                str = str.concat(currency.format(balance));
+                str = str.concat("*");
+                str = str.concat(dateOpen.toString());
 		
 		
 		
 		return str;
 	}
+        
+       
 	
 	public abstract double monthlyInterest();
 	
-	public abstract double monthlyFee();
+	public abstract double monthlyFee(double balance);
+
+        public double getBalance(){
+            return this.balance;
+        }
+       
+        /**
+         * 
+         * @return dateopen
+         */
+        public Date getDate(){
+            return this.dateOpen;
+        }
+        
+        /**
+         * 
+         * @return holder.gLName 
+         */
+        public String getLastName(){
+            return this.holder.gLName();
+        }
+        
 }

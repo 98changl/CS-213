@@ -14,13 +14,23 @@ public class Savings extends Account {
 	
 	@Override
 	public double monthlyInterest() {
-		// TODO Auto-generated method stub
-		return 0;
+                if(isLoyal){
+                    return 35;
+                } 
+                else
+                    return 25;
+                
+            
 	}
 
 	@Override
-	public double monthlyFee() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public double monthlyFee(double balance) {
+                if(balance >= 300){
+                    return 0;
+                }
+                else
+                    return 5;
+        }
 }
+                            
+           

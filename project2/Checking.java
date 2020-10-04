@@ -14,13 +14,21 @@ public class Checking extends Account {
 	
 	@Override
 	public double monthlyInterest() {
-		// TODO Auto-generated method stub
-		return 0;
+              
+            return 5;
 	}
-
+       
 	@Override
-	public double monthlyFee() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double monthlyFee(double balance) {
+            if(balance >= 1500 || directDeposit)
+            return 0;
+            else{
+             return 25;   
+            }
 	}
+        
+        @Override
+        public void credit(double amount){
+            
+        }
 }

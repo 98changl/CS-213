@@ -27,8 +27,12 @@ public abstract class Account {
 	 * Decrease the balance of the account.
 	 * @param amount money to decrease
 	 */
-	public void debit(double amount) {
-		this.balance -= amount;
+	public void debit(Account account , double amount) {
+               
+            if(account instanceof MoneyMarket){
+               ((MoneyMarket) account).incW();
+            }
+               this.balance -= amount;
 	}
 	
 	/**
@@ -36,11 +40,14 @@ public abstract class Account {
 	 * @param amount money to increase
 	 */
 	public void credit(double amount) {
+            
+                
 		this.balance += amount;
 	}
 	
 	public String toString() {
             //*Savings*Jane Doe* $500.00*11/1/2019
+           /// *Checking*John Doe* $500.00*1/1/2010*direct deposit account*
 		DecimalFormat currency = new DecimalFormat("0,000.00");
 		String str = "";
 		
@@ -83,4 +90,34 @@ public abstract class Account {
             return this.holder.gLName();
         }
         
-}
+        /**
+         * Checking will override this method.
+         * Returns weather or not an checking account is direct deposit or not.
+         * @return true if account is direct deposit or false if not.
+         */
+        public boolean isDd(){
+            return true;
+        }
+        
+         /**
+         * Savings will override this method.
+         * Returns weather or not an checking account is direct deposit or not.
+         * @return true if account is loyal or false if not.
+         */
+        public boolean isLy(){
+            return true;
+        }
+        
+       /**
+        * MoneyMarket will override this method to return number of withdrawals
+        * @return withdrawals 
+        */ 
+       public int getW(){
+           return 0;
+       } 
+        
+        
+        }
+        
+        
+        

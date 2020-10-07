@@ -320,6 +320,8 @@ public class AccountDatabase {
 	public void printAccounts() {
             String acc;
             String typeAcc;
+            double numW = 0;
+                
                 for(int x = 0 ; x < size ; x++){
                         typeAcc = "";
                         acc = "";
@@ -332,6 +334,8 @@ public class AccountDatabase {
                     }
                     if(accounts[x] instanceof MoneyMarket){
                         acc = "MoneyMarket";
+                        numW = accounts[x].getW();
+                        typeAcc = typeAcc.concat("*" + numW + " withdrawal");
                     }
                     if(accounts[x] instanceof Savings){
                         acc = "Savings";

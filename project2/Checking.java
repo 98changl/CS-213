@@ -1,5 +1,7 @@
 package project2;
 
+import java.text.DecimalFormat;
+
 /**
  * 
  * @author Liman Chang, Kenneth Christian
@@ -14,8 +16,11 @@ public class Checking extends Account {
 	
 	@Override
 	public double monthlyInterest() {
-              
-            return 5;
+    
+                      
+            //0.0005/12
+            return 0.00004 ;
+
 	}
        
 	@Override
@@ -27,8 +32,13 @@ public class Checking extends Account {
             }
 	}
         
+      
+        /**
+         * Method will return true if account is direct deposit and false if not
+         * @return directDeposit
+         */
         @Override
-        public void credit(double amount){
-            
-        }
+     public boolean isDd(){
+         return this.directDeposit;
+     }
 }

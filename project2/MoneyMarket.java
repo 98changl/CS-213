@@ -6,16 +6,17 @@ package project2;
  */
 public class MoneyMarket extends Account {
 	private int withdrawals;
+        
 
-	public MoneyMarket(String first_name, String last_name, double balance, Date date, int withdrawals) {
+	public MoneyMarket(String first_name, String last_name, double balance, Date date, int withdrawals ) {
 		super(first_name, last_name, balance, date);
 		this.withdrawals = withdrawals;
 	}
 	
 	@Override
 	public double monthlyInterest() {
-
-            return 65;
+            //0.65%/12
+            return 0.0005;
 	}
 
 	@Override
@@ -25,7 +26,21 @@ public class MoneyMarket extends Account {
 	}
             else
                 return 12;
+        }
+        
+        
+            void incW(){
+            this.withdrawals++;
+            
+        }
+        
+        @Override
+        public int getW(){
+            return this.withdrawals;
+        }
+        
+       
         
       
-        }
+        
 }

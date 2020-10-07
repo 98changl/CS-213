@@ -58,7 +58,6 @@ OM Forever Young 3634.45 2/21/2020
 OC Jerry Anderson 1001.4 9/23/2020 false
 OS Tom Moore xxx 9/23/2020 false
 OS Tom Moore 1001.4 9/23/2020 FALS
-E
 OC Tom Moore 1001.4 9/23/2020 flash
 PA
 WC Jerry Anderson xxx

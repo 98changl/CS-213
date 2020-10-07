@@ -1,5 +1,7 @@
 package project2;
 
+import java.text.DecimalFormat;
+
 
 /**
  * 
@@ -93,6 +95,7 @@ public class AccountDatabase {
                 if(find(account) == -1){
                     return false;
                 }
+                
            for(int x = 0; x<size ; x++){
                if(accounts[x].equals(account)){
                   account.credit(amount);
@@ -109,6 +112,7 @@ public class AccountDatabase {
 	 * @return 0: withdrawal successful, 1: insufficient funds, -1 account doesn't exist
 	 */
 	public int withdrawal(Account account, double amount) {
+           
             if(find(account) == -1){
                 return -1;
             }
@@ -117,8 +121,9 @@ public class AccountDatabase {
                      if(account.getBalance() < amount){
                          return -1;
                      }
-                     account.debit(amount);
-             }
+                    account.debit(account , amount);
+            
+                 }
              }
              return 0;
         }
@@ -130,10 +135,8 @@ public class AccountDatabase {
 	 */
 	private void sortByDateOpen() {
             Account acc;
-                 
-		
-                  
-                  for (int i = 0; i < size; i++){ 
+                
+            for (int i = 0; i < size; i++){ 
         
             for (int j = i + 1; j < size; j++){ 
             
@@ -178,7 +181,7 @@ public class AccountDatabase {
                   for (int x = 0; x < size; x++){ 
         
             for (int a = x + 1; a < size; a++){ 
-                if (accounts[x].getLastName().compareTo(accounts[a].getLastName()) > 0){//compares last names 
+                if (accounts[x].getLastName().compareTo(accounts[a].getLastName())>0){//compares last names 
                 
                     acc = accounts[x];
                     accounts[x] = accounts[a];
@@ -187,58 +190,158 @@ public class AccountDatabase {
             }
                   }
         }
-                
+        
+     
+       
+         ////calculate the monthly interests and fees, and print the account statements,  
          public void printByDateOpen() {
 		sortByDateOpen();
-             
-            String acc ="";
-                for(int x = 0 ; x < size ; x++){
+                DecimalFormat decimalFormat = new DecimalFormat("##.##");
+                
+                double intrest =0;
+                double fee = 0;
+                double balance = 0;
+                double newB = 0;
+                String acc;
+                String typeAcc;
+                int numW = 0;
+                        
+            for(int x = 0 ; x < size ; x++){
+                        typeAcc = "";
+                        acc = "";
+                        
                     if(accounts[x] instanceof Checking){
                         acc = "Checking";
+                        if(accounts[x].isDd()){
+                            typeAcc = "*direct deposit account*";
+                        }
+                      intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
+                      fee = accounts[x].monthlyFee(accounts[x].getBalance());
+                      balance = accounts[x].getBalance();
+                      newB = balance - intrest - fee;
                     }
                     if(accounts[x] instanceof MoneyMarket){
                         acc = "MoneyMarket";
+                        numW = accounts[x].getW();
+                        typeAcc = typeAcc.concat("*" + numW + " withdrawal");
+                       
+                     
+                      intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
+                      fee = accounts[x].monthlyFee(accounts[x].getBalance());
+                      balance = accounts[x].getBalance();
+                      newB = balance - intrest - fee;
                     }
                     if(accounts[x] instanceof Savings){
                         acc = "Savings";
+                        if(accounts[x].isLy()){
+                            typeAcc = "*special Savings account*";
+                        }
+                      intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
+                      fee = accounts[x].monthlyFee(accounts[x].getBalance());
+                      balance = accounts[x].getBalance();
+                      newB = balance + intrest - fee;
                     }
-                    System.out.println("*"+acc+accounts[x].toString());
-                }
+                    System.out.println("*"+acc+accounts[x].toString()+typeAcc);
+                    System.out.println("-interest: $ " + decimalFormat.format(intrest) );
+                    System.out.println("-fee: $ " + decimalFormat.format(fee));
+                    System.out.println("-new balance: $ " + decimalFormat.format(newB));
+                    System.out.println("");
+            }
+         }
+                
+                    
+                     
+                    
+                    
+                    
                 
                 
-	}
+                
 	
+	
+       ////calculate the monthly interests and fees, and print the account statements,  
 	public void printByLastName() {
-		sortByLastName();
-                String acc ="";
-                for(int x = 0 ; x < size ; x++){
+            sortByLastName();
+            DecimalFormat decimalFormat = new DecimalFormat("##.##");
+                
+                double numW = 0;
+                double intrest =0;
+                double fee = 0;
+                double balance = 0;
+                double newB = 0;
+                String acc;
+                String typeAcc;
+                        
+            for(int x = 0 ; x < size ; x++){
+                        typeAcc = "";
+                        acc = "";
+                        
                     if(accounts[x] instanceof Checking){
                         acc = "Checking";
+                        if(accounts[x].isDd()){
+                            typeAcc = "*direct deposit account*";
+                        }
+                      intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
+                      fee = accounts[x].monthlyFee(accounts[x].getBalance());
+                      balance = accounts[x].getBalance();
+                      newB = balance - intrest - fee;
+                    }
+                    if(accounts[x] instanceof MoneyMarket){
+                        acc = "MoneyMarket";
+                        numW = accounts[x].getW();
+                        typeAcc = typeAcc.concat("*" + numW + " withdrawal");
+                     
+                      intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
+                      fee = accounts[x].monthlyFee(accounts[x].getBalance());
+                      balance = accounts[x].getBalance();
+                      newB = balance - intrest - fee;
+                    }
+                    if(accounts[x] instanceof Savings){
+                        acc = "Savings";
+                        if(accounts[x].isLy()){
+                            typeAcc = "*special Savings account*";
+                        }
+                      intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
+                      fee = accounts[x].monthlyFee(accounts[x].getBalance());
+                      balance = accounts[x].getBalance();
+                      newB = balance + intrest - fee;
+                    }
+                    System.out.println("*"+acc+accounts[x].toString()+typeAcc);
+                    System.out.println("-interest: $ " + decimalFormat.format(intrest) );
+                    System.out.println("-fee: $ " + decimalFormat.format(fee));
+                    System.out.println("-new balance: $ " + decimalFormat.format(newB));
+                }
+        }
+                
+                
+                
+	
+	//just print the accounts 
+	public void printAccounts() {
+            String acc;
+            String typeAcc;
+                for(int x = 0 ; x < size ; x++){
+                        typeAcc = "";
+                        acc = "";
+                        
+                    if(accounts[x] instanceof Checking){
+                        acc = "Checking";
+                        if(accounts[x].isDd()){
+                            typeAcc = "*direct deposit account*";
+                        }
                     }
                     if(accounts[x] instanceof MoneyMarket){
                         acc = "MoneyMarket";
                     }
                     if(accounts[x] instanceof Savings){
                         acc = "Savings";
+                        if(accounts[x].isLy()){
+                            typeAcc = "*special Savings account*";
+                        }
                     }
-                    System.out.println("*"+acc+accounts[x].toString());
+                    System.out.println("*"+acc+accounts[x].toString()+typeAcc);
                 }
                 
-	}
-	
-	public void printAccounts() {
-		String acc ="";
-                for(int x = 0 ; x < size ; x++){
-                    if(accounts[x] instanceof Checking){
-                        acc = "Checking";
-                    }
-                    if(accounts[x] instanceof MoneyMarket){
-                        acc = "MoneyMarket";
-                    }
-                    if(accounts[x] instanceof Savings){
-                        acc = "Savings";
-                    }
-                    System.out.println("*"+acc+accounts[x].toString());
+                
                 }
 	}
-}

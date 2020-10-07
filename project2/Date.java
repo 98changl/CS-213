@@ -22,6 +22,19 @@ public class Date {
 	}
 	
 	/**
+	 * Determines whether the year for this Date object is a leap year.
+	 * @return true if year is a leap year, false otherwise
+	 */
+	private boolean isLeapYear() {
+		if ((this.year % 4) == 0 && (this.year % 100) != 0) {
+			return true;
+		} else if ((this.year % 400) == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Compares the date given by the parameter to this date.
 	 * Returns a positive integer if this date is later then the input date.
 	 * Returns a negative integer if this date is earlier than the input date.
@@ -76,26 +89,37 @@ public class Date {
 	 * @return true if date is valid
 	 */
 	public boolean isValid() {
-		if (year < 0 || year > 2020) { // year check
+		if (year < 1) { // year check
 			return false;
 		}
+		
 		if (month < 1 || month > 12) { // month check
 			return false;
 		}
-		if (month == 2 && day > 28) { // February check
-			return false;
-		}
-		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) { // 31 day months
-			if (day < 1 || day > 31) {
+		
+		if (isLeapYear() == true) { // leap year
+			if (month == 2 && day > 29) { // February check
 				return false;
 			}
 		}
+		
+		if (month == 2 && day > 28) { // February check
+			return false;
+		}
+		
 		if (month == 4 || month == 6 || month == 9 || month == 11) { // 30 day months
 			if (day < 1 || day > 30) {
 				return false;
 			}
 		}
-		if (day < 1 || day > 31) {
+		/*
+		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) { // 31 day months
+			if (day < 1 || day > 31) {
+				return false;
+			}
+		}
+		*/
+		if (day < 1 || day > 31) { // day check
 			return false;
 		}
 		

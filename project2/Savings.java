@@ -15,10 +15,11 @@ public class Savings extends Account {
 	@Override
 	public double monthlyInterest() {
                 if(isLoyal){
-                    return 35;
+                    //0.35%/12
+                    return 0.0003;
                 } 
-                else
-                    return 25;
+                else    //0.25%/12
+                    return 0.0002;
                 
             
 	}
@@ -30,6 +31,15 @@ public class Savings extends Account {
                 }
                 else
                     return 5;
+        }
+        
+        /**
+         * Method will return true if account is loyal and false if not
+         * @return isLoyal
+         */
+        @Override
+        public boolean isLy(){
+            return this.isLoyal;
         }
 }
                             

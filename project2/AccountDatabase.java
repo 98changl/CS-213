@@ -130,8 +130,8 @@ public class AccountDatabase {
     }
 
     /**
-     * Sorts the accounts in ascending order by date open. Uses selection sort
-     * to sort the array.
+     * Sorts the accounts in ascending order by date open. 
+     * Uses selection sort to sort the array.
      */
     private void sortByDateOpen() {
     	for (int i = 0; i < size - 1; i++) {
@@ -163,28 +163,28 @@ public class AccountDatabase {
     }
 
     /**
-     * Method to sort array in ascending order by last name.
+     * Sorts the accounts in ascending order by last name.
+     * Uses selection sort to sort the array.
      */
     private void sortByLastName() {
-        Account acc;
-        for (int x = 0; x < size; x++) {
+    	for (int i = 0; i < size - 1; i++) {
+            int min = i;
 
-            for (int a = x + 1; a < size; a++) {
-                if (accounts[x].getLastName().compareTo(accounts[a].getLastName()) > 0) {//compares last names 
-
-                    acc = accounts[x];
-                    accounts[x] = accounts[a];
-                    accounts[a] = acc;
-                }
-                
-                if (accounts[x].getLastName().compareTo(accounts[a].getLastName()) == 0) { // last names are equal
-                	if (accounts[x].getFirstName().compareTo(accounts[a].getFirstName()) > 0) {
-                		acc = accounts[x];
-                        accounts[x] = accounts[a];
-                        accounts[a] = acc;
+            for (int j = i + 1; j < size; j++) {
+            	if (accounts[j].getLastName().compareTo(accounts[min].getLastName()) < 0) {
+            		min = j;
+            	}
+            	
+            	if (accounts[j].getLastName().compareTo(accounts[min].getLastName()) == 0) {
+            		if (accounts[j].getFirstName().compareTo(accounts[min].getFirstName()) > 0) {
+                		min = j;
                 	}
-                }
+            	}
             }
+
+            Account temp = accounts[min];
+            accounts[min] = accounts[i];
+            accounts[i] = temp;
         }
     }
 
@@ -193,7 +193,6 @@ public class AccountDatabase {
      * statements by date open.
      */
     public void printByDateOpen() {
-
         sortByDateOpen();
         DecimalFormat decimalFormat = new DecimalFormat("##.##");
         DecimalFormat currency = new DecimalFormat("0.00");
@@ -218,7 +217,7 @@ public class AccountDatabase {
         for (int x = 0; x < size; x++) {
             typeAcc = "";
             acc = "";
-
+            
             if (accounts[x] instanceof Checking) {
                 acc = "Checking";
                 if (accounts[x].isDd()) {

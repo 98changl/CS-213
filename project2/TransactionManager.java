@@ -39,7 +39,7 @@ public class TransactionManager {
 	 * @param amount of money to deposit
 	 */
 	private void printDeposit(boolean result, double amount) {
-		DecimalFormat currency = new DecimalFormat("0,000.00");
+		DecimalFormat currency = new DecimalFormat("##.##");
 		
 		if (result == true) {
 			System.out.println(currency.format(amount) + " deposited to account.");
@@ -54,7 +54,7 @@ public class TransactionManager {
 	 * @param amount of money to withdraw
 	 */
 	private void printWithdraw(int result, double amount) {
-		DecimalFormat currency = new DecimalFormat("0,000.00");
+		DecimalFormat currency = new DecimalFormat("##.##");
 		
 		if (result == 0) {
 			System.out.println(currency.format(amount) + " withdrawn from account.");
@@ -94,7 +94,6 @@ public class TransactionManager {
 		Date date = new Date(1, 1, 2000);
 		boolean directDeposit = false;
 		
-		System.out.println(elements.length);
 		if (elements.length == 3) { // C commands
 			return new Checking(first_name, last_name, balance, date, directDeposit);
 		}

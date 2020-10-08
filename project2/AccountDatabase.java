@@ -172,7 +172,12 @@ public class AccountDatabase {
         String acc;
         String typeAcc;
         int numW = 0;        
-           
+        
+        if (size == 0) {
+     		System.out.println("Database is empty.");
+     		return;
+     	}
+        
         System.out.println();
         System.out.println("--Printing statements by date opened--");
         System.out.println();
@@ -236,6 +241,11 @@ public class AccountDatabase {
         String acc;
         String typeAcc;
         
+        if (size == 0) {
+     		System.out.println("Database is empty.");
+     		return;
+     	}
+        
         System.out.println();
         System.out.println("--Printing statements by last name--");
         System.out.println();
@@ -291,7 +301,12 @@ public class AccountDatabase {
  		String acc;
      	String typeAcc;
      	double numW = 0;
-             
+        
+     	if (size == 0) {
+     		System.out.println("Database is empty.");
+     		return;
+     	}
+     	
      	System.out.println("--Listing accounts in the database--");
      	
      	for(int x = 0 ; x < size ; x++) {

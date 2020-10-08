@@ -3,7 +3,7 @@ package project2;
 import java.text.DecimalFormat;
 
 /**
- *This is an array based container class to store the different account instances of Checking, Savings or MoneyMarket.
+ * This is an array based container class to store the different account instances of Checking, Savings or MoneyMarket.
  * Class contains method to add, remove, and print accounts along with its helper methods.
  * @author Liman Chang, Kenneth Christian
  */
@@ -19,47 +19,18 @@ public class AccountDatabase {
         accounts = new Account[2];
     }
 
-    /**
-     * Helper method to compare new account with existing account.
-     *
-     * @param account
-     * @return the index of the profile. If profile not found then returns -1.
-     */
-    public int equals(Account account) {
-        int equals = -1; // not found
-
-        for (int i = 0; i < size; i++) {
-            if (accounts[i] instanceof Checking && account instanceof Checking) {//check type of acc
-                if (account.getFirstName().equalsIgnoreCase(accounts[i].getFirstName()) && account.getLastName().equalsIgnoreCase(accounts[i].getLastName())) {
-                    equals = i;
-                }
-            }
-            if (accounts[i] instanceof MoneyMarket && account instanceof MoneyMarket) {
-                if (account.getFirstName().equalsIgnoreCase(accounts[i].getFirstName()) && account.getLastName().equalsIgnoreCase(accounts[i].getLastName())) {
-                    equals = i;
-                }
-            }
-            if (accounts[i] instanceof Savings && account instanceof Savings && account.getLastName().equalsIgnoreCase(accounts[i].getLastName())) {
-                if (account.getFirstName().equalsIgnoreCase(accounts[i].getFirstName())) {
-                    equals = i;
-                }
-            }
-        }
-        return equals;
-    }
 
     /**
      * @param account to find in the database
      * @return index of the account, -1 if account doesn't exist
      */
     private int find(Account account) {
-
-        int found = equals(account);
-
-        if (equals(account) != -1) {
-            return found;
-        }
-
+    	for (int i = 0; i < size; i++) {
+    		if (account.equals(accounts[i]) == true) {
+				return i;
+			}
+    	}
+    	
         return -1;
     }
 
@@ -89,6 +60,7 @@ public class AccountDatabase {
             this.size++;
             return true;
         }
+        
         return false;
     }
 
@@ -125,7 +97,7 @@ public class AccountDatabase {
         if(find(account) != -1){//account found
         
             int indexOf = find(account);
-            accounts[indexOf].debit(account, amount);
+            accounts[indexOf].credit(amount);
         
         }
 
@@ -151,7 +123,7 @@ public class AccountDatabase {
                     return 1;
                 }
                 accounts[indexOf].incW();
-                accounts[indexOf].debit(account, amount);
+                accounts[indexOf].debit(amount);
             }
         
         return 0;
@@ -166,7 +138,7 @@ public class AccountDatabase {
             int min = i;
 
             for (int j = i + 1; j < size; j++) {
-                if (accounts[j].getDate().compareTo(accounts[min].getDate()) == 1) { // date j is less than min date
+                if (accounts[j].getDate().compareTo(accounts[min].getDate()) == -1) { // date j is less than min date
                     min = j;
                 }
             }
@@ -191,6 +163,14 @@ public class AccountDatabase {
                     accounts[x] = accounts[a];
                     accounts[a] = acc;
                 }
+                
+                if (accounts[x].getLastName().compareTo(accounts[a].getLastName()) == 0) { // last names are equal
+                	if (accounts[x].getFirstName().compareTo(accounts[a].getFirstName()) > 0) {
+                		acc = accounts[x];
+                        accounts[x] = accounts[a];
+                        accounts[a] = acc;
+                	}
+                }
             }
         }
     }
@@ -203,6 +183,7 @@ public class AccountDatabase {
 
         sortByDateOpen();
         DecimalFormat decimalFormat = new DecimalFormat("##.##");
+        DecimalFormat currency = new DecimalFormat("0.00");
 
         double intrest = 0;
         double fee = 0;
@@ -237,9 +218,13 @@ public class AccountDatabase {
             }
 
             if (accounts[x] instanceof MoneyMarket) {
-                acc = "MoneyMarket";
+                acc = "Money Market";
                 numW = accounts[x].getW();
-                typeAcc = typeAcc.concat("*" + numW + " withdrawal");
+                if (numW == 1) {
+                	typeAcc = typeAcc.concat("*" + numW + " withdrawal*");
+                } else {
+                	typeAcc = typeAcc.concat("*" + numW + " withdrawals*");
+                }
 
                 intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
                 fee = accounts[x].monthlyFee(accounts[x].getBalance());
@@ -257,9 +242,9 @@ public class AccountDatabase {
                 balance = accounts[x].getBalance();
                 newB = balance + intrest - fee;
             }
-            System.out.println("*" + acc + accounts[x].toString() + typeAcc);
-            System.out.println("-interest: $ " + decimalFormat.format(intrest));
-            System.out.println("-fee: $ " + decimalFormat.format(fee));
+            System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            System.out.println("-interest: $ " + currency.format(intrest));
+            System.out.println("-fee: $ " + currency.format(fee));
             System.out.println("-new balance: $ " + decimalFormat.format(newB));
             System.out.println();
         }
@@ -273,8 +258,9 @@ public class AccountDatabase {
     public void printByLastName() {
         sortByLastName();
         DecimalFormat decimalFormat = new DecimalFormat("##.##");
-
-        double numW = 0;
+        DecimalFormat currency = new DecimalFormat("0.00");
+        
+        int numW = 0;
         double intrest = 0;
         double fee = 0;
         double balance = 0;
@@ -307,9 +293,13 @@ public class AccountDatabase {
             }
 
             if (accounts[x] instanceof MoneyMarket) {
-                acc = "MoneyMarket";
+                acc = "Money Market";
                 numW = accounts[x].getW();
-                typeAcc = typeAcc.concat("*" + numW + " withdrawal");
+                if (numW == 1) {
+                	typeAcc = typeAcc.concat("*" + numW + " withdrawal*");
+                } else {
+                	typeAcc = typeAcc.concat("*" + numW + " withdrawals*");
+                }
 
                 intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
                 fee = accounts[x].monthlyFee(accounts[x].getBalance());
@@ -328,9 +318,9 @@ public class AccountDatabase {
                 newB = balance + intrest - fee;
             }
 
-            System.out.println("*" + acc + accounts[x].toString() + typeAcc);
-            System.out.println("-interest: $ " + decimalFormat.format(intrest));
-            System.out.println("-fee: $ " + decimalFormat.format(fee));
+            System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            System.out.println("-interest: $ " + currency.format(intrest));
+            System.out.println("-fee: $ " + currency.format(fee));
             System.out.println("-new balance: $ " + decimalFormat.format(newB));
             System.out.println("");
         }
@@ -343,7 +333,7 @@ public class AccountDatabase {
     public void printAccounts() {
         String acc;
         String typeAcc;
-        double numW = 0;
+        int numW = 0;
 
         if (size == 0) {
             System.out.println("Database is empty.");
@@ -363,9 +353,13 @@ public class AccountDatabase {
                 }
             }
             if (accounts[x] instanceof MoneyMarket) {
-                acc = "MoneyMarket";
+                acc = "Money Market";
                 numW = accounts[x].getW();
-                typeAcc = typeAcc.concat("*" + numW + " withdrawal");
+                if (numW == 1) {
+                	typeAcc = typeAcc.concat("*" + numW + " withdrawal*");
+                } else {
+                	typeAcc = typeAcc.concat("*" + numW + " withdrawals*");
+                }
             }
             if (accounts[x] instanceof Savings) {
                 acc = "Savings";
@@ -373,7 +367,7 @@ public class AccountDatabase {
                     typeAcc = "*special Savings account*";
                 }
             }
-            System.out.println("*" + acc + accounts[x].toString() + typeAcc);
+            System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
         }
         System.out.println("--end of listing--");
     }

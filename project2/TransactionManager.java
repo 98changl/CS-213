@@ -39,7 +39,8 @@ public class TransactionManager {
 	 * @param amount of money to deposit
 	 */
 	private void printDeposit(boolean result, double amount) {
-		DecimalFormat currency = new DecimalFormat("##.##");
+		DecimalFormat currency = new DecimalFormat("0.0");
+		//DecimalFormat currency = new DecimalFormat("0.0");
 		
 		if (result == true) {
 			System.out.println(currency.format(amount) + " deposited to account.");
@@ -54,7 +55,7 @@ public class TransactionManager {
 	 * @param amount of money to withdraw
 	 */
 	private void printWithdraw(int result, double amount) {
-		DecimalFormat currency = new DecimalFormat("##.##");
+		DecimalFormat currency = new DecimalFormat("0.00");
 		
 		if (result == 0) {
 			System.out.println(currency.format(amount) + " withdrawn from account.");
@@ -103,6 +104,7 @@ public class TransactionManager {
 			balance = Double.parseDouble(elements[3]);
 		} 
 		catch (NumberFormatException e) {
+			System.out.println("Input data type mismatch.");
 			return null;
 		}
 		if (elements.length == 4) { // D & W commands
@@ -114,6 +116,12 @@ public class TransactionManager {
 			date = stringToDate(elements[4]);
 		}
 		catch (NumberFormatException e) {
+			System.out.println("Input data type mismatch.");
+			return null;
+		}
+		
+		if (date.isValid() == false) {
+			System.out.println(date.toString() + " is not a valid date!");
 			return null;
 		}
 		if (elements.length == 5) { // O commands
@@ -124,9 +132,18 @@ public class TransactionManager {
 		try {
 			directDeposit = Boolean.parseBoolean(elements[5]);
 		}
-		catch (NumberFormatException e) {
+		catch (InputMismatchException e) {
+			System.out.println("Input data type mismatch.");
 			return null;
 		}
+		
+		if (directDeposit == false) { // parse boolean doesn't catch false strings
+			if (!elements[5].toLowerCase().equals("false")) {
+				System.out.println("Input data type mismatch.");
+				return null;
+			}
+		}
+		
 		return new Checking(first_name, last_name, balance, date, directDeposit);
 	}
 	
@@ -153,6 +170,7 @@ public class TransactionManager {
 			balance = Double.parseDouble(elements[3]);
 		} 
 		catch (NumberFormatException e) {
+			System.out.println("Input data type mismatch.");
 			return null;
 		}
 		if (elements.length == 4) { // D & W commands
@@ -164,6 +182,12 @@ public class TransactionManager {
 			date = stringToDate(elements[4]);
 		}
 		catch (NumberFormatException e) {
+			System.out.println("Input data type mismatch.");
+			return null;
+		}
+		
+		if (date.isValid() == false) {
+			System.out.println(date.toString() + " is not a valid date!");
 			return null;
 		}
 		if (elements.length == 5) { // O commands
@@ -174,9 +198,18 @@ public class TransactionManager {
 		try {
 			isLoyal = Boolean.parseBoolean(elements[5]);
 		}
-		catch (NumberFormatException e) {
+		catch (InputMismatchException e) {
+			System.out.println("Input data type mismatch.");
 			return null;
 		}
+		
+		if (isLoyal == false) { // parse boolean doesn't catch false strings
+			if (!elements[5].toLowerCase().equals("false")) {
+				System.out.println("Input data type mismatch.");
+				return null;
+			}
+		}
+		
 		return new Savings(first_name, last_name, balance, date, isLoyal);
 	}
 	
@@ -203,6 +236,7 @@ public class TransactionManager {
 			balance = Double.parseDouble(elements[3]);
 		} 
 		catch (NumberFormatException e) {
+			System.out.println("Input data type mismatch.");
 			return null;
 		}
 		if (elements.length == 4) { // D & W commands
@@ -214,6 +248,12 @@ public class TransactionManager {
 			date = stringToDate(elements[4]);
 		}
 		catch (NumberFormatException e) {
+			System.out.println("Input data type mismatch.");
+			return null;
+		}
+		
+		if (date.isValid() == false) {
+			System.out.println(date.toString() + " is not a valid date!");
 			return null;
 		}
 		if (elements.length == 5) { // O commands
@@ -225,6 +265,7 @@ public class TransactionManager {
 			withdrawals = Integer.parseInt(elements[5]);
 		}
 		catch (NumberFormatException e) {
+			System.out.println("Input data type mismatch.");
 			return null;
 		}
 		return new MoneyMarket(first_name, last_name, balance, date, withdrawals);
@@ -242,6 +283,7 @@ public class TransactionManager {
 			amount = Double.parseDouble(elements[3]);
 		}
 		catch (NumberFormatException e) {
+			//System.out.println("Input data type mismatch.");
 			return -1;
 		}
 		return amount;
@@ -253,7 +295,6 @@ public class TransactionManager {
 	public void run() {
 		Scanner scn = new Scanner(System.in).useDelimiter("\\s+"); // to get input for command and data
 		AccountDatabase database = new AccountDatabase();
-		//DecimalFormat currency = new DecimalFormat("0,000.00");
 		String input = new String(); // string to store console inputs
 		boolean running = true; // boolean for command loop
 		
@@ -283,7 +324,6 @@ public class TransactionManager {
 			if (command.equals("OC")) {
 				Checking acc = createChecking(input);
 				if (acc == null) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.add(acc);
@@ -293,7 +333,6 @@ public class TransactionManager {
 			else if (command.equals("OS")) {
 				Savings acc = createSavings(input);
 				if (acc == null) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.add(acc);
@@ -303,7 +342,6 @@ public class TransactionManager {
 			else if (command.equals("OM")) {
 				MoneyMarket acc = createMoneyMarket(input);
 				if (acc == null) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.add(acc);
@@ -315,7 +353,6 @@ public class TransactionManager {
 			else if (command.equals("CC")) {
 				Checking acc = createChecking(input);
 				if (acc == null) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.remove(acc);
@@ -325,7 +362,6 @@ public class TransactionManager {
 			else if (command.equals("CS")) {
 				Savings acc = createSavings(input);
 				if (acc == null) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.remove(acc);
@@ -335,7 +371,6 @@ public class TransactionManager {
 			else if (command.equals("CM")) {
 				MoneyMarket acc = createMoneyMarket(input);
 				if (acc == null) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.remove(acc);
@@ -349,7 +384,6 @@ public class TransactionManager {
 				double amount = getAmount(input);
 				
 				if (acc == null || amount == -1) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.deposit(acc, amount);
@@ -361,7 +395,6 @@ public class TransactionManager {
 				double amount = getAmount(input);
 				
 				if (acc == null || amount == -1) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.deposit(acc, amount);
@@ -373,7 +406,6 @@ public class TransactionManager {
 				double amount = getAmount(input);
 				
 				if (acc == null || amount == -1) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					result = database.deposit(acc, amount);
@@ -387,7 +419,6 @@ public class TransactionManager {
 				double amount = getAmount(input);
 				
 				if (acc == null || amount == -1) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					withdrawal_result = database.withdrawal(acc, amount);
@@ -399,7 +430,6 @@ public class TransactionManager {
 				double amount = getAmount(input);
 				
 				if (acc == null || amount == -1) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					withdrawal_result = database.withdrawal(acc, amount);
@@ -411,7 +441,6 @@ public class TransactionManager {
 				double amount = getAmount(input);
 				
 				if (acc == null || amount == -1) {
-					System.out.println("Input data type mismatch.");
 					continue;
 				} else {
 					withdrawal_result = database.withdrawal(acc, amount);

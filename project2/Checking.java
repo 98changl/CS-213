@@ -22,41 +22,53 @@ public class Checking extends Account {
 		this.directDeposit = directDeposit;
 	}
 
-    
+
+	
 	/**
-         * 
-         * @return value of monthly interest
-         */
+     * 
+     * @return value of monthly interest
+     */
 	@Override
 	public double monthlyInterest() {
-    
-           //0.0005/12
-            return 0.00004 ;
-
+		double interest = 0.05 / 100.0;
+		return interest / 12;
 	}
        
-        /**
-         * 
-         * @param balance
-         * @return monthly fee of 0 or 25.  
-         */
+	/**
+     * 
+     * @param balance
+     * @return monthly fee of 0 or 25.  
+     */    
 	@Override
 	public double monthlyFee(double balance) {
-            if(balance >= 1500 || directDeposit)
+     	if(balance >= 1500 || directDeposit)
             return 0;
-            else{
+     	else{
              return 25;   
-            }
+     	}
 	}
         
-      
-        /**
-         * Method will return true if account is direct deposit and false if not
-         * @return directDeposit
-         */
-        @Override
+	/**
+     * Method will return true if account is direct deposit and false if not
+     * @return directDeposit
+     */  
+     @Override
      public boolean isDd(){
          return this.directDeposit;
+     }
+     
+     /**
+      * Compares the account instance and account profile names to determine whether accounts are equal.
+      * @return true if accounts are equals, false otherwise
+      */
+     @Override
+     public boolean equals(Account account) {
+    	 if (account instanceof Checking) {
+    		 if (super.stringEquals(super.getName(), account.getName()) == true) {
+    			 return true;
+    		 }
+    	 }
+    	 return false;
      }
     
 }

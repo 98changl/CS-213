@@ -1,7 +1,7 @@
 package project2;
 
 /**
- * 
+ * Profile class that tracks the name of an account holder.
  * @author Liman Chang, Kenneth Christian
  */
 public class Profile {
@@ -19,7 +19,7 @@ public class Profile {
 	}
 	
 	/**
-	 * Gets a string representation of the profile's first name and last name
+	 * Gets a string representation of the profile's first name and last name.
 	 * @return first name and last name
 	 */
 	public String getName() {
@@ -28,5 +28,21 @@ public class Profile {
 		name = name.concat(" ");
 		name = name.concat(lname);
 		return name;
+	}
+	
+	/**
+	 * Gets a string representation of the profile's last name.
+	 * @return last name
+	 */
+	public String gLName() {
+		return this.lname;
+	}
+	
+	/**
+	 * Gets a string representation of the profile's first name.
+	 * @return first name
+	 */
+	public String gFName() {
+		return this.fname;
 	}
 }

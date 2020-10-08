@@ -1,7 +1,4 @@
-
 package project2;
-
-
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -10,8 +7,6 @@ import static org.junit.Assert.*;
  * @author Liman Chang, Kenneth Christian
  */
 public class CheckingTest {
-
-   
 
     /**
      * JUnit Test of monthlyFee method for balance < 2500 and withdrawals < 6
@@ -129,9 +124,5 @@ public class CheckingTest {
         double result = c.monthlyFee(balance);
         assertEquals(expResult, result, 0.0);
     }
-    
-    
-
-    
    
 }

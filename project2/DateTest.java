@@ -9,17 +9,6 @@ import org.junit.Test;
 public class DateTest {
 
 	/**
-	 * JUnit test that runs all test functions
-	 */
-	@Test
-	public void test() {
-		compareToTest1();
-		compareToTest2();
-		compareToTest3();
-		
-	}
-	
-	/**
 	 * JUnit test that compares equivalent dates.
 	 */
 	@Test

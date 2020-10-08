@@ -134,12 +134,25 @@ public class AccountDatabase {
      * to sort the array.
      */
     private void sortByDateOpen() {
-        for (int i = 0; i < size - 1; i++) {
+    	for (int i = 0; i < size - 1; i++) {
             int min = i;
 
             for (int j = i + 1; j < size; j++) {
                 if (accounts[j].getDate().compareTo(accounts[min].getDate()) == -1) { // date j is less than min date
                     min = j;
+                }
+                
+                // dates are equal so compare names
+                if (accounts[j].getDate().compareTo(accounts[min].getDate()) == 0) {
+                	if (accounts[j].getLastName().compareTo(accounts[min].getLastName()) == 1) {
+                		min = j;
+                	}
+                	
+                	if (accounts[j].getLastName().compareTo(accounts[min].getLastName()) == 0) {
+                		if (accounts[j].getFirstName().compareTo(accounts[min].getFirstName()) == 1) {
+                    		min = j;
+                    	}
+                	}
                 }
             }
 

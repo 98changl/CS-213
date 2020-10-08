@@ -422,10 +422,10 @@ public class TransactionManager {
 			
 			// print commands
 			else if (command.contains("PA")) {
-				database.printByDateOpen();
+				database.printAccounts();
 			}
 			else if (command.contains("PD")) {
-				database.printAccounts();
+				database.printByDateOpen();
 			} 
 			else if (command.contains("PN")) {
 				database.printByLastName();

@@ -28,7 +28,7 @@ public class MoneyMarket extends Account {
     public void incW(){
     	this.withdrawals++;
     }
-        
+       
     /**
      * 
      * @return withdrawals
@@ -43,8 +43,8 @@ public class MoneyMarket extends Account {
     */        
 	@Override
 	public double monthlyInterest() {
-            //0.65%/12
-            return 0.0005;
+            double interest = 0.65 / 100.0;
+            return interest / 12;
 	}
         
 	/**

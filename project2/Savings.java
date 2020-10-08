@@ -33,7 +33,8 @@ public class Savings extends Account {
            	return interest / 12;
        	} 
      	else    //0.25%/12
-     		return 0.0002;     
+     		interest = 0.25 / 100.0;
+     		return interest / 12;     
 	}
         
 	/**

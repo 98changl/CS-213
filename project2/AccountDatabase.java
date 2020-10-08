@@ -19,7 +19,6 @@ public class AccountDatabase {
         accounts = new Account[2];
     }
 
-
     /**
      * @param account to find in the database
      * @return index of the account, -1 if account doesn't exist
@@ -119,12 +118,12 @@ public class AccountDatabase {
        int indexOf = find(account);
          
        if (indexOf != -1) {
-                if (accounts[indexOf].getBalance() < amount) { // insufficient funds
-                    return 1;
-                }
-                accounts[indexOf].incW();
-                accounts[indexOf].debit(amount);
-            }
+    	   if (accounts[indexOf].getBalance() < amount) { // insufficient funds
+    		   return 1;
+    	   }
+    	   accounts[indexOf].incW();
+    	   accounts[indexOf].debit(amount);
+   		}
         
         return 0;
     }
@@ -194,7 +193,7 @@ public class AccountDatabase {
      */
     public void printByDateOpen() {
         sortByDateOpen();
-        DecimalFormat decimalFormat = new DecimalFormat("##.##");
+        DecimalFormat decimalFormat = new DecimalFormat("0,000.00");
         DecimalFormat currency = new DecimalFormat("0.00");
 
         double intrest = 0;
@@ -212,7 +211,6 @@ public class AccountDatabase {
 
         System.out.println();
         System.out.println("--Printing statements by date opened--");
-        System.out.println();
 
         for (int x = 0; x < size; x++) {
             typeAcc = "";
@@ -226,7 +224,7 @@ public class AccountDatabase {
                 intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
                 fee = accounts[x].monthlyFee(accounts[x].getBalance());
                 balance = accounts[x].getBalance();
-                newB = balance - intrest - fee;
+                newB = balance + intrest - fee;
             }
 
             if (accounts[x] instanceof MoneyMarket) {
@@ -241,7 +239,7 @@ public class AccountDatabase {
                 intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
                 fee = accounts[x].monthlyFee(accounts[x].getBalance());
                 balance = accounts[x].getBalance();
-                newB = balance - intrest - fee;
+                newB = balance + intrest - fee;
             }
 
             if (accounts[x] instanceof Savings) {
@@ -254,13 +252,24 @@ public class AccountDatabase {
                 balance = accounts[x].getBalance();
                 newB = balance + intrest - fee;
             }
+
+            // print statements
+            System.out.println("");
             System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
             System.out.println("-interest: $ " + currency.format(intrest));
             System.out.println("-fee: $ " + currency.format(fee));
-            System.out.println("-new balance: $ " + decimalFormat.format(newB));
-            System.out.println();
+            //System.out.println(newB);
+            if (newB >= 1000) {
+            	System.out.println("-new balance: $ " + decimalFormat.format(newB));
+            } else {
+            	System.out.println("-new balance: $ " + currency.format(newB));
+            }
+            
+            // modify accounts
+            accounts[x].debit(balance);
+            accounts[x].credit(newB);
         }
-        System.out.println("--end of listing--");
+        System.out.println("--end of printing--");
     }
 
     /**
@@ -269,7 +278,7 @@ public class AccountDatabase {
      */
     public void printByLastName() {
         sortByLastName();
-        DecimalFormat decimalFormat = new DecimalFormat("##.##");
+        DecimalFormat decimalFormat = new DecimalFormat("0,000.00");
         DecimalFormat currency = new DecimalFormat("0.00");
         
         int numW = 0;
@@ -287,7 +296,6 @@ public class AccountDatabase {
 
         System.out.println();
         System.out.println("--Printing statements by last name--");
-        System.out.println();
 
         for (int x = 0; x < size; x++) {
             typeAcc = "";
@@ -301,7 +309,7 @@ public class AccountDatabase {
                 intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
                 fee = accounts[x].monthlyFee(accounts[x].getBalance());
                 balance = accounts[x].getBalance();
-                newB = balance - intrest - fee;
+                newB = balance + intrest - fee;
             }
 
             if (accounts[x] instanceof MoneyMarket) {
@@ -316,7 +324,7 @@ public class AccountDatabase {
                 intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
                 fee = accounts[x].monthlyFee(accounts[x].getBalance());
                 balance = accounts[x].getBalance();
-                newB = balance - intrest - fee;
+                newB = balance + intrest - fee;
             }
 
             if (accounts[x] instanceof Savings) {
@@ -330,13 +338,23 @@ public class AccountDatabase {
                 newB = balance + intrest - fee;
             }
 
+            // print statements
+            System.out.println("");
             System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
             System.out.println("-interest: $ " + currency.format(intrest));
             System.out.println("-fee: $ " + currency.format(fee));
-            System.out.println("-new balance: $ " + decimalFormat.format(newB));
-            System.out.println("");
+            //System.out.println(newB);
+            if (newB >= 1000) {
+            	System.out.println("-new balance: $ " + decimalFormat.format(newB));
+            } else {
+            	System.out.println("-new balance: $ " + currency.format(newB));
+            }
+            
+            // modify accounts
+            accounts[x].debit(balance);
+            accounts[x].credit(newB);
         }
-        System.out.println("--end of listing--");
+        System.out.println("--end of printing--");
     }
 
     /**
@@ -351,7 +369,7 @@ public class AccountDatabase {
             System.out.println("Database is empty.");
             return;
         }
-
+        
         System.out.println("--Listing accounts in the database--");
 
         for (int x = 0; x < size; x++) {

@@ -1,4 +1,3 @@
-Transaction processing starts.....
 Command 'o' not supported!
 Command 'p' not supported!
 Command 'c' not supported!
@@ -49,7 +48,7 @@ Account is already in the database.
 *Savings*John Doe* $500.00*1/1/2010*special Savings account*
 *Money Market*John Doe* $500.00*1/1/2010*1 withdrawal*
 --end of listing--
-Account does not exist
+Account does not exist.
 Account does not exist.
 13/1/2010 is not a valid date!
 12/32/2010 is not a valid date!
@@ -182,7 +181,6 @@ Insufficient funds.
 -interest: $ 1.59
 -fee: $ 12.00
 -new balance: $ 2,924.04
-
 --end of printing--
 600.00 withdrawn from account.
 

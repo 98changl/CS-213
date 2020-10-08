@@ -2,13 +2,15 @@ package project2;
 import java.text.DecimalFormat;
 
 /**
- * 
+ * This class is defined as an abstract class and is a super class of MoneyMarket, Savings and Checking.
+ * Account contains features that are common of the three account types listed above, features such as deposit and withdraw.
  * @author Liman Chang, Kenneth Christian
  */
 public abstract class Account {
 	private Profile holder;
 	private double balance;
 	private Date dateOpen;
+       
 	
 	/**
 	 * Constructor for the Account class.
@@ -21,6 +23,8 @@ public abstract class Account {
 		this.holder = new Profile(first_name, last_name);
 		this.balance = balance;
 		this.dateOpen = date;
+                
+                
 	}
 	
 	/**
@@ -29,9 +33,7 @@ public abstract class Account {
 	 */
 	public void debit(Account account , double amount) {
                
-            if(account instanceof MoneyMarket){
-               ((MoneyMarket) account).incW();
-            }
+            
                this.balance -= amount;
 	}
 	
@@ -41,19 +43,19 @@ public abstract class Account {
 	 */
 	public void credit(double amount) {
             
-                
-		this.balance += amount;
+                this.balance += amount;
 	}
 	
+        /**
+         * 
+         * @return str, formatted string to be used by print methods in AccountDatabase.
+         */
 	public String toString() {
-            //*Savings*Jane Doe* $500.00*11/1/2019
-           /// *Checking*John Doe* $500.00*1/1/2010*direct deposit account*
+           
 		DecimalFormat currency = new DecimalFormat("0,000.00");
 		String str = "";
 		
-
-		
-		str = str.concat(holder.getName());
+                str = str.concat(holder.getName());
 		str = str.concat("* $");
                 str = str.concat(currency.format(balance));
                 str = str.concat("*");
@@ -65,11 +67,23 @@ public abstract class Account {
 	}
         
        
-	
+	/**
+         * Method overridden by subclasses to return monthly interest
+         * @return monthlyIntrest
+         */
 	public abstract double monthlyInterest();
 	
+        /**
+         * Method overridden by subclasses to return monthly fees
+         * @param balance
+         * @return monthlyFee
+         */
 	public abstract double monthlyFee(double balance);
 
+        /**
+         * 
+         * @return balance
+         */
         public double getBalance(){
             return this.balance;
         }
@@ -91,6 +105,14 @@ public abstract class Account {
         }
         
         /**
+         * 
+         * @return holder.gFName
+         */
+        public String getFirstName(){
+            return this.holder.gFName();
+        }
+        
+        /**
          * Checking will override this method.
          * Returns weather or not an checking account is direct deposit or not.
          * @return true if account is direct deposit or false if not.
@@ -107,6 +129,11 @@ public abstract class Account {
         public boolean isLy(){
             return true;
         }
+     
+      /**
+       * method will be overridden by MoneyMarket class in order to increase number of withdrawals
+       */
+         public void incW(){}
         
        /**
         * MoneyMarket will override this method to return number of withdrawals

@@ -21,7 +21,7 @@ public class AccountDatabase {
 
     /**
      * @param account to find in the database
-     * @return index of the account, -1 if account doesn't exist
+     * @return index of the account if found, -1 if account is not in the database
      */
     private int find(Account account) {
     	for (int i = 0; i < size; i++) {
@@ -48,7 +48,7 @@ public class AccountDatabase {
     /**
      *
      * @param account to add to the database
-     * @return false if account exists
+     * @return false if account exists in the database
      */
     public boolean add(Account account) {
         if (this.size == accounts.length) {
@@ -66,7 +66,7 @@ public class AccountDatabase {
     /**
      *
      * @param account to remove from the database
-     * @return false if account doesn't exist
+     * @return false if account doesn't exist in the database
      */
     public boolean remove(Account account) {
         int indexOf = find(account);
@@ -129,7 +129,7 @@ public class AccountDatabase {
     }
 
     /**
-     * Sorts the accounts in ascending order by date open. 
+     * Helper method to sorts the accounts in ascending order by date open. 
      * Uses selection sort to sort the array.
      */
     private void sortByDateOpen() {
@@ -162,7 +162,7 @@ public class AccountDatabase {
     }
 
     /**
-     * Sorts the accounts in ascending order by last name.
+     * Helper method to sorts the accounts in ascending order by last name.
      * Uses selection sort to sort the array.
      */
     private void sortByLastName() {

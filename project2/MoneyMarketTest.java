@@ -23,7 +23,7 @@ public class MoneyMarketTest {
     }
 
     /**
-     * JUnit Test of monthlyFee method for balance > 2500 and withdrawals < 6
+     * JUnit Test of monthlyFee method for balance greater than 2500 and withdrawals less than 6.
      */
     @Test
     public void testMonthlyFee1() {
@@ -39,7 +39,7 @@ public class MoneyMarketTest {
 
     
     /**
-     * JUnit Test of monthlyFee method for balance == 2500 and withdrawals < 6
+     * JUnit Test of monthlyFee method for balance equals 2500 and withdrawals less than 6.
      */
     @Test
     public void testMonthlyFee2() {
@@ -55,7 +55,7 @@ public class MoneyMarketTest {
     
     
     /**
-     * JUnit Test of monthlyFee method for balance < 2500 and withdrawals < 6
+     * JUnit Test of monthlyFee method for balance less than 2500 and withdrawals less than 6.
      */
     @Test
     public void testMonthlyFee3() {
@@ -71,7 +71,7 @@ public class MoneyMarketTest {
     
     
     /**
-     * JUnit Test of monthlyFee method for balance > 2500 and withdrawals > 6
+     * JUnit Test of monthlyFee method for balance greater than 2500 and withdrawals greater than 6.
      */
     @Test
     public void testMonthlyFee4() {
@@ -86,7 +86,7 @@ public class MoneyMarketTest {
     }
 
    /**
-     * JUnit Test of getW method. Returns number of withdrawals
+     * JUnit Test of getW method. Returns number of withdrawals.
      */
     @Test
     public void testGetW() {

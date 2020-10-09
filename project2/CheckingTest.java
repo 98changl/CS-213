@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class CheckingTest {
 
     /**
-     * JUnit Test of monthlyFee method for balance < 2500 and withdrawals < 6
+     * JUnit Test of monthlyFee method for balance less than 2500 and withdrawals less than 6.
      * Interest for checkings will not change. 
      */
     @Test
@@ -25,8 +25,8 @@ public class CheckingTest {
     }
 
     /**
-     * JUnit Test of monthlyFee method 
-     * If balance < 1500 and account is not direct deposit
+     * JUnit Test of monthlyFee method .
+     * If balance less than 1500 and account is not direct deposit.
      */
     @Test
     public void testMonthlyFee1() {
@@ -41,9 +41,9 @@ public class CheckingTest {
        
     }
     
-     /**
-       *JUnit Test of monthlyFee method 
-       * If balance == 1500 and account is not direct deposit
+    /**
+     * JUnit Test of monthlyFee method.
+     * If balance equals 1500 and account is not direct deposit.
      */
     @Test
     public void testMonthlyFee2() {
@@ -60,7 +60,7 @@ public class CheckingTest {
     
      /**
      * JUnit Test of monthlyFee method.
-     * If balance > 1500 and account is not direct deposit
+     * If balance greater than 1500 and account is not direct deposit.
      */
     @Test
     public void testMonthlyFee3() {
@@ -77,7 +77,7 @@ public class CheckingTest {
     
      /**
      * JUnit Test of monthlyFee method, of class Checking.
-     * If < 1500 and account is direct deposit
+     * If less than 1500 and account is direct deposit.
      */
     @Test
     public void testMonthlyFee4() {
@@ -95,7 +95,7 @@ public class CheckingTest {
     
      /**
      * JUnit Test of monthlyFee method, of class Checking.
-     * If balance is == 1500 and account is direct deposit
+     * If balance is equal to 1500 and account is direct deposit.
      */
     @Test
     public void testMonthlyFee5() {
@@ -111,7 +111,7 @@ public class CheckingTest {
     
     /**
      * JUnit Test of monthlyFee method, of class Checking.
-     * If balance is > 1500 and account is direct deposit
+     * If balance is greater than 1500 and account is direct deposit.
      */
     @Test
     public void testMonthlyFee6() {

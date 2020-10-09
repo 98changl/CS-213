@@ -1,31 +1,27 @@
 package project2;
 
-import java.text.DecimalFormat;
-
 /**
- * This is a sub class of Account and creates a Account of type Checking.
+ * This is a sub class of Account and creates an Account of type Checking.
  * @author Liman Chang, Kenneth Christian
  */
 public class Checking extends Account {
 	private boolean directDeposit;
 	
-        /**
-         * Constructor for Checking
-         * @param first_name
-         * @param last_name
-         * @param balance
-         * @param date
-         * @param directDeposit 
-         */
+	/**
+     * Constructor for Checking account.
+     * @param first_name of the account holder
+     * @param last_name of the account holder
+     * @param balance the account starts with
+     * @param date the account was opened
+     * @param directDeposit availability on the account
+     */    
 	public Checking(String first_name, String last_name, double balance, Date date, boolean directDeposit) {
 		super(first_name, last_name, balance, date);
 		this.directDeposit = directDeposit;
 	}
 
-
-	
     /**
-     * 
+     * Gets the interest rate of the Checking account.
      * @return value of monthly interest
      */
 	@Override
@@ -35,10 +31,9 @@ public class Checking extends Account {
 	}
        
     /**
-     * 
-     * @param balance
-     * @return monthly fee of 0 if balance is greater than $1500 or if account is direct deposit. Else
-     * returns a fee of 25.  
+     * Calculates the monthly fee of the Checking account.
+     * @param balance of the account
+     * @return 0 if balance is greater than $1500 or if account is direct deposit. Else returns a fee of 25.  
      */    
 	@Override
 	public double monthlyFee(double balance) {
@@ -50,7 +45,7 @@ public class Checking extends Account {
 	}
         
     /**
-     * Method will return true if account is direct deposit and false if not
+     * Method will return true if account is direct deposit and false if not.
      * @return directDeposit
      */  
      @Override
@@ -60,6 +55,7 @@ public class Checking extends Account {
      
      /**
       * Compares the account instance and account profile names to determine whether accounts are equal.
+      * @param account to compare to
       * @return true if accounts are equals, false otherwise
       */
      @Override

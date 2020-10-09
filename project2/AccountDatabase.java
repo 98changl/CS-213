@@ -1,5 +1,4 @@
 package project2;
-
 import java.text.DecimalFormat;
 
 /**
@@ -8,18 +7,19 @@ import java.text.DecimalFormat;
  * @author Liman Chang, Kenneth Christian
  */
 public class AccountDatabase {
-
     private Account[] accounts;
     private int size;
 
     /**
-     * Constructor for AccountDatabase, creates a new array of accounts.
+     * Constructor for AccountDatabase.
+     * Creates a new array of size 2 of accounts.
      */
     public AccountDatabase() {
         accounts = new Account[2];
     }
 
     /**
+     * Searches the accounts array to find the desired account.
      * @param account to find in the database
      * @return index of the account if found, -1 if account is not in the database
      */
@@ -46,7 +46,7 @@ public class AccountDatabase {
     }
 
     /**
-     *
+     * Adds an account to the accounts array.
      * @param account to add to the database
      * @return false if account exists in the database
      */
@@ -64,7 +64,7 @@ public class AccountDatabase {
     }
 
     /**
-     *
+     * Removes the desired account from the accounts array if it exists.
      * @param account to remove from the database
      * @return false if account doesn't exist in the database
      */
@@ -84,8 +84,9 @@ public class AccountDatabase {
     }
 
     /**
-     *
+     * Deposits money into the desired account.
      * @param account to deposit money into
+     * @param amount of money to deposit
      * @return false if account doesn't exist
      */
     public boolean deposit(Account account, double amount) {
@@ -104,9 +105,9 @@ public class AccountDatabase {
     }
 
     /**
-     *
+     * Withdraws money from the desired account.
      * @param account to withdrawal money from
-     * @param amount to withdrawal from the account
+     * @param amount of money to withdrawal from the account
      * @return 0: withdrawal successful, 1: insufficient funds, -1 account
      * doesn't exist
      */
@@ -188,8 +189,8 @@ public class AccountDatabase {
     }
 
     /**
-     * Method calculate the monthly interests and fees and prints the account
-     * statements by date open.
+     * Method calculates the monthly interests and fees and prints the account statements by date open.
+     * This method will change the balance of the accounts.
      */
     public void printByDateOpen() {
         sortByDateOpen();
@@ -273,8 +274,8 @@ public class AccountDatabase {
     }
 
     /**
-     * Method calculate the monthly interests and fees and prints the accounts
-     * by last name.
+     * Method calculates the monthly interests and fees and prints the accounts by last name.
+     * This method will change the balance of the accounts.
      */
     public void printByLastName() {
         sortByLastName();
@@ -359,6 +360,7 @@ public class AccountDatabase {
 
     /**
      * Method prints all accounts in database.
+     * This method will not change the balance of the accounts.
      */
     public void printAccounts() {
         String acc;

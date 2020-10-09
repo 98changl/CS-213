@@ -9,7 +9,7 @@ public class Profile {
 	private String lname;	// last name
 	
 	/**
-	 * Creates a profile of a person for an account
+	 * Creates a profile of a person for an account.
 	 * @param first_name of person
 	 * @param last_name of person
 	 */

@@ -1,29 +1,29 @@
 package project2;
 
 /**
- * This is a sub class of Account class and creates a account of type Savings.
+ * This is a sub class of Account and creates an account of type Savings.
  * @author Liman Chang, Kenneth Christian
  */
 public class Savings extends Account {
 	private boolean isLoyal;
 
     /**
-     * Constructor for Savings
-     * @param first_name
-     * @param last_name
-     * @param balance
-     * @param date
-     * @param isLoyal 
+     * Constructor for Savings account.
+     * @param first_name of the account holder
+     * @param last_name of the account holder
+     * @param balance the account starts with
+     * @param date the account was opened
+     * @param isLoyal availability on the account
      */    
 	public Savings(String first_name, String last_name, double balance, Date date, boolean isLoyal) {
 		super(first_name, last_name, balance, date);
 		this.isLoyal = isLoyal;
 	}
 	
-    /**
-     * Method returns monthly interest. Annual interest is 0.35% if account is loyal else 0.25%. 
-     * @return monthly interest. 
-     */    
+	/**
+     * Gets the interest rate of the Savings account.
+     * @return value of monthly interest
+     */
 	@Override
 	public double monthlyInterest() {
 		double interest;
@@ -38,10 +38,9 @@ public class Savings extends Account {
 	}
         
     /**
-     * 
-     * @param balance
-     * @return a fee of 0 if balance is greater than or equal to $300.   
-     * Else return a fee of 5.
+     * Calculates the monthly fee of the Savings account.
+     * @param balance of the account
+     * @return 0 if balance is greater than or equal to $300. Else return a fee of 5.
      */    
 	@Override
 	public double monthlyFee(double balance) {
@@ -53,7 +52,7 @@ public class Savings extends Account {
   	}
         
     /**
-     * Method will return true if account is loyal and false if not
+     * Method will return true if account is loyal and false if not.
      * @return isLoyal
      */
     @Override
@@ -63,6 +62,7 @@ public class Savings extends Account {
     
     /**
      * Compares the account instance and account profile names to determine whether accounts are equal.
+     * @param account to compare to
      * @return true if accounts are equals, false otherwise
      */
     @Override

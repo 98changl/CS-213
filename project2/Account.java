@@ -15,7 +15,7 @@ public abstract class Account {
 	 * Constructor for the Account class.
 	 * @param first_name of the account holder
 	 * @param last_name of the account holder
-	 * @param balance of the account
+	 * @param balance the account starts with
 	 * @param date the account was opened
 	 */
 	public Account(String first_name, String last_name, double balance, Date date) {
@@ -24,12 +24,12 @@ public abstract class Account {
 		this.dateOpen = date;    
 	}
 	
-  /**
-   * Helper method that checks to see if two strings are equal. 
-   * @param a string to compare to b. String a being account instance name.
-   * @param b string to compare to a. String b being account profile name.
-   * @return true if equal, false if not equal
-   */
+	/**
+	 * Helper method that checks to see if two strings are equal.
+	 * @param a string to compare to b, String a being account instance name.
+	 * @param b string to compare to a, String b being account profile name.
+	 * @return true if equal, false if not equal
+	 */
 	public boolean stringEquals(String a, String b) {
 		if (a.length() != b.length()) { // names are not the same length
 			return false;
@@ -61,8 +61,8 @@ public abstract class Account {
 	}
 	
     /**
-     * 
-     * @return str, formatted string to be used by print methods in AccountDatabase.
+     * Creates a string of the Account name, balance, and date.
+     * @return string formatted to be used by print methods in AccountDatabase.
      */    
 	public String toString() {
 		DecimalFormat currency = new DecimalFormat("0.00");
@@ -85,36 +85,36 @@ public abstract class Account {
         
        
 	/**
-	 * Method overridden by subclasses to return monthly interest
- 	 * @return monthlyIntrest
+	 * Method overridden by subclasses to return monthly interest.
+ 	 * @return value of monthly interest
  	 */
 	public abstract double monthlyInterest();
 	
     /**
-     * Method overridden by subclasses to return monthly fees
-     * @param balance
-     * @return monthlyFee
+     * Method overridden by subclasses to return monthly fees.
+     * @param balance of the account
+     * @return monthlyFee of the account
      */    
 	public abstract double monthlyFee(double balance);
 
-        /**
-	 * 
-	 * @param account to compare
-	 * @return
+    /**
+	 * Compares the account instance and account profile names to determine whether accounts are equal.
+	 * @param account to compare to
+	 * @return true if accounts are equals, false otherwise
 	 */
 	public abstract boolean equals(Account account);
 	
     /**
-     * 
-     * @return balance
+     * Gets the balance of the account.
+     * @return double representation of the balance
      */
     public double getBalance(){
         return this.balance;
     }
    
     /**
-     * 
-     * @return dateopen
+     * Gets the date the account was opened.
+     * @return Date object of account date
      */
     public Date getDate(){
         return this.dateOpen;
@@ -129,16 +129,16 @@ public abstract class Account {
     }
     
     /**
-     * 
-     * @return holder.gLName 
+     * Gets the last name of the account holder.
+     * @return last name
      */
     public String getLastName(){
         return this.holder.gLName();
     }
     
     /**
-     * 
-     * @return holder.gFName
+     * Gets the first name of the account holder.
+     * @return first name
      */
     public String getFirstName(){
         return this.holder.gFName();
@@ -153,28 +153,26 @@ public abstract class Account {
         return true;
     }
         
-        
-        /**
-         * Savings will override this method.
-         * Returns weather or not an checking account is direct deposit or not.
-         * @return true if account is loyal or false if not.
-         */
-        public boolean isLy(){
-            return true;
-        }
+    /**
+     * Savings will override this method.
+     * Returns weather or not an checking account is direct deposit or not.
+     * @return true if account is loyal or false if not.
+     */
+    public boolean isLy(){
+        return true;
+    }
+    
+    /**
+     * Method will be overridden by MoneyMarket class in order to increase number of withdrawals.
+     */
+    public void incW(){}
+       
+     /**
+      * MoneyMarket will override this method to return number of withdrawals.
+      * @return withdrawals 
+      */ 
+     public int getW(){
+         return 0;
+     } 
      
-      /**
-       * method will be overridden by MoneyMarket class in order to increase number of withdrawals
-       */
-         public void incW(){}
-         
-       /**
-        * MoneyMarket will override this method to return number of withdrawals
-        * @return withdrawals 
-        */ 
-       public int getW(){
-           return 0;
-       } 
-        
-        
 }

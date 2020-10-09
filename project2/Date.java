@@ -1,7 +1,7 @@
 package project2;
 
 /**
- * Date class
+ * Date class that tracks year, month, and day.
  * @author Liman Chang, Kenneth Christian
  */
 public class Date {
@@ -112,13 +112,6 @@ public class Date {
 				return false;
 			}
 		}
-		/*
-		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) { // 31 day months
-			if (day < 1 || day > 31) {
-				return false;
-			}
-		}
-		*/
 		if (day < 1 || day > 31) { // day check
 			return false;
 		}

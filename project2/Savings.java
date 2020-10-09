@@ -21,7 +21,7 @@ public class Savings extends Account {
 	}
 	
     /**
-     * Method returns monthly interest of 0.35% if account is loyal else returns 0.25%. 
+     * Method returns monthly interest. Annual interest is 0.35% if account is loyal else 0.25%. 
      * @return monthly interest. 
      */    
 	@Override

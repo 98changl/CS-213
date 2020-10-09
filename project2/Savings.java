@@ -1,13 +1,13 @@
 package project2;
 
 /**
- * This is a sub class of Account and creates a Account of type Savings.
+ * This is a sub class of Account class and creates a account of type Savings.
  * @author Liman Chang, Kenneth Christian
  */
 public class Savings extends Account {
 	private boolean isLoyal;
 
-	/**
+    /**
      * Constructor for Savings
      * @param first_name
      * @param last_name
@@ -20,7 +20,7 @@ public class Savings extends Account {
 		this.isLoyal = isLoyal;
 	}
 	
-	/**
+    /**
      * Method returns monthly interest. Value depends on the account details.
      * @return monthly interest. 
      */    
@@ -37,7 +37,7 @@ public class Savings extends Account {
      		return interest / 12;     
 	}
         
-	/**
+    /**
      * 
      * @param balance
      * @return 0 or 5 depending on the details of the account 
@@ -51,7 +51,7 @@ public class Savings extends Account {
         	return 5;
   	}
         
-	/**
+    /**
      * Method will return true if account is loyal and false if not
      * @return isLoyal
      */

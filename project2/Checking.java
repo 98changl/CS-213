@@ -24,7 +24,7 @@ public class Checking extends Account {
 
 
 	
-	/**
+    /**
      * 
      * @return value of monthly interest
      */
@@ -34,7 +34,7 @@ public class Checking extends Account {
 		return interest / 12;
 	}
        
-	/**
+    /**
      * 
      * @param balance
      * @return monthly fee of 0 or 25.  
@@ -48,7 +48,7 @@ public class Checking extends Account {
      	}
 	}
         
-	/**
+    /**
      * Method will return true if account is direct deposit and false if not
      * @return directDeposit
      */  

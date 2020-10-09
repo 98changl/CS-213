@@ -24,12 +24,12 @@ public abstract class Account {
 		this.dateOpen = date;    
 	}
 	
-	/**
-    Helper method that checks to see if two strings are equal.
-    @param a string to compare to b
-    @param b string to compare to a
-    @return true if equal, false if not equal
-     */
+  /**
+   * Helper method that checks to see if two strings are equal.
+   * @param a string to compare to b
+   * @param b string to compare to a
+   * @return true if equal, false if not equal
+   */
 	public boolean stringEquals(String a, String b) {
 		if (a.length() != b.length()) { // names are not the same length
 			return false;
@@ -60,7 +60,7 @@ public abstract class Account {
 		this.balance += amount;
 	}
 	
-	/**
+    /**
      * 
      * @return str, formatted string to be used by print methods in AccountDatabase.
      */    
@@ -90,21 +90,21 @@ public abstract class Account {
  	 */
 	public abstract double monthlyInterest();
 	
-	/**
+    /**
      * Method overridden by subclasses to return monthly fees
      * @param balance
      * @return monthlyFee
      */    
 	public abstract double monthlyFee(double balance);
 
-	/**
+        /**
 	 * 
 	 * @param account to compare
 	 * @return
 	 */
 	public abstract boolean equals(Account account);
 	
-	/**
+    /**
      * 
      * @return balance
      */
@@ -154,7 +154,7 @@ public abstract class Account {
     }
         
         
-         /**
+        /**
          * Savings will override this method.
          * Returns weather or not an checking account is direct deposit or not.
          * @return true if account is loyal or false if not.
@@ -167,7 +167,7 @@ public abstract class Account {
        * method will be overridden by MoneyMarket class in order to increase number of withdrawals
        */
          public void incW(){}
-        
+         
        /**
         * MoneyMarket will override this method to return number of withdrawals
         * @return withdrawals 

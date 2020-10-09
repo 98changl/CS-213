@@ -37,7 +37,8 @@ public class Checking extends Account {
     /**
      * 
      * @param balance
-     * @return monthly fee of 0 or 25.  
+     * @return monthly fee of 0 if balance is greater than $1500 or if account is direct deposit. Else
+     * returns a fee of 25.  
      */    
 	@Override
 	public double monthlyFee(double balance) {

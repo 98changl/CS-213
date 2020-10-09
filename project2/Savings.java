@@ -21,7 +21,7 @@ public class Savings extends Account {
 	}
 	
     /**
-     * Method returns monthly interest. Value depends on the account details.
+     * Method returns monthly interest of 0.35% if account is loyal else returns 0.25%. 
      * @return monthly interest. 
      */    
 	@Override
@@ -40,7 +40,8 @@ public class Savings extends Account {
     /**
      * 
      * @param balance
-     * @return 0 or 5 depending on the details of the account 
+     * @return a fee of 0 if balance is greater than or equal to $300.   
+     * Else return a fee of 5.
      */    
 	@Override
 	public double monthlyFee(double balance) {

@@ -21,7 +21,7 @@ public class MoneyMarket extends Account {
 		this.withdrawals = withdrawals;
 	}
 	
-	/**
+    /**
      * Method to increment withdrawals
      */
     @Override
@@ -47,7 +47,7 @@ public class MoneyMarket extends Account {
             return interest / 12;
 	}
         
-	/**
+    /**
      * 
      * @param balance
      * @return 0 or 12, depending on the account details
@@ -61,7 +61,7 @@ public class MoneyMarket extends Account {
        		return 12;
   	}
         
-	/**
+    /**
      * Compares the account instance and account profile names to determine whether accounts are equal.
      * @return true if accounts are equals, false otherwise
      */

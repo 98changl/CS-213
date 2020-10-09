@@ -50,7 +50,8 @@ public class MoneyMarket extends Account {
     /**
      * 
      * @param balance
-     * @return 0 or 12, depending on the account details
+     * @return fee of 0 if balance is greater than $2500 and withdrawal is less than 6. 
+     * Else return a fee of 12.
      */    
 	@Override
 	public double monthlyFee(double balance) {

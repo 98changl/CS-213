@@ -25,9 +25,9 @@ public abstract class Account {
 	}
 	
   /**
-   * Helper method that checks to see if two strings are equal.
-   * @param a string to compare to b
-   * @param b string to compare to a
+   * Helper method that checks to see if two strings are equal. 
+   * @param a string to compare to b. String a being account instance name.
+   * @param b string to compare to a. String b being account profile name.
    * @return true if equal, false if not equal
    */
 	public boolean stringEquals(String a, String b) {

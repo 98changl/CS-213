@@ -290,7 +290,7 @@ public class TransactionManager {
 	}
 	
 	/**
-	 * 
+	 * Method in charge of conduction I/O.
 	 */
 	public void run() {
 		Scanner scn = new Scanner(System.in).useDelimiter("\\s+"); // to get input for command and data

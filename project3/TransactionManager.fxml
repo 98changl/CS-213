@@ -77,7 +77,7 @@
             <HBox prefHeight="76.0" prefWidth="506.0">
                <children>
                   <Button fx:id="ExportFileButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="138.0" text="Export File" />
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="349.0" />
+                  <TextField fx:id="FileNameToExport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Enter Name Of File to Export" prefHeight="40.0" prefWidth="349.0" />
                </children>
             </HBox>
          </children>

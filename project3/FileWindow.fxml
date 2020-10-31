@@ -11,9 +11,9 @@
    <children>
       <VBox layoutX="46.0" layoutY="44.0" prefHeight="165.0" prefWidth="100.0">
          <children>
-            <Button fx:id="SelectFileButton" onAction="#getDataFromFileOptions" mnemonicParsing="false" prefHeight="51.0" prefWidth="102.0" text="Select File" />
+            <Button fx:id="SelectFileButton" onAction="#getDataFromFileOptionsOpen" mnemonicParsing="false" prefHeight="51.0" prefWidth="102.0" text="Select File" />
             <Region prefHeight="63.0" prefWidth="100.0" />
-            <Button fx:id="SubmitFileButton" onAction="#getDataFromFileOptions" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="102.0" text="Submit" />
+            <Button fx:id="SubmitFileButton" onAction="#getDataFromFileOptionsOpen" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="102.0" text="Submit" />
          </children>
       </VBox>
       <VBox layoutX="46.0" layoutY="352.0" prefHeight="51.0" prefWidth="100.0">

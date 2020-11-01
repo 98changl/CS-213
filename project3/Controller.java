@@ -177,39 +177,124 @@ public class Controller implements Initializable {
         return a[0];
     }
 
-    @FXML
-    /**
-     * Method to disable specials savings check box or direct deposit check box
-     * based on selection of account type.
-     *
-     * @param event
-     * @throws Exception
-     */
-    public void DisableCheckBox(ActionEvent event) throws Exception {
+        /**
+         * Method to disable specials savings check box or direct deposit check box
+         * based on selection of account type.
+         *
+         * @param event
+         * @throws Exception
+         */
+        @FXML
+        public void DisableCheckBox(ActionEvent event) throws Exception {
 
-        if (!SavingRB.isSelected()) {//if savings is not selected than disable specials acc check box
-            SpecialSavingAccCB.setSelected(false);
-            SpecialSavingAccCB.setDisable(true);
-        } else SpecialSavingAccCB.setDisable(false);
+            if (!SavingRB.isSelected()) {//if savings is not selected than disable specials acc check box
+                SpecialSavingAccCB.setSelected(false);
+                SpecialSavingAccCB.setDisable(true);
+            } else SpecialSavingAccCB.setDisable(false);
 
-        if (!CheckingRB.isSelected()) {//if checkings is not selected than disable direct deposit check boc
-            DirectDepositCheckingsCB.setSelected(false);
-            DirectDepositCheckingsCB.setDisable(true);
-        } else DirectDepositCheckingsCB.setDisable(false);
+            if (!CheckingRB.isSelected()) {//if checkings is not selected than disable direct deposit check boc
+                DirectDepositCheckingsCB.setSelected(false);
+                DirectDepositCheckingsCB.setDisable(true);
+            } else DirectDepositCheckingsCB.setDisable(false);
 
-        if (CloseAccRB.isSelected()) {//if and else if to disable textfields based on bank options
-            AmountInput.setDisable(true);
-            DateInput.setDisable(true);
-        } else if (DepositRB.isSelected() || WithdrawAccRB.isSelected()) {
-            AmountInput.setDisable(false);
-            DateInput.setDisable(true);
-        } else {
-            AmountInput.setDisable(false);
-            DateInput.setDisable(false);
+            if (CloseAccRB.isSelected()) {//if and else if to disable textfields based on bank options
+                AmountInput.setDisable(true);
+                DateInput.setDisable(true);
+            } else if (DepositRB.isSelected() || WithdrawAccRB.isSelected()) {
+                AmountInput.setDisable(false);
+                DateInput.setDisable(true);
+            } else {
+                AmountInput.setDisable(false);
+                DateInput.setDisable(false);
+            }
+
+
         }
 
+    /**
+     * Method to append to text area.
+     * Method calls return method in AccountDatabase class
+     * and receives and array of accounts to append.
+     */
+    @FXML
+        public void DisplayAccounts(){
+            if(DisplayAllAcc.isSelected()){
+                AccountDatabase accountDatabase = new AccountDatabase();
+                String []Acc ;
+                Acc = accountDatabase.printAccounts();
+                int x = 0;
+                if(Acc.length == 0){
+                    TextAreaPrint.appendText("Database is empty.\n");
+                }
+                if(Acc.length != 0){
+                    TextAreaPrint.appendText("--Listing accounts in the database--\n");
+                    TextAreaPrint.appendText("\n");
+                   while(x < Acc.length) {
+                       TextAreaPrint.appendText(Acc[x]+"\n");
+                       x++;
+                   }
+                   TextAreaPrint.appendText("--end of listing--\n");
+                }
+            }
 
-    }
+            if(DisplayByDate.isSelected()){
+
+                AccountDatabase accountDatabase = new AccountDatabase();
+                String []Acc ;
+                Acc = accountDatabase.printByDateOpen();
+
+                if(Acc.length == 0){
+                    TextAreaPrint.appendText("Database is empty.\n");
+                }
+
+                if(Acc.length !=0){
+                    int x = 0;
+                    TextAreaPrint.appendText("--Printing statements by date opened--\n");
+                    TextAreaPrint.appendText("\n");
+
+                    while(x<Acc.length) {
+
+                        if(x % 4 == 0 && x != 0){
+                            TextAreaPrint.appendText("\n");
+                        }
+                        TextAreaPrint.appendText(Acc[x] + "\n");
+
+                        x++;
+                    }
+                TextAreaPrint.appendText("--end of printing--\n");
+                }
+
+            }//end of isSelected
+
+            if(DisplayByLName.isSelected()){
+
+                AccountDatabase accountDatabase = new AccountDatabase();
+                String []Acc ;
+                Acc = accountDatabase.printByLastName();
+
+                if(Acc.length == 0){
+                    TextAreaPrint.appendText("Database is empty\n");
+                }
+
+                if(Acc.length !=0){
+                    int x = 0;
+                    TextAreaPrint.appendText("--Printing statements by last name--\n");
+                    TextAreaPrint.appendText("\n");
+                    while(x<Acc.length) {
+
+                        if(x % 4 == 0 && x != 0){
+                            TextAreaPrint.appendText("\n");
+                        }
+                        TextAreaPrint.appendText(Acc[x] + "\n");
+
+                        x++;
+                    }
+                    TextAreaPrint.appendText("--end of printing--\n");
+                }
+            }//end of isSelected
+
+        }
+
 
 
     /**

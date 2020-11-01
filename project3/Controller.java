@@ -49,7 +49,7 @@ public class Controller implements Initializable {
 	public TextField FileNameToExport, FileImportNameTxtF;
     
     // private variables for transaction management
-    private AccountDatabase database = new AccountDatabase();
+    private AccountDatabase accountDatabase = new AccountDatabase();
     private String[] a = new String[1];// to store the file path for import.
     private String first_name;
     private String last_name;
@@ -261,7 +261,7 @@ public class Controller implements Initializable {
     @FXML
         public void DisplayAccounts(){
             if(DisplayAllAcc.isSelected()){
-                AccountDatabase accountDatabase = new AccountDatabase();
+              //  AccountDatabase accountDatabase = new AccountDatabase();
                 String []Acc ;
                 Acc = accountDatabase.printAccounts();
                 int x = 0;
@@ -281,7 +281,7 @@ public class Controller implements Initializable {
 
             if(DisplayByDate.isSelected()){
 
-                AccountDatabase accountDatabase = new AccountDatabase();
+              //  AccountDatabase accountDatabase = new AccountDatabase();
                 String []Acc ;
                 Acc = accountDatabase.printByDateOpen();
 
@@ -310,7 +310,7 @@ public class Controller implements Initializable {
 
             if(DisplayByLName.isSelected()){
 
-                AccountDatabase accountDatabase = new AccountDatabase();
+               // AccountDatabase accountDatabase = new AccountDatabase();
                 String []Acc ;
                 Acc = accountDatabase.printByLastName();
 

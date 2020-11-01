@@ -273,7 +273,7 @@ public class Controller implements Initializable {
                 Acc = accountDatabase.printByLastName();
 
                 if(Acc.length == 0){
-                    TextAreaPrint.appendText("Database is empty\n");
+                    TextAreaPrint.appendText("Database is empty.\n");
                 }
 
                 if(Acc.length !=0){

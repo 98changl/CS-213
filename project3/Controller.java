@@ -130,36 +130,78 @@ public class Controller implements Initializable {
         return Date;
     }
 
-    @FXML
-    /**
-     * Mehtod to get .txt file from the user
-     *
-     * @param event
-     * @throws Exception
-     */
-    public void getDataFromFileOptionsOpen(ActionEvent event) throws Exception {
-    	
-        //file choose
-        FileChooser fileChooser = new FileChooser();
-        SelectFileButton.setOnAction(e -> {
-            try {
+        /**
+         * Method to input and submit file
+         * filtered by .txt extension.
+         *
+         * @param event
+         * @throws Exception
+         */
+        @FXML
+        public void getFileInput(ActionEvent event) throws Exception {
+
+            //file choose
+            FileChooser fileChooser = new FileChooser();
+            SelectFileButton.setOnAction(e -> {
                 FileImportNameTxtF.clear();
-                File selectedFile = fileChooser.showOpenDialog(null);
-                //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".txt"));//only shows .txt files to user
-                FileImportNameTxtF.appendText(selectedFile.getPath());
+                FileChooser chooser = new FileChooser();
+                chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                        new FileChooser.ExtensionFilter("All Files", "*.*"));
+                Stage stage = new Stage();
+                File sourceFile = chooser.showOpenDialog(stage); //get the reference of the source file
+                FileImportNameTxtF.appendText(sourceFile.getPath());
+                a[0] = sourceFile.getPath();
+                stage.close();
+                //TextAreaPrint.appendText(sourceFile.getPath());
+                //write code to read from the file.
+            });
 
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        });
+                //submit file
+                SubmitFileButton.setOnAction(e -> {
+                    System.out.println(a[0]);
 
-        //submit file
-        SubmitFileButton.setOnAction(e -> {
-             a[0] =  FileImportNameTxtF.getText();
+                    try {
+                        a[0] = FileImportNameTxtF.getText();
+                    }catch (NullPointerException a){
+                        TextAreaPrint.appendText("Please Select A File.");
+                    }
+                try (Scanner scanner = new Scanner(new File(a[0]))) {
+                    String lineRead = "";
+                    String[] tokens;
 
-        });
-    }
+                    while (scanner.hasNext()) {
 
+                        lineRead = scanner.nextLine();
+                        tokens = lineRead.split(",");
+
+
+                        if (tokens[0].equals("M")) {
+                            //System.out.println(tokens[1] + tokens[2] + Double.parseDouble(tokens[3])+stringToDate(tokens[4])+Integer.parseInt(tokens[5]));
+                           MoneyMarket m = new MoneyMarket(tokens[1] , tokens[2] ,Double.parseDouble(tokens[3]),stringToDate(tokens[4]),Integer.parseInt(tokens[5]));
+                            accountDatabase.add(m);
+                        }
+
+                        if(tokens[0].equals("S")){
+                            //System.out.println(tokens[1] + tokens[2] + Double.parseDouble(tokens[3])+stringToDate(tokens[4])+Integer.parseInt(tokens[5]));
+                            Savings s = new Savings(tokens[1] , tokens[2] ,Double.parseDouble(tokens[3]),stringToDate(tokens[4]),Boolean.parseBoolean(tokens[5]));
+                            accountDatabase.add(s);
+
+                        }
+
+                        if(tokens[0].equals("C")){
+                           // System.out.println(tokens[1] + tokens[2] + Double.parseDouble(tokens[3])+stringToDate(tokens[4])+Integer.parseInt(tokens[5]));
+                            Checking c = new Checking(tokens[1] , tokens[2] ,Double.parseDouble(tokens[3]),stringToDate(tokens[4]),Boolean.parseBoolean(tokens[5]));
+                            accountDatabase.add(c);
+
+                        }
+                    }
+
+                } catch (FileNotFoundException r) {
+                    r.printStackTrace();
+                }
+                });
+        }
+	
     @FXML
     /**
      * Method to export .txt file
@@ -294,6 +336,17 @@ public class Controller implements Initializable {
             }//end of isSelected
 
         }
+	
+    /**
+     * Converts a string representation of a date into a date object.
+     * Does not perform exception handling.
+     * @param date in the form of a string
+     * @return date object with values from string input
+     */
+    private Date stringToDate(String date) {
+        String[] elements = date.split("/");
+        return new Date(Integer.parseInt(elements[0]), Integer.parseInt(elements[1]), Integer.parseInt(elements[2]));
+    }
 
 
 

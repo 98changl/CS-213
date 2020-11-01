@@ -221,48 +221,49 @@ public class AccountDatabase {
         System.out.println("--Printing statements by date opened--");
 
         for (int x = 0; x < size * 4; x = x+4) {
+            int a = x;
             typeAcc = "";
             acc = "";
-
-            if (accounts[x] instanceof Checking) {
+            if(x != 0 )a = x/4;
+            if (accounts[a] instanceof Checking) {
                 acc = "Checking";
-                if (accounts[x].isDd()) {
+                if (accounts[a].isDd()) {
                     typeAcc = "*direct deposit account*";
                 }
-                intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
-                fee = accounts[x].monthlyFee(accounts[x].getBalance());
-                balance = accounts[x].getBalance();
+                intrest = accounts[a].monthlyInterest() * accounts[a].getBalance();
+                fee = accounts[a].monthlyFee(accounts[a].getBalance());
+                balance = accounts[a].getBalance();
                 newB = balance + intrest - fee;
             }
 
-            if (accounts[x] instanceof MoneyMarket) {
+            if (accounts[a] instanceof MoneyMarket) {
                 acc = "Money Market";
-                numW = accounts[x].getW();
+                numW = accounts[a].getW();
                 if (numW == 1) {
                     typeAcc = typeAcc.concat("*" + numW + " withdrawal*");
                 } else {
                     typeAcc = typeAcc.concat("*" + numW + " withdrawals*");
                 }
 
-                intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
-                fee = accounts[x].monthlyFee(accounts[x].getBalance());
-                balance = accounts[x].getBalance();
+                intrest = accounts[a].monthlyInterest() * accounts[a].getBalance();
+                fee = accounts[a].monthlyFee(accounts[a].getBalance());
+                balance = accounts[a].getBalance();
                 newB = balance + intrest - fee;
             }
 
-            if (accounts[x] instanceof Savings) {
+            if (accounts[a] instanceof Savings) {
                 acc = "Savings";
-                if (accounts[x].isLy()) {
+                if (accounts[a].isLy()) {
                     typeAcc = "*special Savings account*";
                 }
-                intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
-                fee = accounts[x].monthlyFee(accounts[x].getBalance());
-                balance = accounts[x].getBalance();
+                intrest = accounts[a].monthlyInterest() * accounts[a].getBalance();
+                fee = accounts[a].monthlyFee(accounts[a].getBalance());
+                balance = accounts[a].getBalance();
                 newB = balance + intrest - fee;
             }
 
             // print statements
-            accountArray[x] = ("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            accountArray[x] = ("*" + acc + "*" + accounts[a].toString() + typeAcc);
             accountArray[x+1] = ("-interest: $ " + currency.format(intrest));
             accountArray[x+2] = ("-fee: $ " + currency.format(fee));
 
@@ -270,12 +271,12 @@ public class AccountDatabase {
             if (newB >= 1000) {
                 accountArray[x+3] = ("-new balance: $ " + decimalFormat.format(newB));
             } else {
-                accountArray[x+4] = ("-new balance: $ " + currency.format(newB));
+                accountArray[x+3] = ("-new balance: $ " + currency.format(newB));
             }
 
             // modify accounts
-            accounts[x].debit(balance);
-            accounts[x].credit(newB);
+            accounts[a].debit(balance);
+            accounts[a].credit(newB);
         }
         return accountArray;
     }
@@ -311,46 +312,48 @@ public class AccountDatabase {
 
 
         for (int x = 0; x < size * 4; x = x+4)  {
+            int a = x;
             typeAcc = "";
             acc = "";
 
-            if (accounts[x] instanceof Checking) {
+            if(x != 0 )a = x/4;
+            if (accounts[a] instanceof Checking) {
                 acc = "Checking";
-                if (accounts[x].isDd()) {
+                if (accounts[a].isDd()) {
                     typeAcc = "*direct deposit account*";
                 }
-                intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
-                fee = accounts[x].monthlyFee(accounts[x].getBalance());
-                balance = accounts[x].getBalance();
+                intrest = accounts[a].monthlyInterest() * accounts[a].getBalance();
+                fee = accounts[a].monthlyFee(accounts[a].getBalance());
+                balance = accounts[a].getBalance();
                 newB = balance + intrest - fee;
             }
 
-            if (accounts[x] instanceof MoneyMarket) {
+            if (accounts[a] instanceof MoneyMarket) {
                 acc = "Money Market";
-                numW = accounts[x].getW();
+                numW = accounts[a].getW();
                 if (numW == 1) {
                     typeAcc = typeAcc.concat("*" + numW + " withdrawal*");
                 } else {
                     typeAcc = typeAcc.concat("*" + numW + " withdrawals*");
                 }
 
-                intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
-                fee = accounts[x].monthlyFee(accounts[x].getBalance());
-                balance = accounts[x].getBalance();
+                intrest = accounts[a].monthlyInterest() * accounts[a].getBalance();
+                fee = accounts[a].monthlyFee(accounts[a].getBalance());
+                balance = accounts[a].getBalance();
                 newB = balance + intrest - fee;
             }
 
-            if (accounts[x] instanceof Savings) {
+            if (accounts[a] instanceof Savings) {
                 acc = "Savings";
-                if (accounts[x].isLy()) {
+                if (accounts[a].isLy()) {
                     typeAcc = "*special Savings account*";
                 }
-                intrest = accounts[x].monthlyInterest() * accounts[x].getBalance();
-                fee = accounts[x].monthlyFee(accounts[x].getBalance());
-                balance = accounts[x].getBalance();
+                intrest = accounts[a].monthlyInterest() * accounts[a].getBalance();
+                fee = accounts[a].monthlyFee(accounts[a].getBalance());
+                balance = accounts[a].getBalance();
                 newB = balance + intrest - fee;
             }
-            accountArray[x] = ("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            accountArray[x] = ("*" + acc + "*" + accounts[a].toString() + typeAcc);
             accountArray[x+1] = ("-interest: $ " + currency.format(intrest));
             accountArray[x+2] = ("-fee: $ " + currency.format(fee));
 
@@ -362,8 +365,8 @@ public class AccountDatabase {
             }
 
             // modify accounts
-            accounts[x].debit(balance);
-            accounts[x].credit(newB);
+            accounts[a].debit(balance);
+            accounts[a].credit(newB);
         }
         return accountArray;
     }
@@ -415,4 +418,5 @@ public class AccountDatabase {
         }
         return accountArray;
     }
+
 }

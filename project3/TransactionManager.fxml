@@ -20,7 +20,7 @@
    <children>
       <VBox layoutX="17.0" layoutY="282.0" prefHeight="189.0" prefWidth="161.0">
          <children>
-            <RadioButton  fx:id="MoneyMarketRB" onAction="#DisableCheckBox" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="MoneyMarket">
+            <RadioButton fx:id="MoneyMarketRB" onAction="#DisableCheckBox" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="MoneyMarket">
                <toggleGroup>
                   <ToggleGroup fx:id="AccType" />
                </toggleGroup></RadioButton>
@@ -32,23 +32,23 @@
       </VBox>
       <VBox layoutX="14.0" layoutY="496.0" prefHeight="101.0" prefWidth="203.0">
          <children>
-            <CheckBox fx:id="SpecialSavingAccCB" onAction="#DisableCheckBox" mnemonicParsing="false" prefHeight="36.0" prefWidth="203.0" text="Special Savings Acccount" />
+            <CheckBox fx:id="SpecialSavingAccCB"  mnemonicParsing="false" onAction="#DisableCheckBox" prefHeight="36.0" prefWidth="203.0" text="Special Savings Acccount" />
             <Region prefHeight="30.0" prefWidth="161.0" />
-            <CheckBox fx:id="DirectDepositCheckingsCB" onAction="#DisableCheckBox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="203.0" text="Direct Deposit Account" />
+            <CheckBox fx:id="DirectDepositCheckingsCB" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#DisableCheckBox" prefHeight="37.0" prefWidth="203.0" text="Direct Deposit Account" />
          </children>
       </VBox>
       <VBox layoutX="17.0" layoutY="14.0" prefHeight="224.0" prefWidth="140.0">
          <children>
-            <RadioButton fx:id="OpenAccRB" onAction="#DisableCheckBox" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Open Account">
+            <RadioButton fx:id="OpenAccRB" mnemonicParsing="false" onAction="#DisableCheckBox" prefHeight="31.0" prefWidth="140.0" text="Open Account">
                <toggleGroup>
                   <ToggleGroup fx:id="BankOptions" />
                </toggleGroup></RadioButton>
             <Region prefHeight="30.0" prefWidth="161.0" />
-            <RadioButton fx:id="CloseAccRB" onAction="#DisableCheckBox" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Close Account" toggleGroup="$BankOptions" />
+            <RadioButton fx:id="CloseAccRB" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#DisableCheckBox" prefHeight="31.0" prefWidth="140.0" text="Close Account" toggleGroup="$BankOptions" />
             <Region layoutX="10.0" layoutY="41.0" prefHeight="30.0" prefWidth="161.0" />
-            <RadioButton fx:id="WithdrawAccRB" onAction="#DisableCheckBox" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Withdraw" toggleGroup="$BankOptions" />
+            <RadioButton fx:id="WithdrawAccRB" layoutX="10.0" layoutY="71.0" mnemonicParsing="false" onAction="#DisableCheckBox" prefHeight="31.0" prefWidth="140.0" text="Withdraw" toggleGroup="$BankOptions" />
             <Region layoutX="10.0" layoutY="102.0" prefHeight="30.0" prefWidth="161.0" />
-            <RadioButton fx:id="DepositRB" onAction="#DisableCheckBox" layoutX="10.0" layoutY="132.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" text="Deposit" toggleGroup="$BankOptions" />
+            <RadioButton fx:id="DepositRB" layoutX="10.0" layoutY="132.0" mnemonicParsing="false" onAction="#DisableCheckBox" prefHeight="31.0" prefWidth="140.0" text="Deposit" toggleGroup="$BankOptions" />
          </children>
       </VBox>
       <VBox layoutX="9.0" layoutY="619.0" prefHeight="253.0" prefWidth="676.0">
@@ -59,9 +59,10 @@
             <Region prefHeight="19.0" prefWidth="282.0" />
             <TextField fx:id="AmountInput" prefHeight="33.0" prefWidth="282.0" text="Enter Amount Here&#10;" />
             <Region prefHeight="19.0" prefWidth="282.0" />
-            <TextField fx:id="DateInput" prefHeight="33.0" prefWidth="282.0" text="Enter Date Here&#10;" />
-            <Button fx:id="SubmitInfo" mnemonicParsing="false" onAction="#getDataFromCommands" prefHeight="46.0" prefWidth="127.0" text="Submit Info" />
+            <TextField fx:id="DateInput" prefHeight="33.0" prefWidth="282.0" text="Enter Date Here M/D/YYYY&#10;" />
             <Region prefHeight="19.0" prefWidth="282.0" />
+            <TextField fx:id="NumWithDrawals" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="450.0" text="Enter Number of Withdrawals Here" />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" />
          </children>
       </VBox>
       <Line endX="100.0" layoutX="116.0" layoutY="263.0" startX="-100.0" />
@@ -71,17 +72,16 @@
          <children>
             <HBox prefHeight="49.0" prefWidth="506.0">
                <children>
-                  <Button fx:id="SelectFileButton" onAction="#getFileInput" mnemonicParsing="false" prefHeight="41.0" prefWidth="138.0" text="Import File" />
-                  <TextField fx:id="FileImportNameTxtF" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="349.0" />
+                  <Button fx:id="SelectFileButton" mnemonicParsing="false" onAction="#getFileInput" prefHeight="41.0" prefWidth="138.0" text="Import File" />
                </children>
             </HBox>
             <Region prefHeight="40.0" prefWidth="506.0" />
             <HBox prefHeight="76.0" prefWidth="506.0">
                <children>
-                  <Button fx:id="ExportFileButton" onAction="#exportFile" mnemonicParsing="false" prefHeight="41.0" prefWidth="138.0" text="Export File" />
-                  <TextField fx:id="FileNameToExport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="349.0" />
+                  <Button fx:id="ExportFileButton" mnemonicParsing="false" onAction="#exportFile" prefHeight="41.0" prefWidth="138.0" text="Export File" />
                </children>
             </HBox>
+            <Button fx:id="SubmitInfo" mnemonicParsing="false" onAction="#getDataFromCommands" prefHeight="46.0" prefWidth="140.0" text="Submit Info" />
          </children>
       </VBox>
       <ScrollPane layoutX="305.0" layoutY="14.0" prefHeight="476.0" prefWidth="775.0">
@@ -91,15 +91,14 @@
       </ScrollPane>
       <HBox layoutX="305.0" layoutY="497.0" prefHeight="49.0" prefWidth="140.0">
          <children>
-            <MenuButton fx:id="PrintOptions" onAction="#DisplayAccounts" mnemonicParsing="false" prefHeight="55.0" prefWidth="153.0" text="Print Options">
-              <items>
-                <MenuItem fx:id="PrintAllAccMenuItem" onAction="#DisplayAccounts" mnemonicParsing="false" text="Print All Accounts" />
-                <MenuItem fx:id="PrintByLastNameMenuItem" onAction="#PrintAccByLastName" mnemonicParsing="false" text="Print By Last Name" />
-                  <MenuItem fx:id="PrintByDateOpenMenuItem" onAction="#PrintAccByDateOpen" mnemonicParsing="false" text="Print By Date open" />
-              </items>
+            <MenuButton fx:id="PrintOptions" mnemonicParsing="false" onAction="#DisplayAccounts" prefHeight="55.0" prefWidth="153.0" text="Print Options">
+               <items>
+                  <MenuItem fx:id="PrintAllAccMenuItem" mnemonicParsing="false" onAction="#DisplayAccounts" text="Print All Accounts" />
+                  <MenuItem fx:id="PrintByLastNameMenuItem" mnemonicParsing="false" onAction="#PrintAccByLastName" text="Print By Last Name" />
+                  <MenuItem fx:id="PrintByDateOpenMenuItem" mnemonicParsing="false" onAction="#PrintAccByDateOpen" text="Print By Date open" />
+               </items>
             </MenuButton>
          </children>
       </HBox>
-      <ButtonBar layoutX="470.0" layoutY="536.0" prefHeight="40.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

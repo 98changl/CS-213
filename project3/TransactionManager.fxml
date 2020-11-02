@@ -94,8 +94,8 @@
             <MenuButton fx:id="PrintOptions" onAction="#DisplayAccounts" mnemonicParsing="false" prefHeight="55.0" prefWidth="153.0" text="Print Options">
               <items>
                 <MenuItem fx:id="PrintAllAccMenuItem" onAction="#DisplayAccounts" mnemonicParsing="false" text="Print All Accounts" />
-                <MenuItem fx:id="PrintByLastNameMenuItem" onAction="#DisplayAccounts" mnemonicParsing="false" text="Print By Last Name" />
-                  <MenuItem fx:id="PrintByDateOpenMenuItem" onAction="#DisplayAccounts" mnemonicParsing="false" text="Print By Date open" />
+                <MenuItem fx:id="PrintByLastNameMenuItem" onAction="#PrintAccByLastName" mnemonicParsing="false" text="Print By Last Name" />
+                  <MenuItem fx:id="PrintByDateOpenMenuItem" onAction="#PrintAccByDateOpen" mnemonicParsing="false" text="Print By Date open" />
               </items>
             </MenuButton>
          </children>

@@ -13,8 +13,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-			Scene scene = new Scene(root,600,600);
+			Parent root = FXMLLoader.load(getClass().getResource("TransactionManager.fxml"));
+			Scene scene = new Scene(root,1250,900);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("Project 3");
 			primaryStage.setScene(scene);

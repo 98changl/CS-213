@@ -192,7 +192,7 @@ public class AccountDatabase {
      * Method calculates the monthly interests and fees and prints the account statements by date open.
      * This method will change the balance of the accounts.
      */
-    public void printByDateOpen() {
+    public String[] printByDateOpen() {
         sortByDateOpen();
         DecimalFormat decimalFormat = new DecimalFormat("0,000.00");
         DecimalFormat currency = new DecimalFormat("0.00");
@@ -204,15 +204,17 @@ public class AccountDatabase {
         String acc;
         String typeAcc;
         int numW = 0;
-
+        
+        String print[] = new String[size + 2];
+        
         if (size == 0) {
-            System.out.println("Database is empty.");
-            return;
+            print[0] = "Database is empty.";
+            return print;
         }
-
-        System.out.println();
-        System.out.println("--Printing statements by date opened--");
-
+        
+        // System.out.println();
+        print[0] = "--Printing statements by date opened--";
+        int i = 1;
         for (int x = 0; x < size; x++) {
             typeAcc = "";
             acc = "";
@@ -255,29 +257,57 @@ public class AccountDatabase {
             }
 
             // print statements
-            System.out.println("");
-            System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
-            System.out.println("-interest: $ " + currency.format(intrest));
-            System.out.println("-fee: $ " + currency.format(fee));
-            //System.out.println(newB);
+            //System.out.println("");
+            String delim = "&";
+            
+            //System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            String str = "*";
+            str = str.concat(acc);
+            str = str.concat("*");
+            str = str.concat(accounts[x].toString());
+            str = str.concat(typeAcc);
+            str = str.concat(delim);
+            
+            //System.out.println("-interest: $ " + currency.format(intrest));
+            str = str.concat("-interest: $ ");
+            str = str.concat(currency.format(intrest));
+            str = str.concat(delim);
+            
+            //System.out.println("-fee: $ " + currency.format(fee));
+            str = str.concat("-fee: $ ");
+            str = str.concat(currency.format(fee));
+            str = str.concat(delim);
+            
             if (newB >= 1000) {
-            	System.out.println("-new balance: $ " + decimalFormat.format(newB));
+            	//System.out.println("-new balance: $ " + decimalFormat.format(newB));
+            	str = str.concat("-new balance: $ ");
+            	str = str.concat(decimalFormat.format(newB));
             } else {
-            	System.out.println("-new balance: $ " + currency.format(newB));
+            	//System.out.println("-new balance: $ " + currency.format(newB));
+            	str = str.concat("-new balance: $ ");
+            	str = str.concat(currency.format(newB));
             }
+            str = str.concat(delim);
             
             // modify accounts
             accounts[x].debit(balance);
             accounts[x].credit(newB);
+            
+            // modify string array
+            print[i] = str;
+            i++;
         }
-        System.out.println("--end of printing--");
+        
+        //System.out.println("--end of printing--");
+        print[i] = "--end of printing--";
+        return print;
     }
 
     /**
      * Method calculates the monthly interests and fees and prints the accounts by last name.
      * This method will change the balance of the accounts.
      */
-    public void printByLastName() {
+    public String[] printByLastName() {
         sortByLastName();
         DecimalFormat decimalFormat = new DecimalFormat("0,000.00");
         DecimalFormat currency = new DecimalFormat("0.00");
@@ -290,14 +320,16 @@ public class AccountDatabase {
         String acc;
         String typeAcc;
 
+        String print[] = new String[size + 2];
+        
         if (size == 0) {
-            System.out.println("Database is empty.");
-            return;
+            print[0] = "Database is empty.";
+            return print;
         }
-
-        System.out.println();
-        System.out.println("--Printing statements by last name--");
-
+        
+        // System.out.println();
+        print[0] = "--Printing statements by last name--";
+        int i = 1;
         for (int x = 0; x < size; x++) {
             typeAcc = "";
             acc = "";
@@ -340,39 +372,69 @@ public class AccountDatabase {
             }
 
             // print statements
-            System.out.println("");
-            System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
-            System.out.println("-interest: $ " + currency.format(intrest));
-            System.out.println("-fee: $ " + currency.format(fee));
-            //System.out.println(newB);
+            //System.out.println("");
+            String delim = "&";
+            
+            //System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            String str = "*";
+            str = str.concat(acc);
+            str = str.concat("*");
+            str = str.concat(accounts[x].toString());
+            str = str.concat(typeAcc);
+            str = str.concat(delim);
+            
+            //System.out.println("-interest: $ " + currency.format(intrest));
+            str = str.concat("-interest: $ ");
+            str = str.concat(currency.format(intrest));
+            str = str.concat(delim);
+            
+            //System.out.println("-fee: $ " + currency.format(fee));
+            str = str.concat("-fee: $ ");
+            str = str.concat(currency.format(fee));
+            str = str.concat(delim);
+            
             if (newB >= 1000) {
-            	System.out.println("-new balance: $ " + decimalFormat.format(newB));
+            	//System.out.println("-new balance: $ " + decimalFormat.format(newB));
+            	str = str.concat("-new balance: $ ");
+            	str = str.concat(decimalFormat.format(newB));
             } else {
-            	System.out.println("-new balance: $ " + currency.format(newB));
+            	//System.out.println("-new balance: $ " + currency.format(newB));
+            	str = str.concat("-new balance: $ ");
+            	str = str.concat(currency.format(newB));
             }
+            str = str.concat(delim);
             
             // modify accounts
             accounts[x].debit(balance);
             accounts[x].credit(newB);
+            
+            // modify string array
+            print[i] = str;
+            i++;
         }
-        System.out.println("--end of printing--");
+        //System.out.println("--end of printing--");
+        print[i] = "--end of printing--";
+        return print;
     }
 
     /**
      * Method prints all accounts in database.
      * This method will not change the balance of the accounts.
      */
-    public void printAccounts() {
+    public String[] printAccounts() {
         String acc;
         String typeAcc;
         int numW = 0;
 
+        String print[] = new String[size + 2];
+        
         if (size == 0) {
-            System.out.println("Database is empty.");
-            return;
+            print[0] = "Database is empty.";
+            return print;
         }
         
-        System.out.println("--Listing accounts in the database--");
+        print[0] = "--Listing accounts in the database--";
+        int i = 1;
 
         for (int x = 0; x < size; x++) {
             typeAcc = "";
@@ -399,8 +461,19 @@ public class AccountDatabase {
                     typeAcc = "*special Savings account*";
                 }
             }
-            System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            
+            //System.out.println("*" + acc + "*" + accounts[x].toString() + typeAcc);
+            String str = "*";
+            str = str.concat(acc);
+            str = str.concat("*");
+            str = str.concat(accounts[x].toString());
+            str = str.concat(typeAcc);
+            print[i] = str;
+            i++;
         }
-        System.out.println("--end of listing--");
+        
+        //System.out.println("--end of listing--");
+        print[i] = "--end of listing--";
+        return print;
     }
 }

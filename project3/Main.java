@@ -16,7 +16,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("TransactionManager.fxml"));
 			Scene scene = new Scene(root,1250,900);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("Project 3");
+			primaryStage.setTitle("Transaction Manager");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

@@ -62,7 +62,9 @@ public class Controller implements Initializable {
     /**
      * Method to get data from commands window and
      * perform bank actions such as open, close, withdraw, and deposit.
-     * Method also does mismatch input data checking for name, date and amount.
+     * Method also does mismatch input data checking for name, date, amount
+     * and checks to see if an account is in the data base for open or if and account does 
+     * not exist for withdrawal, close and deposit.
      *
      * @param event
      * @throws Exception
@@ -122,8 +124,11 @@ public class Controller implements Initializable {
 
                         if (isGood == true) {
                             MoneyMarket m = new MoneyMarket(FirstNameInput.getText(), LastNameInput.getText(), Double.parseDouble(AmountInput.getText()), stringToDate(DateInput.getText()), Integer.parseInt(NumWithDrawals.getText()));
-                            accountDatabase.add(m);
-                            TextAreaPrint.appendText("Account opened and added to the database.\n");
+                           boolean inDB = accountDatabase.add(m);
+                           if(inDB == true) {
+                               TextAreaPrint.appendText("Account opened and added to the database.\n");
+                           }
+                           else TextAreaPrint.appendText("account exists in the database\n");
                         }
                     }
                     if (SavingRB.isSelected()) {
@@ -134,8 +139,11 @@ public class Controller implements Initializable {
 
                         if (isGood == true) {
                             Savings m = new Savings(FirstNameInput.getText(), LastNameInput.getText(), Double.parseDouble(AmountInput.getText()), stringToDate(DateInput.getText()), isLoyal);
-                            accountDatabase.add(m);
-                            TextAreaPrint.appendText("Account opened and added to the database.\n");
+                            boolean inDB = accountDatabase.add(m);
+                            if(inDB == true) {
+                                TextAreaPrint.appendText("Account opened and added to the database.\n");
+                            }
+                            else TextAreaPrint.appendText("account exists in the database\n");
                         }
                     }
                     if (CheckingRB.isSelected()) {
@@ -146,8 +154,12 @@ public class Controller implements Initializable {
 
                         if (isGood == true) {
                             Savings m = new Savings(FirstNameInput.getText(), LastNameInput.getText(), Double.parseDouble(AmountInput.getText()), stringToDate(DateInput.getText()), isDD);
-                            accountDatabase.add(m);
-                            TextAreaPrint.appendText("Account opened and added to the database.\n");
+                            boolean inDB = accountDatabase.add(m);
+
+                            if(inDB == true) {
+                                TextAreaPrint.appendText("Account opened and added to the database.\n");
+                            }
+                            else TextAreaPrint.appendText("account exists in the database\n");
                         }
                     }
                 }

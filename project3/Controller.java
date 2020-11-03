@@ -94,32 +94,6 @@ public class Controller implements Initializable {
     		TextAreaPrint.appendText("Input data type mismatch.\n");
     	}
     	
-    	// checks validity of first name
-    	if (first_name.isEmpty()) {
-    		TextAreaPrint.appendText("Input data type mismatch.\n");
-			return;
-    	}
-    	for (int i = 0; i < first_name.length(); i++) {
-    		char test = first_name.charAt(i);
-    		if (!Character.isAlphabetic(test)) {
-    			TextAreaPrint.appendText("Input data type mismatch.\n");
-    			return;
-    		}
-    	}
-    	
-    	// checks validity of last name
-    	if (last_name.isEmpty()) {
-    		TextAreaPrint.appendText("Input data type mismatch.\n");
-			return;
-    	}
-    	for (int i = 0; i < last_name.length(); i++) {
-    		char test = last_name.charAt(i);
-    		if (!Character.isAlphabetic(test)) {
-    			TextAreaPrint.appendText("Input data type mismatch.\n");
-    			return;
-    		}
-    	}
-    	
     	double balance = 0.0;
     	Date date = new Date(1, 1, 2000);
     	Account acc = null;

@@ -14,7 +14,7 @@ public class Fish extends Sandwich {
 		}
 		
 		if (obj instanceof Extra) {
-			super.extras.add((Extra) obj);
+			return super.extras.add((Extra) obj);
 		}
 
 		return false;

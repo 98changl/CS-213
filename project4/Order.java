@@ -14,8 +14,7 @@ public class Order implements Customizable {
 	@Override
 	public boolean add(Object obj) {
 		if (obj instanceof OrderLine) {
-			orderlines.add((OrderLine) obj);
-			return true;
+			return orderlines.add((OrderLine) obj);
 		}
 		
 		return false;
@@ -30,4 +29,11 @@ public class Order implements Customizable {
 		return false;
 	}
 
+	public void clear() {
+		orderlines.clear();
+	}
+	
+	public int size() {
+		return orderlines.size();
+	}
 }

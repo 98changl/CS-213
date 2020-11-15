@@ -1,7 +1,7 @@
 package project4;
 
 public class Extra {
-	String ingredient = "";
+	private String ingredient;
 		
 	public Extra(String ingredient) {
 		this.ingredient = ingredient;

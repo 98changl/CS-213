@@ -36,6 +36,7 @@ public class Controller  implements Initializable {
 
     //to keep track of line number
     public int lineCounter = 0;
+    public OrderLine orderLine;
     public Order order = new Order(lineCounter);
 
     /**
@@ -122,7 +123,6 @@ public class Controller  implements Initializable {
         if(SandwichTypeCB.getValue().toString().matches("Chicken")) {//change image
             sandwich = new Chicken();
             sandwich.add(new Extra(extraIng));
-            OrderLine orderLine = new OrderLine(lineCounter,sandwich);
             order.add(orderLine = new OrderLine(lineCounter,sandwich));
 
 
@@ -131,7 +131,6 @@ public class Controller  implements Initializable {
         if(SandwichTypeCB.getValue().toString().matches("Beef")) {//change image
             sandwich = new Beef();
             sandwich.add(new Extra(extraIng));
-            OrderLine orderLine = new OrderLine(lineCounter,sandwich);
             order.add(orderLine = new OrderLine(lineCounter,sandwich));
 
         }
@@ -139,10 +138,10 @@ public class Controller  implements Initializable {
         if(SandwichTypeCB.getValue().toString().matches("Fish")) {//change image
             sandwich = new Fish();
             sandwich.add(new Extra(extraIng));
-            OrderLine orderLine = new OrderLine(lineCounter,sandwich);
             order.add(orderLine = new OrderLine(lineCounter,sandwich));
 
         }
+        SelectedExtraIngredientLV.getItems().clear();
 
     }
 
@@ -151,6 +150,10 @@ public class Controller  implements Initializable {
      * for OrderDetails.
      */
     public void openDetails(){
+
+        for(int x = 0 ; x<order.getArray().size() ; x++){
+            System.out.println(order.getArray().get(x).getLineNumber() + " " + order.getArray().get(x).getSandwich());
+        }
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("OrderDetails.fxml"));

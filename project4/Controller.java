@@ -111,18 +111,21 @@ public class Controller  implements Initializable {
 
 
         Sandwich sandwich = new Chicken();
-        sandwich.add(new Extra(extraIng));
+        sandwich.add(null);
 
         Extra extra = null;
-
-        if(!SelectedExtraIngredientLV.getItems().isEmpty()){
-            extra = new Extra(extraIng);//String of extra ingred.
-        }
+        String[] extras = null;
 
 
         if(SandwichTypeCB.getValue().toString().matches("Chicken")) {//change image
             sandwich = new Chicken();
-            sandwich.add(new Extra(extraIng));
+
+            if((!SelectedExtraIngredientLV.getItems().isEmpty())) {
+                extras = extraIng.split(",");
+                for (int x = 0; x < extras.length; x++) {
+                    sandwich.add(new Extra(extras[x]));//Split Ingredients to create extra
+                }
+            }
             order.add(orderLine = new OrderLine(lineCounter,sandwich));
 
 
@@ -130,14 +133,27 @@ public class Controller  implements Initializable {
 
         if(SandwichTypeCB.getValue().toString().matches("Beef")) {//change image
             sandwich = new Beef();
-            sandwich.add(new Extra(extraIng));
+
+            if((!SelectedExtraIngredientLV.getItems().isEmpty())){
+                extras = extraIng.split(",");
+                for (int x = 0; x < extras.length; x++) {
+                    sandwich.add(new Extra(extras[x]));//Split Ingredients to create extra
+                }
+            }
             order.add(orderLine = new OrderLine(lineCounter,sandwich));
 
         }
 
         if(SandwichTypeCB.getValue().toString().matches("Fish")) {//change image
             sandwich = new Fish();
-            sandwich.add(new Extra(extraIng));
+
+            if((!SelectedExtraIngredientLV.getItems().isEmpty())){
+                extras = extraIng.split(",");
+
+                for (int x = 0; x < extras.length; x++) {
+                    sandwich.add(new Extra(extras[x]));//Split Ingredients to create extra
+                }
+            }
             order.add(orderLine = new OrderLine(lineCounter,sandwich));
 
         }
@@ -151,7 +167,6 @@ public class Controller  implements Initializable {
      */
     public void openDetails(){
 
-       
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("OrderDetails.fxml"));

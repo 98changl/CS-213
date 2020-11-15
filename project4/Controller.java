@@ -151,9 +151,7 @@ public class Controller  implements Initializable {
      */
     public void openDetails(){
 
-        for(int x = 0 ; x<order.getArray().size() ; x++){
-            System.out.println(order.getArray().get(x).getLineNumber() + " " + order.getArray().get(x).getSandwich());
-        }
+       
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("OrderDetails.fxml"));

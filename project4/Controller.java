@@ -86,7 +86,9 @@ public class Controller  implements Initializable {
      * Mehtod to control all extra add Ingredient functions.
      */
     public void SubmitExtra() {
-        SelectedExtraIngredientLV.getItems().addAll(ExtraIngredientLV.getSelectionModel().getSelectedItems());
+        if(SelectedExtraIngredientLV.getItems().size() < 6) {
+            SelectedExtraIngredientLV.getItems().addAll(ExtraIngredientLV.getSelectionModel().getSelectedItems());
+        }
     }
 
     /**
@@ -167,6 +169,9 @@ public class Controller  implements Initializable {
      */
     public void openDetails(){
 
+        for(int x = 0 ; x<order.getArray().size() ; x++){
+            System.out.println(order.getArray().get(x).getLineNumber() + " " + order.getArray().get(x).getSandwich());
+        }
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("OrderDetails.fxml"));
@@ -200,7 +205,7 @@ public class Controller  implements Initializable {
             e.printStackTrace();
         }
 
-        ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 
 

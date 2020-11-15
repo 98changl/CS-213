@@ -3,6 +3,9 @@ package project4;
 public class Chicken extends Sandwich {
 	double Price = 8.99;
 	
+	/**
+	 * Constructor for the chicken class.
+	 */
 	public Chicken() {
 		super();
 	}
@@ -23,7 +26,12 @@ public class Chicken extends Sandwich {
 	@Override
 	public boolean remove(Object obj) {
 		if (obj instanceof Extra) {
-			return super.extras.remove((Extra) obj);
+			for (int i = 0; i < super.extras.size(); i++) {
+				if (super.extras.get(i).toString().equals(obj.toString())) {
+					super.extras.remove(i);
+					return true;
+				}
+			}
 		}
 		
 		return false;

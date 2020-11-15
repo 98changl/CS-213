@@ -1,10 +1,13 @@
 package project4;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.io.*;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.scene.Parent;
@@ -15,15 +18,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
-public class Controller  implements Initializable {
-
+public class Controller implements Initializable {
 
     @FXML
     public ComboBox SandwichTypeCB;
 
-
     @FXML
-    public ListView ExtraIngredientLV, SelectedExtraIngredientLV;
+    public ListView<String> ExtraIngredientLV, SelectedExtraIngredientLV;
 
     @FXML
     public ImageView SandwichImage;
@@ -34,68 +35,104 @@ public class Controller  implements Initializable {
     @FXML
     public TextField PriceTF;
 
-    //to keep track of line number
-    public int lineCounter = 0;
-    public OrderLine orderLine;
-    public Order order = new Order(lineCounter);
+    public Order order;
+    
+    private Sandwich sandwich;	// sandwich the order is making
+    private DecimalFormat format = new DecimalFormat("0.00");	// price formatting
+    
+    /**
+     * Determines if the ingredient has already been added to selected.
+     * @param ingredient
+     * @return true if the ingredient is already added, false otherwise
+     */
+    private boolean duplicate(String ingredient) {
+    	ObservableList<String> list = SelectedExtraIngredientLV.getItems();
+    	
+    	for (String s : list) {
+    		if (ingredient.equals(s)) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
     /**
      * Method to control all ComboBox functions based on
      * the sandwich type selected.
      */
-    public void ComboBoxActions(){
-
+    public void ComboBoxActions() {
+    	FileInputStream input = null;
+    	
         //change image
         if(SandwichTypeCB.getValue().toString().matches("Chicken") ) {//change image
+        	sandwich = new Chicken();
+        	SelectedExtraIngredientLV.getItems().clear();
+        	
             try {
-                FileInputStream input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Chicken.png");
-                Image image = new Image(input);
-                SandwichImage.setImage(image);
-                ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                input = new FileInputStream("PJ4_Chicken.png");
 
             } catch (FileNotFoundException t) {
                 t.printStackTrace();
             }
         }
-            if(SandwichTypeCB.getValue().toString().matches("Beef")){//change image
-                try {
-                    FileInputStream input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Beef.png");
-                    Image image = new Image(input);
-                    SandwichImage.setImage(image);
-                    ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-                }catch (FileNotFoundException t){
-                    t.printStackTrace();
-                }
-
-        }
-        if(SandwichTypeCB.getValue().toString().matches("Fish")) {//change image
+        else if(SandwichTypeCB.getValue().toString().matches("Beef")){//change image
+        	sandwich = new Beef();
+        	SelectedExtraIngredientLV.getItems().clear();
+        	
+        	try {
+        		input = new FileInputStream("PJ4_Beef.png");
+        		
+        	} catch (FileNotFoundException t) {
+        		t.printStackTrace();
+            }
+        } 
+        else if(SandwichTypeCB.getValue().toString().matches("Fish")) {//change image
+        	sandwich = new Fish();
+        	SelectedExtraIngredientLV.getItems().clear();
+        	
             try {
-                FileInputStream input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Fish.png");
-                Image image = new Image(input);
-                SandwichImage.setImage(image);
-                ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+                input = new FileInputStream("PJ4_Fish.png");
 
             } catch (FileNotFoundException t) {
                 t.printStackTrace();
             }
         }
+        
+        if (input != null) {
+        	Image image = new Image(input);
+            SandwichImage.setImage(image);
+        }
+        
+        PriceTF.setText("$" + format.format(sandwich.price()));
+        ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        SelectedExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
+        ExtraIngredientLV.setItems(Extra.ingredientList());
     }
 
     /**
      * Mehtod to control all extra add Ingredient functions.
      */
     public void SubmitExtra() {
-        if(SelectedExtraIngredientLV.getItems().size() < 6) {
-            SelectedExtraIngredientLV.getItems().addAll(ExtraIngredientLV.getSelectionModel().getSelectedItems());
+    	String ingredient = ExtraIngredientLV.getSelectionModel().getSelectedItem();
+    	
+    	if(SelectedExtraIngredientLV.getItems().size() < 6) {
+    		if (duplicate(ingredient) == false) {
+    			sandwich.add(new Extra(ingredient));
+                SelectedExtraIngredientLV.getItems().add(ingredient);
+    		}
         }
+    	PriceTF.setText("$" + format.format(sandwich.price()));
     }
 
     /**
      * Method to control all extra remove Ingredient functions.
      */
-    public void RemoveExtra(){
-        SelectedExtraIngredientLV.getItems().removeAll(ExtraIngredientLV.getSelectionModel().getSelectedItems());
+    public void RemoveExtra() {
+    	String ingredient = SelectedExtraIngredientLV.getSelectionModel().getSelectedItem();
+    	sandwich.remove(new Extra(ingredient));
+        SelectedExtraIngredientLV.getItems().remove(ingredient);
+        PriceTF.setText("$" + format.format(sandwich.price()));
     }
 
     /**
@@ -103,64 +140,24 @@ public class Controller  implements Initializable {
      * Increases line counter by 1. Method also
      * gets the extra the Ingredient.
      */
-    public void addSandwich(){
-
-        lineCounter++;
-        String extraIng = null;
-        extraIng = (String) SelectedExtraIngredientLV.getItems().stream()////get extras into a string
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));//"," as delimiter
-
-
-        Sandwich sandwich = new Chicken();
-        sandwich.add(null);
-
-        Extra extra = null;
-        String[] extras = null;
-
-
-        if(SandwichTypeCB.getValue().toString().matches("Chicken")) {//change image
-            sandwich = new Chicken();
-
-            if((!SelectedExtraIngredientLV.getItems().isEmpty())) {
-                extras = extraIng.split(",");
-                for (int x = 0; x < extras.length; x++) {
-                    sandwich.add(new Extra(extras[x]));//Split Ingredients to create extra
-                }
-            }
-            order.add(orderLine = new OrderLine(lineCounter,sandwich));
-
-
-        }
-
-        if(SandwichTypeCB.getValue().toString().matches("Beef")) {//change image
-            sandwich = new Beef();
-
-            if((!SelectedExtraIngredientLV.getItems().isEmpty())){
-                extras = extraIng.split(",");
-                for (int x = 0; x < extras.length; x++) {
-                    sandwich.add(new Extra(extras[x]));//Split Ingredients to create extra
-                }
-            }
-            order.add(orderLine = new OrderLine(lineCounter,sandwich));
-
-        }
-
-        if(SandwichTypeCB.getValue().toString().matches("Fish")) {//change image
-            sandwich = new Fish();
-
-            if((!SelectedExtraIngredientLV.getItems().isEmpty())){
-                extras = extraIng.split(",");
-
-                for (int x = 0; x < extras.length; x++) {
-                    sandwich.add(new Extra(extras[x]));//Split Ingredients to create extra
-                }
-            }
-            order.add(orderLine = new OrderLine(lineCounter,sandwich));
-
-        }
-        SelectedExtraIngredientLV.getItems().clear();
-
+    public void addSandwich() {
+    	Order.lineNumber++;
+    	System.out.println(Order.lineNumber);
+    	OrderLine line = new OrderLine(Order.lineNumber, sandwich);
+    	order.add(line);
+    	
+    	if(SandwichTypeCB.getValue().toString().matches("Chicken") ) {
+    		sandwich = new Chicken();
+    	}
+    	else if(SandwichTypeCB.getValue().toString().matches("Beef") ) {
+        	sandwich = new Beef();
+    	}
+    	else if(SandwichTypeCB.getValue().toString().matches("Fish") ) {
+        	sandwich = new Fish();
+    	}
+    	
+    	PriceTF.setText("$" + format.format(sandwich.price()));
+    	SelectedExtraIngredientLV.getItems().clear();
     }
 
     /**
@@ -168,29 +165,30 @@ public class Controller  implements Initializable {
      * for OrderDetails. Method adds 
      * order to the listview in the new stage.
      */
-    public void openDetails(){
-
+    public void openDetails() {
+    	
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderDetails.fxml"));
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderDetails.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             Scene scene = new Scene(root,1250,900);
             stage.setScene(scene);
             stage.show();
 
+            /*
             //Get controller of scene2
             SecondController controller2 = loader.getController();
             for(int x  = 0 ; x < order.getArray().size() ; x++){
 
                     controller2.DetailsListView.getItems().addAll(order.getArray().get(x).getLineNumber() + " " + order.getArray().get(x).getSandwich());
             }
+            */
 
         } catch(Exception e) {
             e.printStackTrace();
         }
 
     }
-
 
     /**
      * Called when view loads.
@@ -204,7 +202,7 @@ public class Controller  implements Initializable {
         //set image to chicken upon start
         SandwichTypeCB.getSelectionModel().selectFirst();
         try {
-            FileInputStream input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Chicken.png");
+            FileInputStream input = new FileInputStream("PJ4_Chicken.png");
             Image image = new Image(input);
             SandwichImage.setImage(image);
 
@@ -212,9 +210,15 @@ public class Controller  implements Initializable {
             e.printStackTrace();
         }
 
-        ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-
-
+        order = new Order();
+        sandwich = new Chicken();
+        PriceTF.setText("$" + format.format(sandwich.price()));
+    	
+    	ExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        SelectedExtraIngredientLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
+        ExtraIngredientLV.setItems(Extra.ingredientList());
+        SelectedExtraIngredientLV.getItems().clear();
     }
+    
 }

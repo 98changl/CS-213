@@ -6,8 +6,7 @@ public class Order implements Customizable {
 	public static int lineNumber;
 	private ArrayList<OrderLine> orderlines;
 
-	public Order(int lineNumber) {
-		this.lineNumber = lineNumber;
+	public Order() {
 		orderlines = new ArrayList<OrderLine>();
 	}
 	

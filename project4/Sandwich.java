@@ -7,6 +7,9 @@ public abstract class Sandwich implements Customizable {
 	static final double PER_EXTRA = 1.99;
 	protected ArrayList<Extra> extras;
 	
+	/**
+	 * Constructor for the Sandwich class.
+	 */
 	public Sandwich() {
 		extras = new ArrayList<Extra>();
 	}

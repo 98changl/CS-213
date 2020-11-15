@@ -32,6 +32,7 @@ public class Controller  implements Initializable {
 
     //to keep track of line number
     public int lineCounter = 0;
+    public Order order = new Order(lineCounter);
 
     /**
      * Method to control all ComboBox functions based on
@@ -90,10 +91,11 @@ public class Controller  implements Initializable {
 
     /**
      * Method to add sandwich to the order and
-     * Increases line counter by 1. Method also 
-     * gets the extra the Ingredient. 
+     * Increases line counter by 1. Method also
+     * gets the extra the Ingredient.
      */
     public void addSandwich(){
+
 
         lineCounter++;
 
@@ -101,7 +103,10 @@ public class Controller  implements Initializable {
         extraIng = (String) SelectedExtraIngredientLV.getItems().stream()////get extras into a string
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));//"," as delimiter
-        System.out.println(extraIng);
+
+
+        Sandwich sandwich = new Chicken();
+        sandwich.add(new Extra(extraIng));
 
 
 
@@ -114,25 +119,32 @@ public class Controller  implements Initializable {
 
 
         if(SandwichTypeCB.getValue().toString().matches("Chicken")) {//change image
-            sandwichType = new Chicken();
-            OrderLine orderLine = new OrderLine(lineCounter,sandwichType);
+            sandwich = new Chicken();
+            sandwich.add(new Extra(extraIng));
+            OrderLine orderLine = new OrderLine(lineCounter,sandwich);
+            order.add(orderLine = new OrderLine(lineCounter,sandwich));
+
 
         }
 
         if(SandwichTypeCB.getValue().toString().matches("Beef")) {//change image
-            sandwichType = new Beef();
-            OrderLine orderLine = new OrderLine(lineCounter,sandwichType);
-
+            sandwich = new Beef();
+            sandwich.add(new Extra(extraIng));
+            OrderLine orderLine = new OrderLine(lineCounter,sandwich);
+            order.add(orderLine = new OrderLine(lineCounter,sandwich));
 
         }
 
         if(SandwichTypeCB.getValue().toString().matches("Fish")) {//change image
-            sandwichType = new Fish();
-            OrderLine orderLine = new OrderLine(lineCounter,sandwichType);
+            sandwich = new Fish();
+            sandwich.add(new Extra(extraIng));
+            OrderLine orderLine = new OrderLine(lineCounter,sandwich);
+            order.add(orderLine = new OrderLine(lineCounter,sandwich));
+
         }
 
-        System.out.println();
     }
+
 
 
     /**

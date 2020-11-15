@@ -88,7 +88,9 @@ public class Controller  implements Initializable {
         SelectedExtraIngredientLV.getItems().addAll(ExtraIngredientLV.getSelectionModel().getSelectedItems());
     }
 
-    //Method to control all extra remove Ingredient functions.
+    /**
+     * Method to control all extra remove Ingredient functions.
+     */
     public void RemoveExtra(){
         SelectedExtraIngredientLV.getItems().removeAll(ExtraIngredientLV.getSelectionModel().getSelectedItems());
     }

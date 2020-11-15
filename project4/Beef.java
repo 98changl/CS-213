@@ -1,5 +1,7 @@
 package project4;
 
+import java.text.DecimalFormat;
+
 public class Beef extends Sandwich {
 	double Price = 10.99;
 	
@@ -51,9 +53,11 @@ public class Beef extends Sandwich {
 	@Override
 	public String toString() {
 		String str = "Beef,";
+		DecimalFormat format = new DecimalFormat("0.00");
+		
 		str = str.concat(super.toString());
 		str = str.concat("$");
-		str = str.concat(String.valueOf(Price));
+		str = str.concat(format.format(price()));
 		
 		return str;
 	}

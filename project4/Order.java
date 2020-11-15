@@ -22,7 +22,13 @@ public class Order implements Customizable {
 	@Override
 	public boolean remove(Object obj) {
 		if (obj instanceof OrderLine) {
-			return orderlines.remove((OrderLine) obj);
+			OrderLine temp = (OrderLine) obj;
+			for (int i = 0; i < orderlines.size(); i++) {
+				if (orderlines.get(i).getSandwich().toString().equals(temp.getSandwich().toString())) {
+					orderlines.remove(i);
+					return true;
+				}
+			}
 		}
 		
 		return false;

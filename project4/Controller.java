@@ -1,14 +1,18 @@
 package project4;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 
 public class Controller  implements Initializable {
@@ -96,9 +100,7 @@ public class Controller  implements Initializable {
      */
     public void addSandwich(){
 
-
         lineCounter++;
-
         String extraIng = null;
         extraIng = (String) SelectedExtraIngredientLV.getItems().stream()////get extras into a string
                 .map(Object::toString)
@@ -108,9 +110,6 @@ public class Controller  implements Initializable {
         Sandwich sandwich = new Chicken();
         sandwich.add(new Extra(extraIng));
 
-
-
-        Sandwich sandwichType = null;
         Extra extra = null;
 
         if(!SelectedExtraIngredientLV.getItems().isEmpty()){
@@ -145,7 +144,23 @@ public class Controller  implements Initializable {
 
     }
 
+    /**
+     * Method opens a new stage
+     * for OrderDetails.
+     */
+    public void openDetails(){
 
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("OrderDetails.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root,1250,900);
+            stage.setScene(scene);
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     /**
      * Called when view loads.

@@ -11,9 +11,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="808.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.Controller">
    <children>
-      <ComboBox  fx:id="SandwichTypeCB" layoutX="106.0" layoutY="14.0" prefHeight="47.0" prefWidth="237.0" promptText="Sandwich Type">
+      <ComboBox  onAction="#ComboBoxActions" fx:id="SandwichTypeCB" layoutX="106.0" layoutY="14.0" prefHeight="47.0" prefWidth="237.0" promptText="Sandwich Type">
          <items>
-            <FXCollections fx:factory="observableArrayList">
+            <FXCollections fx:factory="observableArrayList"  >
                <String fx:id="ChickenSandwich" fx:value="Chicken" />
                <String fx:id="BeefSandwich" fx:value="Beef" />
                <String fx:id="FishSandwich" fx:value="Fish" />
@@ -22,7 +22,7 @@
       </ComboBox>
       <ListView  fx:id="ExtraIngredientLV" layoutX="106.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="237.0" >
          <items>
-            <FXCollections fx:factory="observableArrayList">
+            <FXCollections  fx:factory="observableArrayList">
                <String fx:id="Tomatoes" fx:value="Tomatoes" />
                <String fx:id="CheddarCheese" fx:value="Cheddar cheese" />
                <String fx:id="BlueCheese" fx:value="Blue Cheese" />
@@ -38,11 +38,11 @@
       </ListView>
       <ImageView fx:id="SandwichImage" fitHeight="324.0" fitWidth="594.0" layoutX="575.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="PriceTF" layoutX="645.0" layoutY="586.0" prefHeight="53.0" prefWidth="200.0" />
-      <Button fx:id="AddB" layoutX="976.0" layoutY="615.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" text="ADD SANDWICH" />
-      <Button fx:id="DetailsB" layoutX="976.0" layoutY="517.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="DETAILS" />
+      <Button  onAction="#addSandwich" fx:id="AddB" layoutX="976.0" layoutY="615.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="200.0" text="ADD SANDWICH" />
+      <Button fx:id="DetailsB" onAction="#openDetails" layoutX="976.0" layoutY="517.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="DETAILS" />
       <ListView fx:id="SelectedExtraIngredientLV" layoutX="106.0" layoutY="459.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="312.0" prefWidth="237.0" />
-      <Button fx:id="AddIngredients" layoutX="362.0" layoutY="118.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="189.0" text="ADD INGREDIENTS" />
-      <Button fx:id="RemoveIngredients" layoutX="362.0" layoutY="197.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="189.0" text="REMOVE INGREDIENTS" />
+      <Button onAction="#SubmitExtra" fx:id="AddIngredientsB" layoutX="362.0" layoutY="118.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="189.0" text="ADD INGREDIENTS" />
+      <Button onAction="#RemoveExtra" fx:id="RemoveIngredientsB" layoutX="362.0" layoutY="197.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="189.0" text="REMOVE INGREDIENTS" />
      
    </children>
 </AnchorPane>

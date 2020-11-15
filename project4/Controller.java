@@ -165,25 +165,32 @@ public class Controller  implements Initializable {
 
     /**
      * Method opens a new stage
-     * for OrderDetails.
+     * for OrderDetails. Method adds 
+     * order to the listview in the new stage.
      */
     public void openDetails(){
 
-        for(int x = 0 ; x<order.getArray().size() ; x++){
-            System.out.println(order.getArray().get(x).getLineNumber() + " " + order.getArray().get(x).getSandwich());
-        }
-
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("OrderDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderDetails.fxml"));
+            Parent root = loader.load();
             Stage stage = new Stage();
             Scene scene = new Scene(root,1250,900);
             stage.setScene(scene);
             stage.show();
+
+            //Get controller of scene2
+            SecondController controller2 = loader.getController();
+            for(int x  = 0 ; x < order.getArray().size() ; x++){
+
+                    controller2.DetailsListView.getItems().addAll(order.getArray().get(x).getLineNumber() + " " + order.getArray().get(x).getSandwich());
+            }
+
         } catch(Exception e) {
             e.printStackTrace();
         }
 
     }
+
 
     /**
      * Called when view loads.

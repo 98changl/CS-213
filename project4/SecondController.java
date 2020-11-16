@@ -23,10 +23,7 @@ public class SecondController implements Initializable {
     @FXML
     public Button AddSelectedSandwichB, RemoveSandwichB, ClearSandwichB, SaveB , GoToMain;
 
-    @FXML
-    public TextField SumTotal;
-
-    //to go back
+    // to go back
     public Stage stage;
 
     /**
@@ -34,10 +31,25 @@ public class SecondController implements Initializable {
      */
     public void remove() {//index
         int selected = DetailsListView.getSelectionModel().getSelectedIndex();
+        
+        if(DetailsListView.getItems().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Note");
+            alert.setHeaderText("Cannot remove, your order is empty!");
+            alert.showAndWait();
+            return;
+        }
+        else if (selected == DetailsListView.getItems().size() - 1) {//total price is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Note");
+            alert.setHeaderText("You selected total price, please select an order line");
+            alert.showAndWait();
+            return;
+        }
+        
         DetailsListView.getItems().remove(selected);
         Controller.order.remove(Controller.order.getOrderLine(selected));
         updateListView();
-        calcTotalPrice();
     }
 
     /**
@@ -45,11 +57,26 @@ public class SecondController implements Initializable {
      */
     public void add() {
         int selected = DetailsListView.getSelectionModel().getSelectedIndex();
+        
+        if(DetailsListView.getItems().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Note");
+            alert.setHeaderText("Cannot add, your order is empty!");
+            alert.showAndWait();
+            return;
+        }
+        else if (selected == DetailsListView.getItems().size() - 1) {//total price is selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Note");
+            alert.setHeaderText("You selected total price, please select an order line");
+            alert.showAndWait();
+            return;
+        }
+        
         DetailsListView.getItems().addAll(DetailsListView.getSelectionModel().getSelectedItems());
         OrderLine duplicate = new OrderLine(Order.lineNumber, Controller.order.getOrderLine(selected).getSandwich());
         Controller.order.add(duplicate);
         updateListView();
-        calcTotalPrice();
     }
 
 
@@ -57,6 +84,13 @@ public class SecondController implements Initializable {
      * Method to clear the order.
      */
     public void clear() {
+    	if (DetailsListView.getItems().size() <= 1) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Note");
+            alert.setHeaderText("Cannot empty, there are no sandwiches!");
+            alert.showAndWait();
+            return;
+        }
         Controller.order.clear();
         DetailsListView.getItems().clear();
     }
@@ -93,7 +127,6 @@ public class SecondController implements Initializable {
 		pw.close();
 		Controller.order.reorder();
 		updateListView();
-		calcTotalPrice();
     }
 
     /**
@@ -122,8 +155,6 @@ public class SecondController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	updateListView();
-    	calcTotalPrice();
-    	SumTotal.editableProperty().set(false);
     }
     
     /**
@@ -171,17 +202,18 @@ public class SecondController implements Initializable {
     		list.add(display);
     	}
     	
+    	list.add(calcTotalPrice());
     	return list;
     }
     
-    private void calcTotalPrice() {
+    private String calcTotalPrice() {
     	DecimalFormat format = new DecimalFormat("0.00");
     	
-    	double t = 0;//get total price
-        for(int x = 0 ; x<Controller.order.size() ; x++){
+    	double t = 0; //get total price
+        for(int x = 0 ; x < Controller.order.size() ; x++){
             t = t + Controller.order.getOrderLine(x).getSandwich().price();
         }
 
-        SumTotal.setText("Total: $" + format.format(t));
+        return "Total: $" + format.format(t);
     }
 }

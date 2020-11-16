@@ -39,19 +39,19 @@ public class Order implements Customizable {
 	}
 
 	/**
-	 * Resets the line number and clears the orderlines array.
-	 */
-	public void clear() {
-		lineNumber = 1;
-		orderlines.clear();
-	}
-	
-	/**
 	 * Gets the size of the orderlines array list.
 	 * @return
 	 */
 	public int size() {
 		return orderlines.size();
+	}
+	
+	/**
+	 * Resets the line number and clears the orderlines array.
+	 */
+	public void clear() {
+		lineNumber = 1;
+		orderlines.clear();
 	}
 	
 	/**

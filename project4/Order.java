@@ -34,11 +34,32 @@ public class Order implements Customizable {
 		return false;
 	}
 
+	/**
+	 * Resets the line number and clears the orderlines array.
+	 */
 	public void clear() {
+		lineNumber = 0;
 		orderlines.clear();
 	}
 	
+	/**
+	 * Gets the size of the orderlines array list.
+	 * @return
+	 */
 	public int size() {
 		return orderlines.size();
 	}
+	
+	/**
+	 * Gets the order line at the given index
+	 * @param index
+	 * @return OrderLines if the index is valid, null otherwise
+	 */
+	public OrderLine getOrderLine(int index) {
+		if (index < 0 || index > orderlines.size()) {
+			return null;
+		}
+		return orderlines.get(index);
+	}
+	
 }

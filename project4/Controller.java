@@ -142,7 +142,6 @@ public class Controller implements Initializable {
      */
     public void addSandwich() {
     	Order.lineNumber++;
-    	System.out.println(Order.lineNumber);
     	OrderLine line = new OrderLine(Order.lineNumber, sandwich);
     	order.add(line);
     	

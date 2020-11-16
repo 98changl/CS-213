@@ -46,7 +46,7 @@ class OrderTest {
 	}
 	
 	@Test 
-	void clearTest() {
+	void clearTest1() {
 		Sandwich sandwich = new Chicken();
 		OrderLine line = new OrderLine(Order.lineNumber, sandwich);
 		Order order = new Order();
@@ -55,4 +55,18 @@ class OrderTest {
 		assertEquals(order.size(), 0);
 	}
 	
+	@Test 
+	void clearTest2() {
+		Sandwich sandwich = new Chicken();
+		OrderLine line = new OrderLine(Order.lineNumber, sandwich);
+		Order order = new Order();
+		order.add(line);
+		order.clear();
+		assertEquals(Order.lineNumber, 0);
+	}
+	
+	@Test
+	void getTest() {
+		
+	}
 }

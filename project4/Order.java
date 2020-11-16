@@ -29,7 +29,6 @@ public class Order implements Customizable {
 				if (orderlines.get(i).getSandwich().toString().equals(temp.getSandwich().toString())) {
 					if (orderlines.get(i).getLineNumber() == temp.getLineNumber()) {
 						orderlines.remove(i);
-						lineNumber--;
 						return true;
 					}
 				}
@@ -71,10 +70,11 @@ public class Order implements Customizable {
 	 * Reorders the line numbers in the array list.
 	 */
 	public void reorder() {
-		for (int i = 1; i < lineNumber; i++) {
-			if (orderlines.get(i).getLineNumber() != i) {
-				orderlines.get(i).setLineNumber(i);
+		for (int i = 0; i < size(); i++) {
+			if (orderlines.get(i).getLineNumber() != i + 1) {
+				orderlines.get(i).setLineNumber(i + 1);
 			}
 		}
+		lineNumber = size() + 1;
 	}
 }

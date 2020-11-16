@@ -3,7 +3,7 @@ package project4;
 import java.text.DecimalFormat;
 
 public class Beef extends Sandwich {
-	double Price = 10.99;
+	private double Price = 10.99;
 	
 	/**
 	 * Constructor for the beef class.
@@ -55,6 +55,7 @@ public class Beef extends Sandwich {
 		String str = "Beef,";
 		DecimalFormat format = new DecimalFormat("0.00");
 		
+		str = str.concat("Roast Beef,Provolone Cheese,Mustard,");
 		str = str.concat(super.toString());
 		str = str.concat("$");
 		str = str.concat(format.format(price()));

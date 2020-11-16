@@ -1,6 +1,5 @@
 package project4;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +8,6 @@ import java.io.*;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -182,13 +180,17 @@ public class Controller implements Initializable {
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderDetails.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            Scene scene = new Scene(root,1250,900);
+            Scene scene = new Scene(root,950,700);
+            stage.setTitle("Order Details");
             stage.setScene(scene);
             stage.show();
 
-            /*
+            
             //Get controller of scene2
             SecondController controller2 = loader.getController();
+            controller2.getStage(stage);
+            
+            /*
             for(int x  = 0 ; x < order.getArray().size() ; x++){
 
                     controller2.DetailsListView.getItems().addAll(order.getArray().get(x).getLineNumber() + " " + order.getArray().get(x).getSandwich());

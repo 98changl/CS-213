@@ -114,15 +114,28 @@ public class Controller implements Initializable {
      * Mehtod to control all extra add Ingredient functions.
      */
     public void SubmitExtra() {
-    	String ingredient = ExtraIngredientLV.getSelectionModel().getSelectedItem();
     	
-    	if(SelectedExtraIngredientLV.getItems().size() < 6) {
-    		if (duplicate(ingredient) == false) {
-    			sandwich.add(new Extra(ingredient));
+        String ingredient = ExtraIngredientLV.getSelectionModel().getSelectedItem();
+
+        if(SelectedExtraIngredientLV.getItems().size() < 6) {
+            if (duplicate(ingredient) == false) {
+                sandwich.add(new Extra(ingredient));
                 SelectedExtraIngredientLV.getItems().add(ingredient);
-    		}
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Note");
+                alert.setHeaderText("You can only add an ingredient once.");
+                alert.showAndWait();
+            }
         }
-    	PriceTF.setText("$" + format.format(sandwich.price()));
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Note");
+            alert.setHeaderText("You can only add upto 6 ingredients per sandwich.");
+            alert.showAndWait();
+        }
+        PriceTF.setText("$" + format.format(sandwich.price()));
     }
 
     /**

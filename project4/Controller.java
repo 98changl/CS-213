@@ -15,7 +15,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-
+/**
+ * Controller class for the Order.fxml file.
+ * @author Liman Chang, Kenneth Christian
+ */
 public class Controller implements Initializable {
 
     @FXML
@@ -67,7 +70,7 @@ public class Controller implements Initializable {
             SelectedExtraIngredientLV.getItems().clear();
 
             try {
-                input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Chicken.png");
+                input = new FileInputStream("PJ4_Chicken.png");
 
             } catch (FileNotFoundException t) {
                 t.printStackTrace();
@@ -78,7 +81,7 @@ public class Controller implements Initializable {
             SelectedExtraIngredientLV.getItems().clear();
 
             try {
-                input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Beef.png");
+                input = new FileInputStream("PJ4_Beef.png");
 
             } catch (FileNotFoundException t) {
                 t.printStackTrace();
@@ -89,7 +92,7 @@ public class Controller implements Initializable {
             SelectedExtraIngredientLV.getItems().clear();
 
             try {
-                input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Fish.png");
+                input = new FileInputStream("PJ4_Fish.png");
 
             } catch (FileNotFoundException t) {
                 t.printStackTrace();
@@ -244,7 +247,7 @@ public class Controller implements Initializable {
         //set image to chicken upon start
         SandwichTypeCB.getSelectionModel().selectFirst();
         try {
-            FileInputStream input = new FileInputStream("C:\\Users\\kenne\\OneDrive\\Desktop\\PJ4_Chicken.png");
+            FileInputStream input = new FileInputStream("PJ4_Chicken.png");
             Image image = new Image(input);
             SandwichImage.setImage(image);
 

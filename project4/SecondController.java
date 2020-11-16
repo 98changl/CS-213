@@ -15,6 +15,10 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the OrderDetails.fxml file.
+ * @author Liman Chang, Kenneth Christian
+ */
 public class SecondController implements Initializable {
 
     @FXML

@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * JUnit test suite for the Order class.
+ * @author Liman Chang, Kenneth Christian
+ */
 class OrderTest {
 	
 	@Test 
@@ -91,12 +95,7 @@ class OrderTest {
 		Order order = setupOrder();
 		OrderLine get = order.getOrderLine(-1);
 		assertEquals(get, null);
-	}
-	
-	@Test
-	void getOrderLineTest3() {
-		Order order = setupOrder();
-		OrderLine get = order.getOrderLine(4);
+		get = order.getOrderLine(4);
 		assertEquals(get, null);
 	}
 	

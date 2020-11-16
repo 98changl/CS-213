@@ -32,6 +32,9 @@ public class SecondController implements Initializable {
 
     /**
      * Method to remove sandwich from order details stage.
+     * Method also check for errors and shows alert window
+     * for the errors to notify user for proper function of
+     * program.
      */
     public void remove() {//index
 
@@ -65,6 +68,9 @@ public class SecondController implements Initializable {
 
     /**
      * Method to add selected sandwich to the order.
+     * Method also check for errors and shows alert window
+     * for the errors to notify user for proper function of
+     * program.
      */
     public void add() {
 
@@ -99,6 +105,9 @@ public class SecondController implements Initializable {
 
     /**
      * Method to clear the order.
+     * Method also check for errors and shows alert window
+     * for the errors to notify user for proper function of
+     * program.
      */
     public void clear() {
 

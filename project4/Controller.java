@@ -35,7 +35,7 @@ public class Controller implements Initializable {
     @FXML
     public TextField PriceTF;
 
-    public Order order;
+    public static Order order;
     
     private Sandwich sandwich;	// sandwich the order is making
     private DecimalFormat format = new DecimalFormat("0.00");	// price formatting
@@ -141,7 +141,6 @@ public class Controller implements Initializable {
      * gets the extra the Ingredient.
      */
     public void addSandwich() {
-    	Order.lineNumber++;
     	OrderLine line = new OrderLine(Order.lineNumber, sandwich);
     	order.add(line);
     	

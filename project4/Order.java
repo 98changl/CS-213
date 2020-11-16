@@ -7,12 +7,14 @@ public class Order implements Customizable {
 	private ArrayList<OrderLine> orderlines;
 
 	public Order() {
+		lineNumber = 1;
 		orderlines = new ArrayList<OrderLine>();
 	}
 	
 	@Override
 	public boolean add(Object obj) {
 		if (obj instanceof OrderLine) {
+			lineNumber++;
 			return orderlines.add((OrderLine) obj);
 		}
 		
@@ -25,8 +27,11 @@ public class Order implements Customizable {
 			OrderLine temp = (OrderLine) obj;
 			for (int i = 0; i < orderlines.size(); i++) {
 				if (orderlines.get(i).getSandwich().toString().equals(temp.getSandwich().toString())) {
-					orderlines.remove(i);
-					return true;
+					if (orderlines.get(i).getLineNumber() == temp.getLineNumber()) {
+						orderlines.remove(i);
+						lineNumber--;
+						return true;
+					}
 				}
 			}
 		}
@@ -38,7 +43,7 @@ public class Order implements Customizable {
 	 * Resets the line number and clears the orderlines array.
 	 */
 	public void clear() {
-		lineNumber = 0;
+		lineNumber = 1;
 		orderlines.clear();
 	}
 	
@@ -62,4 +67,14 @@ public class Order implements Customizable {
 		return orderlines.get(index);
 	}
 	
+	/** 
+	 * Reorders the line numbers in the array list.
+	 */
+	public void reorder() {
+		for (int i = 1; i < lineNumber; i++) {
+			if (orderlines.get(i).getLineNumber() != i) {
+				orderlines.get(i).setLineNumber(i);
+			}
+		}
+	}
 }

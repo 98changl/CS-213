@@ -11,6 +11,10 @@ public class OrderLine {
 		this.price = sandwich.price();
 	}
 	
+	public void setLineNumber(int lineNumber) {
+		this.lineNumber = lineNumber;
+	}
+	
 	public int getLineNumber() {
 		return lineNumber;
 	}

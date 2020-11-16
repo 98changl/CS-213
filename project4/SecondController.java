@@ -1,22 +1,19 @@
 package project4;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -24,71 +21,130 @@ public class SecondController implements Initializable {
 
 
     @FXML
-    public ListView<String> DetailsListView;
+    public ListView DetailsListView;
 
     @FXML
-    public Button AddSelectedSandwichB , RemoveSandwichB, ClearSandwichB ,SaveB;
+    public Button AddSelectedSandwichB, RemoveSandwichB, ClearSandwichB, SaveB , GoToMain;
+
+    @FXML
+    public TextField SumTotal;
+
+    //to go back
+    public Stage stage;
 
     /**
      * Method to remove sandwich from order details stage.
      */
     public void remove() {//index
+        DecimalFormat format = new DecimalFormat("0.00");
+
         int selected = DetailsListView.getSelectionModel().getSelectedIndex();
         DetailsListView.getItems().remove(selected);
         Controller.order.remove(Controller.order.getOrderLine(selected));
-        updateListView();
+        Controller.order.reorder();
+
+        double t = 0;//get total price
+        for(int x = 0 ; x<Controller.order.size() ; x++){
+            t = t + Controller.order.getOrderLine(x).getSandwich().price();
+        }
+
+        SumTotal.appendText("Total: $" + format.format(t));
+        Controller.order.reorder();
+
+
+
     }
 
     /**
      * Method to add selected sandwich to the order.
      */
     public void add() {
+
+        DecimalFormat format = new DecimalFormat("0.00");
+
         int selected = DetailsListView.getSelectionModel().getSelectedIndex();
         DetailsListView.getItems().addAll(DetailsListView.getSelectionModel().getSelectedItems());
-        OrderLine duplicate = new OrderLine(Order.lineNumber, Controller.order.getOrderLine(selected).getSandwich());
-        Controller.order.add(duplicate);
-        updateListView();
+        OrderLine orderLine = new OrderLine(0, Controller.order.getOrderLine(selected).getSandwich());
+        Controller.order.add(orderLine);
+
+        double t = 0;//get total price
+        for(int x = 0 ; x<Controller.order.size() ; x++){
+            t = t + Controller.order.getOrderLine(x).getSandwich().price();
+        }
+
+        SumTotal.appendText("Total: $" + format.format(t));
+        Controller.order.reorder();
+        
     }
 
 
     /**
-     * Method to clear the order.
+     * Mehtod to clear the order.
      */
     public void clear() {
+
         Controller.order.clear();
         DetailsListView.getItems().clear();
     }
-    
+
     /**
-     * Method to save the order to a file.
+     * Method to save order to a .txt file.
      */
-    public void SaveB() {
-    	FileChooser chooser = new FileChooser();
-		chooser.setTitle("Open Target File for the Export");
-		chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
-				new ExtensionFilter("All Files", "*.*"));
-		Stage stage = new Stage();
-		File targetFile = chooser.showSaveDialog(stage); //get the reference of the target file
-		//write code to write to the file.
-		
-		PrintWriter pw = null;
-		try {
-			pw = new PrintWriter(targetFile);
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		if (pw != null) {
-			ObservableList<String> list = getDetailsList();
-			
-			for (int i = 0; i < list.size(); i++) {
-				pw.write(list.get(i));
-			}
-		}
-		
-		pw.close();
+    public void save() {
+
+        DecimalFormat format = new DecimalFormat("0.00");
+
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open Target File for the Export");
+        chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        Stage stage = new Stage();
+        File targetFile = chooser.showSaveDialog(stage); //get the reference of the target file
+        //write code to write to the file.
+
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(targetFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        double t = 0;//get total price
+        for(int x = 0 ; x<Controller.order.size() ; x++){
+            t = t + Controller.order.getOrderLine(x).getSandwich().price();
+        }
+
+
+        if (pw != null) {
+
+            for (int i = 0; i < Controller.order.size(); i++) {
+                pw.write(Controller.order.getOrderLine(i).getLineNumber() + " " + Controller.order.getOrderLine(i).getSandwich().toString());
+                pw.write("\n");
+            }
+            pw.write("Total: $" + format.format(t));
+        }
+
+        pw.close();
     }
+
+    /**
+     * Method to get this stage.
+     * 
+     * @param stage
+     */
+    public void getStage(Stage stage){
+        this.stage = stage;
+    }
+
+    /**
+     * Method to close this stage on back button click.
+     */
+    public void close(){
+        this.stage.close();
+    }
+
+
+
 
     /**
      * Called when view loads.
@@ -98,50 +154,17 @@ public class SecondController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	updateListView();
-    }
-    
-    /**
-     * Updates the DetailsListView with the order.
-     */
-    private void updateListView() {
-    	DetailsListView.setItems(getDetailsList());
-    }
-    
-    /**
-     * Converts the order into an observable list for the DetailsListView.
-     * @return Observable List list
-     */
-    private ObservableList<String> getDetailsList() {
-    	ObservableList<String> list = FXCollections.observableArrayList();
-    	
-    	// loop through order line list
-    	for (int i = 0; i < Controller.order.size(); i++) {
-    		OrderLine temp = Controller.order.getOrderLine(i);
-    		String[] sandwichStr = temp.getSandwich().toString().split(",");
-    		String display = "Order #";
-    		
-    		// set up sandwich name
-    		display = display.concat(String.valueOf(temp.getLineNumber()));
-    		display = display.concat(": ");
-    		display = display.concat(sandwichStr[0]);
-    		display = display.concat(" sandwich\n");
-    		
-    		int j = 1;
-    		// loop through ingredients
-    		for (j = 1; j < sandwichStr.length - 1; j++) {
-    			display = display.concat("\t");
-    			display = display.concat(sandwichStr[j]);
-    			display = display.concat("\n");
-    		}
-    		
-    		// price of the sandwich
-    		display = display.concat("Price: ");
-    		display = display.concat(sandwichStr[j]);
-    		
-    		list.add(display);
-    	}
-    	
-    	return list;
+
+        DecimalFormat format = new DecimalFormat("0.00");
+
+        double t = 0;//get total price
+        for(int x = 0 ; x<Controller.order.size() ; x++){
+            t = t + Controller.order.getOrderLine(x).getSandwich().price();
+        }
+
+        SumTotal.appendText("Total: $" + format.format(t));
+        SumTotal.editableProperty().set(false);
+
+
     }
 }

@@ -206,6 +206,10 @@ public class SecondController implements Initializable {
     	return list;
     }
     
+    /**
+     * Calculates the total price of the order. 
+     * @return total price
+     */
     private String calcTotalPrice() {
     	DecimalFormat format = new DecimalFormat("0.00");
     	

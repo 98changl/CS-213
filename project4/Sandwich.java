@@ -2,6 +2,10 @@ package project4;
 
 import java.util.ArrayList;
 
+/**
+ * Abstract class for the sandwich object.
+ * @author Liman Chang, Kenneth Christian
+ */
 public abstract class Sandwich implements Customizable {
 	static final int MAX_EXTRAS = 6;
 	static final double PER_EXTRA = 1.99;
@@ -18,6 +22,10 @@ public abstract class Sandwich implements Customizable {
 	public abstract boolean remove(Object obj);
 	public abstract double price();
 	
+	/**
+	 * Converts the extras array list into a string with comma delimeter.
+	 * @return String representation of extras 
+	 */
 	public String toString() {
 		String str = "";
 		
@@ -29,10 +37,18 @@ public abstract class Sandwich implements Customizable {
 		return str;
 	}
 
+	/**
+	 * Gets the total number of ingredients a sandwich can have.
+	 * @return MAX_EXTRAS
+	 */
 	public int getMaxExtras() {
 		return MAX_EXTRAS;
 	}
 	
+	/**
+	 * Gets the price of an extra ingredient on a sandwich.
+	 * @return PER_EXTRA
+	 */
 	public double getPerExtra() {
 		return PER_EXTRA;
 	}

@@ -2,6 +2,10 @@ package project4;
 
 import java.util.ArrayList;
 
+/**
+ * Order class used to track order lines for controller.
+ * @author Liman Chang, Kenneth Christian
+ */
 public class Order implements Customizable {
 	public static int lineNumber;
 	private ArrayList<OrderLine> orderlines;
@@ -11,6 +15,10 @@ public class Order implements Customizable {
 		orderlines = new ArrayList<OrderLine>();
 	}
 	
+	/**
+	 * Adds an OrderLine object to the orderlines array list.
+	 * @return true if the object was added, false otherwise
+	 */
 	@Override
 	public boolean add(Object obj) {
 		if (obj instanceof OrderLine) {
@@ -21,6 +29,10 @@ public class Order implements Customizable {
 		return false;
 	}
 
+	/**
+	 * Removes an OrderLine object to the orderlines array list.
+	 * @return true if the object was removed, false otherwise
+	 */
 	@Override
 	public boolean remove(Object obj) {
 		if (obj instanceof OrderLine) {
@@ -40,7 +52,7 @@ public class Order implements Customizable {
 
 	/**
 	 * Gets the size of the orderlines array list.
-	 * @return
+	 * @return size
 	 */
 	public int size() {
 		return orderlines.size();
@@ -60,7 +72,10 @@ public class Order implements Customizable {
 	 * @return OrderLines if the index is valid, null otherwise
 	 */
 	public OrderLine getOrderLine(int index) {
-		if (index < 0 || index > orderlines.size()) {
+		if (index < 0 || index > size()) {
+			return null;
+		}
+		if (size() == 0) {
 			return null;
 		}
 		return orderlines.get(index);

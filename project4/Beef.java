@@ -2,6 +2,10 @@ package project4;
 
 import java.text.DecimalFormat;
 
+/**
+ * Subclass of sandwich that deals with beef sandwiches.
+ * @author Liman Chang, Kenneth Christian
+ */
 public class Beef extends Sandwich {
 	private double Price = 10.99;
 	
@@ -12,6 +16,10 @@ public class Beef extends Sandwich {
 		super();
 	}
 	
+	/**
+	 * Adds an ingredient to the extras list.
+	 * @return true if the ingredient was added, false otherwise
+	 */
 	@Override
 	public boolean add(Object obj) {
 		if (super.extras.size() == super.getMaxExtras()) {
@@ -25,6 +33,10 @@ public class Beef extends Sandwich {
 		return false;
 	}
 
+	/**
+	 * Removes an ingredient to the extras list.
+	 * @return true if the ingredient was removed, false otherwise
+	 */
 	@Override
 	public boolean remove(Object obj) {
 		if (obj instanceof Extra) {
@@ -39,6 +51,10 @@ public class Beef extends Sandwich {
 		return false;
 	}
 
+	/**
+	 * Calculates the price of the sandwich.
+	 * @return double representation of the price
+	 */
 	@Override
 	public double price() {
 		double extraPrice = 0.0;
@@ -50,6 +66,10 @@ public class Beef extends Sandwich {
 		return Price + extraPrice;
 	}
 	
+	/**
+	 * Converts the sandwich details into a string with comma delimeter separating details.
+	 * @return String of the sandwich
+	 */
 	@Override
 	public String toString() {
 		String str = "Beef,";

@@ -1,7 +1,6 @@
 package project4;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ class OrderTest {
 	@Test 
 	void lineNumber() {
 		Order.lineNumber++;
-		assertEquals(Order.lineNumber, 1);
+		assertEquals(Order.lineNumber, 2);
 	}
 	
 	@Test
@@ -57,36 +56,71 @@ class OrderTest {
 	}
 	
 	@Test 
-	void clearTest1() {
-		Sandwich sandwich = new Chicken();
-		OrderLine line = new OrderLine(Order.lineNumber, sandwich);
-		Order order = new Order();
-		order.add(line);
-		order.clear();
-		assertEquals(order.size(), 0);
-	}
-	
-	@Test 
-	void clearTest2() {
-		Sandwich sandwich = new Chicken();
-		OrderLine line = new OrderLine(Order.lineNumber, sandwich);
-		Order order = new Order();
-		order.add(line);
-		order.clear();
-		assertEquals(Order.lineNumber, 0);
-	}
-	
-	@Test
-	void getOrderLineTest() {
+	void clearTest() {
 		Order order = setupOrder();
+		OrderLine line = new OrderLine(Order.lineNumber, new Chicken());
+		order.clear();
 		
+		assertEquals(order.size(), 0);
+		assertEquals(Order.lineNumber, 1);
+		assertEquals(order.remove(line), false);
+		assertEquals(order.getOrderLine(0), null);
 	}
 	
 	@Test
-	void getTest() {
+	void getOrderLineTest1() {
+		Order order = setupOrder();
+		OrderLine get = order.getOrderLine(0);
+		assertEquals(get.getLineNumber(), 1);
+		assertEquals(get.getSandwich().toString(), "Chicken,Fried Chicken,Spicy Sauce,Pickles,$8.99");
+		assertEquals(get.getPrice(), 8.99, 0);
 		
+		get = order.getOrderLine(1);
+		assertEquals(get.getLineNumber(), 2);
+		assertEquals(get.getSandwich().toString(), "Beef,Roast Beef,Provolone Cheese,Mustard,$10.99");
+		assertEquals(get.getPrice(), 10.99, 0);
+		
+		get = order.getOrderLine(2);
+		assertEquals(get.getLineNumber(), 3);
+		assertEquals(get.getSandwich().toString(), "Fish,Grilled Snapper,Cilantro,Lime,$12.99");
+		assertEquals(get.getPrice(), 12.99, 0);
 	}
 	
+	@Test
+	void getOrderLineTest2() {
+		Order order = setupOrder();
+		OrderLine get = order.getOrderLine(-1);
+		assertEquals(get, null);
+	}
+	
+	@Test
+	void getOrderLineTest3() {
+		Order order = setupOrder();
+		OrderLine get = order.getOrderLine(4);
+		assertEquals(get, null);
+	}
+	
+	@Test
+	void reorderTest() {
+		Order order = setupOrder();
+		order.remove(new OrderLine(2, new Beef()));
+		order.reorder();
+		
+		OrderLine get = order.getOrderLine(0);
+		assertEquals(get.getLineNumber(), 1);
+		assertEquals(get.getSandwich().toString(), "Chicken,Fried Chicken,Spicy Sauce,Pickles,$8.99");
+		assertEquals(get.getPrice(), 8.99, 0);
+		
+		get = order.getOrderLine(1);
+		assertEquals(get.getLineNumber(), 2);
+		assertEquals(get.getSandwich().toString(), "Fish,Grilled Snapper,Cilantro,Lime,$12.99");
+		assertEquals(get.getPrice(), 12.99, 0);
+	}
+	
+	/**
+	 * Sets up an Order object for testing.
+	 * @return Order
+	 */
 	private Order setupOrder() {
 		Order order = new Order();
 		order.add(new OrderLine(Order.lineNumber, new Chicken()));

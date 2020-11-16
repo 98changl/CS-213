@@ -3,6 +3,10 @@ package project4;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Extra class for details of extra ingredients.
+ * @author Liman Chang, Kenneth Christian
+ */
 public class Extra {
 	private String ingredient;
 		

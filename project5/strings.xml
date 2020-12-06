@@ -8,6 +8,9 @@
     <string name="Senior">Tickets For Senior</string>
     <string name="Student">Tickets For Students</string>
     <string name="Calculate">Calculate</string>
+    <string name="TicketPrice">Ticket Price</string>
+    <string name="SalesTax">Sales Tax</string>
+    <string name="TicketTotal">Ticket Total</string>
     <string-array name="num_tickets">
         <item>0</item>
         <item>1</item>

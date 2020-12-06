@@ -9,7 +9,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activity2" android:parentActivityName=".MainActivity" android:label="Activity2">
+        <activity
+                android:name=".Activity2"
+                android:label="Ticket Price Calculator"
+                android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>

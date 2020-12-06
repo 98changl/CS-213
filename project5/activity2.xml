@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
               android:padding="10dip"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -8,7 +8,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="89dp">
+            android:layout_height="50dp">
         <Spinner
 
                 android:layout_width="205dp"
@@ -24,7 +24,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="84dp">
+            android:layout_height="51dp">
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/senorSpinner" android:layout_weight="1"
@@ -38,7 +38,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="74dp">
+            android:layout_height="53dp">
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/studentSpinner" android:layout_weight="1"
@@ -61,13 +61,45 @@
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:inputType="textPersonName"
-                android:text="Ticket Price"
                 android:ems="10"
-                android:id="@+id/editTextTextPersonName" android:layout_weight="1"/>
+                android:id="@+id/editTextTextPersonName" android:layout_weight="1" android:text="@string/TicketPrice"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/ticket_price_Text_view" android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
     </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="58dp">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editTextTextPersonName2" android:layout_weight="1" android:text="@string/SalesTax"/>
+        <TextView
+                android:layout_width="531dp"
+                android:layout_height="match_parent" android:id="@+id/sales_tax_text_view" android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="61dp">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editTextTextPersonName3" android:layout_weight="1" android:text="@string/TicketTotal"/>
+        <TextView
+                android:layout_width="533dp"
+                android:layout_height="match_parent" android:id="@+id/ticket_total_text_view"
+                android:layout_weight="1" android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
+    </LinearLayout>
+    <ImageButton
+            android:layout_width="397dp"
+            android:layout_height="149dp" android:id="@+id/imageB" android:onClick="goToWeb"/>
 
 </LinearLayout>
